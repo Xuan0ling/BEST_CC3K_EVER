@@ -3,15 +3,14 @@
 
 #include <vector>
 #include <iostream>
+#include "constants.h"
 #include "posn.h"
 
 
 class GameOutput {
-    std::vector<char> output;
 public:
     GameOutput();
-    void printOutput();
-    void addOutput(Posn posn, char c);
+    void printOutput(std::vector<char> display);
     ~GameOutput();
 };
 

@@ -4,8 +4,18 @@
 #include <memory>
 #include "posn.h"
 // define player races types
-enum PlayerRace {SHADE, DROW, VAMPIRE, TROLL, GOBLIN};
-enum PlayerCmd {NO, SO, EA, WE, NE, NW, SE, SW, USE, ATTACK, USEPOTION, ENTERNEXTFLOOR, RESTART, QUIT};
+enum class PlayerCmd {
+    WE, SO, NO, EA,
+    ATTACK_WE, ATTACK_EA, ATTACK_NO, ATTACK_SO,
+    USEPOTION_WE, USEPOTION_EA, USEPOTION_NO, USEPOTION_SO,
+    ENTERNEXTFLOOR,
+    RESTART, QUIT, INVALID
+};
+
+enum class PlayerRace {
+    SHADE, DROW, VAMPIRE, TROLL, GOBLIN, INVALID
+};
+
 
 const int MAP_WIDTH = 79;
 const int MAP_HEIGHT = 25;

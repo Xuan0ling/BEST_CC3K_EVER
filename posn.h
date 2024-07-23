@@ -1,18 +1,18 @@
 #ifndef INPUT_H
 #define INPUT_H
+#include <iostream>
 
 class Posn {
+public:
     int y;
     int x;
-public:
-    Posn(int y, int x);
-    int getX();
-    int getY();
-    void setX(int x);
-    void setY(int y);
+    Posn(int y = 0, int x = 0);
+
+    Posn operator+(const Posn &other);
     ~Posn();
 };
 
+std::ostream &operator<<(std::ostream &out, const Posn &posn);
 
 
 

@@ -1,0 +1,18 @@
+#ifndef GAMEMAP_H
+#define GAMEMAP_H
+
+#include <vector>
+#include "constants.h"
+
+class GameMap {
+    int width = MAP_WIDTH;
+    int height = MAP_HEIGHT;
+    std::string mapFile;
+    std::vector<std::vector<char>> cells;
+public:
+    GameMap(std::string mapFile);
+    ~GameMap();
+    char getTile(int y, int x) const;
+};
+
+#endif

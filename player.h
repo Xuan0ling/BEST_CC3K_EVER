@@ -5,29 +5,45 @@
 
 
 class Player {
-    PlayerRace playerRace;
+    Posn posn;
     int hp;
     int atk;
     int def;
     int gold;
     int maxHp;
-    int exAtk;
-    int exDef;
-    int currFloorIndex;
-    bool isDead;
-    bool isWon;
+    int exAtk = 0;
+    int exDef = 0;
+    int currFloorIndex = 1;
+    bool isDead = false;
+    bool isWon = false;
     Floor* floor;
 public:
-    Player(PlayerRace playerRace, Floor* floor);
-    bool handlePlayerCmd(PlayerCmd cmd);
+    Player(Floor* floor, int hp = 100, int atk = 50, int def = 50, int gold = 0, int maxHp = 100);
+
+    void setPosn(Posn newPosn);
+    void changePosn(Posn posnChange);
+    Posn getPosn();
+
+    virtual char getSymbol();
+    
+    virtual void move(Posn posnChange);
+    virtual void attack(Posn attackDir);
+    virtual void usePotion(Posn usePotionDir);
+    virtual void gainGold();
+
     void setHp(int hp);
-    void setAtk(int atk);
-    void setDef(int def);
     void setGold(int gold);
+
+    void gainHp(int hp);
+    void gainAtk(int atk);
+    void gainDef(int def);
+    void gainGold(int gold);
+    void gainExAtk(int exAtk);
+    void gainExDef(int exDef);
+    void gainCurrFloorIndex(int currFloorIndex);
+
+
     void setMaxHp(int maxHp);
-    void setExAtk(int exAtk);
-    void setExDef(int exDef);
-    void setCurrFloorIndex(int currFloorIndex);
     void setIsDead(bool isDead);
     void setIsWon(bool isWon);
     int getHp();
@@ -40,7 +56,7 @@ public:
     int getCurrFloorIndex();
     bool getIsDead();
     bool getIsWon();
-    ~Player();
+    virtual ~Player();
 };
 
 

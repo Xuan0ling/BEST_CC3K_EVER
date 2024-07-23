@@ -23,8 +23,8 @@ public:
     GameEngine(std::string mapFile, PlayerRace playerRace);
 
     bool gameRun();
-    void handlePlayerCmd(char cmd);
-
+    void handlePlayerCmd(PlayerCmd cmd);
+    void restartGame();
 
     ~GameEngine();
 };
