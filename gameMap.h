@@ -14,7 +14,6 @@ public:
     GameMap(std::string mapFile);
     ~GameMap();
     char getTile(int y, int x) const;
-    void removepoint(int chambernum, Posn pair);
     std::vector<std::vector<Posn>> getPossiblePoints();
 };
 

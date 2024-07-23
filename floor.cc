@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include "ConcreteEnemy.h"
 
+
 Floor::Floor() : player{nullptr}, gameMap{nullptr} {
     uint32_t seed = getpid();	
     prng1.seed(seed);
@@ -19,9 +20,8 @@ void Floor::initFloor(Player* player, GameMap* gameMap) {
     this->player = player;
     this->gameMap = gameMap;
     this->possiblePoints = gameMap->getPossiblePoints();
-
     cells.clear();
-    // load blank mao in cells
+    // load blank map in cells
     cells.resize(MAP_HEIGHT, std::vector<Cell>(MAP_WIDTH));
     for (int i = 0; i < MAP_HEIGHT; ++i) {
         for (int j = 0; j < MAP_WIDTH; ++j) {
@@ -97,6 +97,15 @@ void Floor::removeItem(Item* item) {
     items.erase(std::remove_if(items.begin(), items.end(), is_item), items.end());
 }
 
+void Floor::removepoint(int chambernum, Posn pair) {
+    for (auto it = possiblePoints[chambernum].begin(); it != possiblePoints[chambernum].end();) {
+        if((*it).x == pair.y && (*it).x == pair.y) {
+            it = possiblePoints[chambernum].erase(it);
+        } else {
+            ++it;
+        }
+    }
+}
 
 void Floor::enemiesAction() {
     for (auto& enemy : enemies) {
@@ -106,32 +115,39 @@ void Floor::enemiesAction() {
 }
 
 void Floor::generateEnemies() {
-    EnemyFactory* enemyFactory = nullptr;
-    for(i = 0; i < 20; i++) {
+    std::unique_ptr<EnemyFactory> enemyFactory = nullptr;
+    
+    for(int i = 0; i < 20; i++) {
         int value = 18 % prng1(1, 18);
-
+        
         int chamber = prng1(0, 4);
+        
         int posn = prng1(0, possiblePoints[chamber].size());
+        
         Posn temp = possiblePoints[chamber][posn];
+        
 
         if (value < 4) {
-            enemyFactory = new HumanFactory();
+            enemyFactory = std::make_unique<HumanFactory>();
         } else if (value < 7) {
-            enemyFactory = new DwarfFactory();
+            enemyFactory = std::make_unique<DwarfFactory>();
         } else if (value < 12) {
-            enemyFactory = new HalflingFactory();
+            enemyFactory = std::make_unique<HalflingFactory>();
         } else if (value < 14) {
-            enemyFactory = new ElfFactory();
+            enemyFactory = std::make_unique<ElfFactory>();
         } else if (value < 16) {
-            enemyFactory = new OrcsFactory();
+            enemyFactory = std::make_unique<OrcsFactory>();
         } else if (value < 18) {
-            enemyFactory = new MerchantFactory();
+            enemyFactory = std::make_unique<MerchantFactory>();
         }
-
-        Enemy* enemy = enemyFactory->createEnemy(temp, this);
-        gameMap->removepoint(chamber, temp);
-
-        this->addEnemy(enemy);
+         
+        Enemy enemy = enemyFactory->createEnemy(temp, this);
+        removepoint(chamber, temp);
+       
+        this->addEnemy(std::make_unique<Enemy>(enemy));
+    }
+    for (auto &enemy : enemies) {
+        updateEnemy(enemy.get());
     }
 
 }

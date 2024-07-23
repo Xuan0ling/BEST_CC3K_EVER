@@ -4,7 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include "constants.h"
-
+#include "PRNG.h"
 class Cell;
 
 class Floor {
@@ -39,6 +39,8 @@ public:
 
     void removeEnemy(Enemy* enemy);
     void removeItem(Item* item);
+
+    void removepoint(int chambernum, Posn pair);
 
     void enemiesAction();
     void generateEnemies();

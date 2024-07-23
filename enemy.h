@@ -16,9 +16,9 @@ class Enemy {
 public:
     Enemy(char symbol, Posn posn, int hp, int atk, int def, Floor* floor);
     virtual ~Enemy();
-    virtual void move(PRNG& prng) = 0;
-    virtual void attack(Player* player) = 0;
-    virtual void beAttacked(int atk) = 0;
+    virtual void move(PRNG& prng);
+    virtual void attack(Player* player);
+    virtual void beAttacked(int atk);
 
     char getSymbol();
     Posn getPosn();

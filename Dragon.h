@@ -3,7 +3,7 @@
 
 
 #include "enemy.h"
-#include "floor.h"
+class Floor;
 
 
 class Dragon : public Enemy {
@@ -11,9 +11,9 @@ class Dragon : public Enemy {
  public:
     Dragon(Posn posn, Floor* floor);
     ~Dragon();
-    void move(PRNG& prng) override;
+    /* void move(PRNG& prng) override;
     void attack(Player* player) override;
-    void beAttacked(int atk) override;
+    void beAttacked(int atk) override; */
 };
 
 #endif

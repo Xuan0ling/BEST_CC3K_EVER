@@ -53,16 +53,6 @@ char GameMap::getTile(int y, int x) const {
     return cells[y][x];
 }
 
-void GameMap::removepoint(int chambernum, Posn pair) {
-    for (auto it = PossiblePoints[chambernum].begin(); it != PossiblePoints[chambernum].end();) {
-        if((*it).x == pair.y && (*it).x == pair.y) {
-            it = PossiblePoints[chambernum].erase(it);
-        } else {
-            ++it;
-        }
-    }
-}
-
 std::vector<std::vector<Posn>> GameMap::getPossiblePoints() {
     return PossiblePoints;
 }

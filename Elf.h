@@ -2,7 +2,7 @@
 #define ELF_H
 
 
-#include "Enemy.h"
+#include "enemy.h"
 
 
 class Elf : public Enemy {
@@ -10,9 +10,9 @@ class Elf : public Enemy {
  public:
     Elf(Posn posn, Floor* floor);
     ~Elf();
-    void move(PRNG& prng) override;
+    /* void move(PRNG& prng) override;
     void attack(Player* player) override;
-    void beAttacked(int atk) override;
+    void beAttacked(int atk) override; */
 };
 
 #endif
