@@ -4,8 +4,13 @@
 #include "enemy.h"
 #include "item.h"
 #include "gameMap.h"
+#include <unistd.h>
+#include "ConcreteEnemy.h"
 
-Floor::Floor() : player{nullptr}, gameMap{nullptr} {}
+Floor::Floor() : player{nullptr}, gameMap{nullptr} {
+    uint32_t seed = getpid();	
+    prng1.seed(seed);
+}
 
 Floor::~Floor() {}
 
@@ -13,6 +18,8 @@ Floor::~Floor() {}
 void Floor::initFloor(Player* player, GameMap* gameMap) {
     this->player = player;
     this->gameMap = gameMap;
+    this->possiblePoints = gameMap->getPossiblePoints();
+
     cells.clear();
     // load blank mao in cells
     cells.resize(MAP_HEIGHT, std::vector<Cell>(MAP_WIDTH));
@@ -93,12 +100,40 @@ void Floor::removeItem(Item* item) {
 
 void Floor::enemiesAction() {
     for (auto& enemy : enemies) {
-        enemy->move(player->getPosn());
+        enemy->move(prng1);
         enemy->attack(player);
     }
 }
 
 void Floor::generateEnemies() {
+    EnemyFactory* enemyFactory = nullptr;
+    for(i = 0; i < 20; i++) {
+        int value = 18 % prng1(1, 18);
+
+        int chamber = prng1(0, 4);
+        int posn = prng1(0, possiblePoints[chamber].size());
+        Posn temp = possiblePoints[chamber][posn];
+
+        if (value < 4) {
+            enemyFactory = new HumanFactory();
+        } else if (value < 7) {
+            enemyFactory = new DwarfFactory();
+        } else if (value < 12) {
+            enemyFactory = new HalflingFactory();
+        } else if (value < 14) {
+            enemyFactory = new ElfFactory();
+        } else if (value < 16) {
+            enemyFactory = new OrcsFactory();
+        } else if (value < 18) {
+            enemyFactory = new MerchantFactory();
+        }
+
+        Enemy* enemy = enemyFactory->createEnemy(temp, this);
+        gameMap->removepoint(chamber, temp);
+
+        this->addEnemy(enemy);
+    }
+
 }
 
 void Floor::generateItems() {

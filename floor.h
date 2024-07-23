@@ -13,6 +13,9 @@ class Floor {
     std::vector<std::vector<Cell>> cells;
     std::vector<EnemyPtr> enemies;
     std::vector<ItemPtr> items;
+    std::vector<std::vector<Posn>> possiblePoints;
+    PRNG prng1;
+
 public:
     Floor();
     ~Floor();
