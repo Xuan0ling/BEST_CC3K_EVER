@@ -21,14 +21,17 @@ void Cell::setSymbol(char symbol) {
 }
 
 void Cell::setPlayer(Player* player) {
+    clearPointers();
     this->player = player;
 }
 
 void Cell::setEnemy(Enemy* enemy) {
+    clearPointers();
     this->enemy = enemy;
 }
 
 void Cell::setItem(Item* item) {
+    clearPointers();
     this->item = item;
 }
 

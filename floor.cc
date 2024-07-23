@@ -165,7 +165,7 @@ void Floor::generateFloor() {
 }
 
 bool Floor::checkValidMove(Posn posn) {
-    char symbol = getCell(posn).getSymbol();
+    char symbol = getCell(posn).getDisplaySymbol();
     if (symbol == '.' || symbol == '+' || symbol == '#') {
         return true;
     }
