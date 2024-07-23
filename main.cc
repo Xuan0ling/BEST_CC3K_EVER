@@ -9,7 +9,7 @@ int main(int argc, char* argv[]) {
     std::string mapFile = "emptyfloor.txt";
 
     GameEngine gameEngine(mapFile, PlayerRace::SHADE);
-    gameEngine.gameRun();
+    bool isWon = gameEngine.gameRun();
     return 0;
 }
 
