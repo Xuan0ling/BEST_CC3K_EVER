@@ -61,7 +61,6 @@ PlayerCmd GameInput::getInput() {
 }
 
 PlayerCmd GameInput::getPlayerPosition(char input) {
-    std::cout << "input: " << input << std::endl;
     switch (input) {
         case 'h':
             return PlayerCmd::WE;

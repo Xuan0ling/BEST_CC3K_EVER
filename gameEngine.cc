@@ -21,11 +21,14 @@ bool GameEngine::gameRun() {
 
     gameOutput->printOutput(floor->getDisplay());
     PlayerCmd input = gameInput->getInput();
+    // if is invalid input, keep asking for input
+    while (input == PlayerCmd::INVALID) {
+        input = gameInput->getInput();
+    }
 
     while (input != PlayerCmd::QUIT) {
         handlePlayerCmd(input);
 
-        std::cout << player->getPosn() << std::endl;
         if (player->getIsDead() || player->getIsWon()) {
             break;
         }
@@ -81,6 +84,11 @@ void GameEngine::handlePlayerCmd(PlayerCmd cmd) {
             player->gainCurrFloorIndex(1);
             floor->initFloor(player.get(), gameMap.get());
             break;
+        case PlayerCmd::RESTART:
+            restartGame();
+            break;
+        default:
+            break;
     }
 }
 
@@ -92,6 +100,8 @@ void GameEngine::restartGame() {
     player->setHp(player->getMaxHp());
     player->setGold(0);
     floor->initFloor(player.get(), gameMap.get());
+    player->setPosn(Posn{5, 5});
+    floor->updatePlayer();
 }
 
 

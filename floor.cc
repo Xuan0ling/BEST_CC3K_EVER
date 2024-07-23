@@ -115,7 +115,6 @@ void Floor::generateFloor() {
 
 bool Floor::checkValidMove(Posn posn) {
     char symbol = getCell(posn).getSymbol();
-    std::cout << ">" << symbol << "<" << std::endl;
     if (symbol == '.' || symbol == '+' || symbol == '#') {
         return true;
     }
