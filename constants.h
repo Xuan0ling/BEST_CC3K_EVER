@@ -2,6 +2,8 @@
 #define CONSTANTS_H
 
 #include <memory>
+#include <string>
+#include <ncurses.h>
 #include "posn.h"
 // define player races types
 enum class PlayerCmd {
@@ -38,6 +40,7 @@ typedef std::unique_ptr<GameOutput> GameOutputPtr;
 typedef std::unique_ptr<GameMap> GameMapPtr;
 typedef std::unique_ptr<Enemy> EnemyPtr;
 typedef std::unique_ptr<Item> ItemPtr;
+
 
 
 #endif

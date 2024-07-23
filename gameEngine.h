@@ -20,7 +20,7 @@ class GameEngine {
 
     int currFloorNum = 1;
 public:
-    GameEngine(std::string mapFile, PlayerRace playerRace);
+    GameEngine(std::string mapFile, PlayerRace playerRace, bool useDLC);
 
     bool gameRun();
     void handlePlayerCmd(PlayerCmd cmd);

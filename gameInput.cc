@@ -1,10 +1,22 @@
 #include "gameInput.h"
 
-GameInput::GameInput() {}
+GameInput::GameInput(bool useDLC) : useDLC{useDLC} {
+    if (useDLC) {
+        initscr(); // Initialize ncurses
+        cbreak();
+        noecho();
+        keypad(stdscr, TRUE);
+    }
+}
 
 PlayerCmd GameInput::getInput() {
     char input;
-    std::cin >> input;
+    if (useDLC) {
+        input = getch(); // Use ncurses getch for input
+    } else {
+        std::cin >> input;
+    }
+
     switch (input) {
         case 'h':
         case 'j':
@@ -12,7 +24,11 @@ PlayerCmd GameInput::getInput() {
         case 'l':
             return getPlayerPosition(input);
         case 'a': {
-            std::cin >> input;
+            if (useDLC) {
+                input = getch();
+            } else {
+                std::cin >> input;
+            }
             PlayerCmd attackDir = getPlayerPosition(input);
             return 
                 attackDir == PlayerCmd::WE ? PlayerCmd::ATTACK_WE : 
@@ -21,7 +37,11 @@ PlayerCmd GameInput::getInput() {
                 attackDir == PlayerCmd::SO ? PlayerCmd::ATTACK_SO : PlayerCmd::INVALID;
         }
         case 'u': {
-            std::cin >> input;
+            if (useDLC) {
+                input = getch();
+            } else {
+                std::cin >> input;
+            }
             PlayerCmd useDir = getPlayerPosition(input);
             return 
                 useDir == PlayerCmd::WE ? PlayerCmd::USEPOTION_WE : 
@@ -58,7 +78,11 @@ PlayerCmd GameInput::getPlayerPosition(char input) {
 
 PlayerRace GameInput::getPlayerRace() {
     char input;
-    std::cin >> input;
+    if (useDLC) {
+        input = getch();
+    } else {
+        std::cin >> input;
+    }
     switch (input) {
         case 's':
             return PlayerRace::SHADE;
@@ -75,4 +99,8 @@ PlayerRace GameInput::getPlayerRace() {
     }
 }
 
-GameInput::~GameInput() {}
+GameInput::~GameInput() {
+    if (useDLC) {
+        endwin(); // End ncurses
+    }
+}
