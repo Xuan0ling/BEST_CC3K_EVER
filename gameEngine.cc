@@ -5,13 +5,13 @@
 
 
 
-GameEngine::GameEngine(std::string mapFile, PlayerRace playerRace) {
+GameEngine::GameEngine(std::string mapFile, PlayerRace playerRace, bool useDLC) {
     gameMap = std::make_unique<GameMap>(mapFile);
     floor = std::make_unique<Floor>();
     player = std::make_unique<Player>(floor.get());
     floor->initFloor(player.get(), gameMap.get());
-    gameInput = std::make_unique<GameInput>();
-    gameOutput = std::make_unique<GameOutput>();
+    gameInput = std::make_unique<GameInput>(useDLC);
+    gameOutput = std::make_unique<GameOutput>(useDLC);
 }
 
 bool GameEngine::gameRun() {
@@ -24,7 +24,7 @@ bool GameEngine::gameRun() {
 
     while (input != PlayerCmd::QUIT) {
         handlePlayerCmd(input);
-        
+
         std::cout << player->getPosn() << std::endl;
         if (player->getIsDead() || player->getIsWon()) {
             break;

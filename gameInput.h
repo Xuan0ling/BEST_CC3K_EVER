@@ -5,8 +5,9 @@
 
 class GameInput {
     char input;
+    bool useDLC;
 public:
-    GameInput();
+    GameInput(bool useDLC);
     PlayerCmd getInput();
     PlayerCmd getPlayerPosition(char input);
     PlayerRace getPlayerRace();

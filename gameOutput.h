@@ -8,9 +8,10 @@
 
 
 class GameOutput {
+    bool useDLC = false;
 public:
-    GameOutput();
-    void printOutput(std::vector<char> display);
+    GameOutput(bool useDLC);
+    void printOutput(const std::vector<char>& display);
     ~GameOutput();
 };
 
