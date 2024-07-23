@@ -16,9 +16,11 @@ GameEngine::GameEngine(std::string mapFile, PlayerRace playerRace, bool useDLC) 
 
 bool GameEngine::gameRun() {
     floor->initFloor(player.get(), gameMap.get());
+    
     player->setPosn(Posn{5, 5});
+    floor->generateEnemies();
     floor->updatePlayer();
-
+    
     gameOutput->printOutput(floor->getDisplay());
     PlayerCmd input = gameInput->getInput();
     // if is invalid input, keep asking for input

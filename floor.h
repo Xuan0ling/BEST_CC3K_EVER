@@ -4,7 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include "constants.h"
-
+#include "PRNG.h"
 class Cell;
 
 class Floor {
@@ -13,6 +13,9 @@ class Floor {
     std::vector<std::vector<Cell>> cells;
     std::vector<EnemyPtr> enemies;
     std::vector<ItemPtr> items;
+    std::vector<std::vector<Posn>> possiblePoints;
+    PRNG prng1;
+
 public:
     Floor();
     ~Floor();
@@ -36,6 +39,8 @@ public:
 
     void removeEnemy(Enemy* enemy);
     void removeItem(Item* item);
+
+    void removepoint(int chambernum, Posn pair);
 
     void enemiesAction();
     void generateEnemies();
