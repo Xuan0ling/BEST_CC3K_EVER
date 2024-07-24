@@ -7,7 +7,7 @@ class Floor;
 
 
 class Dragon : public Enemy {
-
+    
  public:
     Dragon(Floor* floor, Posn posn);
     ~Dragon();

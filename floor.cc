@@ -6,7 +6,7 @@
 #include "gameMap.h"
 #include <unistd.h>
 #include "ConcreteEnemy.h"
-
+#include "concreteitemfactory.h"
 
 Floor::Floor() : player{nullptr}, gameMap{nullptr} {
     uint32_t seed = getpid();	
@@ -162,7 +162,7 @@ void Floor::generateEnemies() {
         
         int chamber = prng1(0, 4);
         
-        int posn = prng1(0, possiblePoints[chamber].size());
+        int posn = prng1(0, possiblePoints[chamber].size() - 1);
         
         Posn temp = possiblePoints[chamber][posn];
         
@@ -192,10 +192,59 @@ void Floor::generateEnemies() {
 
 }
 
-void Floor::generateItems() {
+void Floor::generatePotions() {
+
+    std::unique_ptr<Itemfactory> itemFactory = nullptr;
+
+    for(int i = 0; i < 10; i++) {
+        int value = prng1(0, 5);
+
+        int chamber = prng1(0, 4);
+        int posn = prng1(0, possiblePoints[chamber].size() - 1);
+        
+        Posn temp = possiblePoints[chamber][posn];
+
+        if(value == 0) {
+            itemFactory = std::make_unique<Restorehealthfactory>();
+        } else if (value == 1) {
+            itemFactory = std::make_unique<Boostatkfactory>();
+        } else if (value == 2) {
+            itemFactory = std::make_unique<Boostdeffactory>();
+        } else if (value == 3) {
+            itemFactory = std::make_unique<Poisonhealthfactory>();
+        } else if (value == 4) {
+            itemFactory = std::make_unique<Woundatkfactory>();
+        } else if (value == 5) {
+            itemFactory = std::make_unique<Wounddeffactory>();
+        }
+
+        Item potion = itemFactory->createItems(this, temp);
+        removepoint(chamber, temp);
+       
+        this->addItem(std::make_unique<Item>(potion));
+    }
+    for (auto &item : items) {
+        updateItem(item.get());
+    }
+}
+
+void Floor::generateGold() {
 }
 
 void Floor::generateStair() {
+    int playerchamber = player->getchamber();
+    int which = prng1(0, 4);
+    while(true) {
+        if (which != playerchamber) {
+            break;
+        } 
+        which = prng1(0, 4);
+    }
+
+    int posn = prng1(0, possiblePoints[which].size());
+
+    Posn temp = possiblePoints[which][posn];
+
 }
 
 void Floor::generatePlayer() {
@@ -203,6 +252,7 @@ void Floor::generatePlayer() {
 
 void Floor::generateFloor() {
     generateEnemies();
+    generatePotions();
 }
 
 bool Floor::checkValidMove(Posn posn) {

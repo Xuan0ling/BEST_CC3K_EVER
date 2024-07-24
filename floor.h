@@ -49,7 +49,8 @@ public:
 
     void enemiesAction();
     void generateEnemies();
-    void generateItems();
+    void generatePotions();
+    void generateGold();
     void generateStair();
     void generatePlayer();
     void generateFloor();
