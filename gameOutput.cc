@@ -13,7 +13,7 @@ GameOutput::GameOutput(bool useDLC) : useDLC{useDLC} {
         keypad(stdscr, TRUE);
         if (has_colors()) {
             start_color();
-            init_pair(COLOR_PAIR_PLAYER, COLOR_BLUE, COLOR_BLACK);
+            init_pair(COLOR_PAIR_PLAYER, COLOR_CYAN, COLOR_BLACK);
             init_pair(COLOR_PAIR_STAIRCASE, COLOR_BLUE, COLOR_BLACK);
             init_pair(COLOR_PAIR_ENEMY, COLOR_RED, COLOR_BLACK);
             init_pair(COLOR_PAIR_TREASURE, COLOR_YELLOW, COLOR_BLACK);
@@ -69,7 +69,7 @@ void GameOutput::printOutput(const std::vector<char>& display, Player* player) {
         mvprintw(MAP_HEIGHT + 5, 0, "Action: %s", player->getAction().c_str());
         refresh(); // Refresh the ncurses window to show changes
     } else {
-        std::cout << "\x1B[2J\x1B[H"; // ANSI escape codes to clear the terminal
+        // std::cout << "\x1B[2J\x1B[H"; // ANSI escape codes to clear the terminal
         for (int i = 0; i < MAP_HEIGHT; i++) {
             for (int j = 0; j < MAP_WIDTH; j++) {
                 char cell = display[i * MAP_WIDTH + j];
