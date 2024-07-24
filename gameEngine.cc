@@ -15,10 +15,11 @@ GameEngine::GameEngine(std::string mapFile, PlayerRace playerRace, bool useDLC) 
 }
 
 bool GameEngine::gameRun() {
-    floor->loadFloor();
+    floor->initFloor(player.get(), gameMap.get());
     gameOutput->printOutput(floor->getDisplay(), player.get());
+
     PlayerCmd input = getAction();
-    
+
     while (input != PlayerCmd::QUIT) {
         handlePlayerCmd(input);
         handleEnemiesAction();

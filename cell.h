@@ -18,7 +18,6 @@ public:
     void setPlayer(Player* player);
     void setEnemy(Enemy* enemy);
     void setItem(Item* item);
-    void setStair();
 
 
     void clearPointers();
@@ -29,7 +28,6 @@ public:
     Item* getItem() const;
 
     bool isEmpty() const;
-    
 
     char getDisplaySymbol() const;
 };

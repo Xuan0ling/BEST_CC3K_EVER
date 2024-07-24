@@ -21,7 +21,6 @@ public:
     ~Floor();
 
     void initFloor(Player* player, GameMap* gameMap);
-    void loadFloor();
 
     void addEnemy(EnemyPtr enemy);
     void addItem(ItemPtr item);
@@ -55,6 +54,8 @@ public:
     void generateStair();
     void generatePlayer();
     void generateFloor();
+
+    Posn playerRandomPosn();
 
     bool checkValidMove(Posn posn);
     bool checkValidMoveForEnemy(Posn posn);

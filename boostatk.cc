@@ -1,10 +1,6 @@
 #include "boostatk.h"
-#include "player.h"
-Boostatk::Boostatk(Floor *floor, Posn posn): Potion{floor, posn} {}
 
+Boostatk::Boostatk(Floor *floor, Posn posn): Potion{floor, posn, 5, 0, 0} {}
 
 Boostatk::~Boostatk() {}
 
-void Boostatk::modifyPlayerStats(Player *player) {
-    player->gainAtk(5);
-}

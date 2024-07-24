@@ -5,7 +5,6 @@ class Boostdef: public Potion {
 public:
     Boostdef(Floor *floor, Posn posn);
     ~Boostdef();
-    void modifyPlayerStats(Player *player) override;
 };
 
 #endif

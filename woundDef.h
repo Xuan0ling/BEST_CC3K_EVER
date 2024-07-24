@@ -6,7 +6,6 @@ class Wounddef: public Potion {
 public: 
     Wounddef(Floor* floor, Posn posn);
     ~Wounddef();
-    void modifyPlayerStats(Player *player) override;
 };
 
 #endif

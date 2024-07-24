@@ -1,12 +1,6 @@
 #include "boostdef.h"
-#include "player.h"
-Boostdef::Boostdef(Floor *floor, Posn posn): Potion{floor, posn} {}
 
-
+Boostdef::Boostdef(Floor *floor, Posn posn): Potion{floor, posn, 0, 5, 0} {}
 
 Boostdef::~Boostdef() {}
-
-void Boostdef::modifyPlayerStats(Player *player) {
-    player->gainDef(5);
-}
 

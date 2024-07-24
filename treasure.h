@@ -8,10 +8,8 @@ class Treasure: public Item {
 public:
     Treasure(Floor *floor, Posn posn, int gold);
     ~Treasure();
-
     int getGold();
     void modifystats(Player* player);
-
 };
 
 
