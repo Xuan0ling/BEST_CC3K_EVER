@@ -152,7 +152,11 @@ void Floor::removepoint(int chambernum, Posn pair) {
 
 void Floor::enemiesAction() {
     for (auto& enemy : enemies) {
-        enemy->move(prng1);
+        if (enemy->attack(player)) {
+            continue;
+        } else {
+            enemy->move(prng1);
+        }
     }
 }
 
@@ -183,7 +187,7 @@ void Floor::generateEnemies() {
             enemyFactory = std::make_unique<MerchantFactory>();
         }
          
-        Enemy enemy = enemyFactory->createEnemy(this, temp);
+        Enemy* enemy = enemyFactory->createEnemy(this, temp);
         removepoint(chamber, temp);
        
         this->addEnemy(std::make_unique<Enemy>(enemy));

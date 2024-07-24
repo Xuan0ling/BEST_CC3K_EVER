@@ -9,4 +9,12 @@ Dragon::Dragon (Floor* floor, Posn posn, Item* hoard)
 
 Dragon::~Dragon() {}
 
+void Dragon::move(PRNG &prng) {
+}
 
+bool Dragon::attack(Player *player) {
+    return true;
+}
+
+void Dragon::beAttacked(int atk) {
+}
