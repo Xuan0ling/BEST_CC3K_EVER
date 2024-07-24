@@ -21,7 +21,6 @@ void Cell::setSymbol(char symbol) {
 }
 
 void Cell::setPlayer(Player* player) {
-    clearPointers();
     this->player = player;
 }
 
@@ -31,8 +30,11 @@ void Cell::setEnemy(Enemy* enemy) {
 }
 
 void Cell::setItem(Item* item) {
-    clearPointers();
     this->item = item;
+}
+
+void Cell::setStair() {
+    symbol = SYMBOL_STAIR;
 }
 
 char Cell::getSymbol() const {

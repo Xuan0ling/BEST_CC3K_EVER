@@ -13,7 +13,7 @@ GameOutput::GameOutput(bool useDLC) : useDLC{useDLC} {
         keypad(stdscr, TRUE);
         if (has_colors()) {
             start_color();
-            init_pair(COLOR_PAIR_PLAYER, COLOR_BLUE, COLOR_BLACK);
+            init_pair(COLOR_PAIR_PLAYER, COLOR_CYAN, COLOR_BLACK);
             init_pair(COLOR_PAIR_STAIRCASE, COLOR_BLUE, COLOR_BLACK);
             init_pair(COLOR_PAIR_ENEMY, COLOR_RED, COLOR_BLACK);
             init_pair(COLOR_PAIR_TREASURE, COLOR_YELLOW, COLOR_BLACK);

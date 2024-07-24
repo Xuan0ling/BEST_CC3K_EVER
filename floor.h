@@ -21,6 +21,7 @@ public:
     ~Floor();
 
     void initFloor(Player* player, GameMap* gameMap);
+    void loadFloor();
 
     void addEnemy(EnemyPtr enemy);
     void addItem(ItemPtr item);
@@ -51,8 +52,8 @@ public:
     void generateEnemies();
     void generatePotions();
     void generateGold();
-    void generateStair();
     void generatePlayer();
+    void generateStair();
     void generateFloor();
 
     Posn playerRandomPosn();

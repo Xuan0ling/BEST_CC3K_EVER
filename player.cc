@@ -159,10 +159,6 @@ int Player::getCurrFloorIndex() {
     return currFloorIndex;
 }
 
-int Player::getchamber() {
-    return chamber;
-}
-
 bool Player::getIsDead() {
     return isDead;
 }

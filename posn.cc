@@ -13,6 +13,10 @@ Posn Posn::operator+=(const Posn &other) {
     return *this;
 }
 
+bool Posn::operator==(const Posn &other) const {
+    return y == other.y && x == other.x;
+}
+
 Posn::~Posn() {}
 
 
@@ -20,3 +24,5 @@ std::ostream &operator<<(std::ostream &out, const Posn &posn) {
     out << "(" << posn.y << ", " << posn.x << ")";
     return out;
 }
+
+

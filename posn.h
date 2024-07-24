@@ -10,6 +10,7 @@ public:
 
     Posn operator+(const Posn &other);
     Posn operator+=(const Posn &other);
+    bool operator==(const Posn &other) const;
     ~Posn();
 };
 
