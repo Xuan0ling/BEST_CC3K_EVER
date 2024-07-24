@@ -16,6 +16,18 @@ void Cell::clearPointers() {
     item = nullptr;
 }
 
+void Cell::clearPlayer() {
+    player = nullptr;
+}
+
+void Cell::clearEnemy() {
+    enemy = nullptr;
+}
+
+void Cell::clearItem() {
+    item = nullptr;
+}
+
 void Cell::setSymbol(char symbol) {
     this->symbol = symbol;
 }
@@ -35,6 +47,14 @@ void Cell::setItem(Item* item) {
 
 void Cell::setStair() {
     symbol = SYMBOL_STAIR;
+}
+
+bool Cell::hasGold() const {
+    if (item && item->getSymbol() == SYMBOL_GOLD) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 char Cell::getSymbol() const {

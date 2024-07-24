@@ -42,6 +42,7 @@ PlayerCmd GameEngine::getAction() {
     while (input == PlayerCmd::INVALID) {
         player->setAction("Invalid Command");
         gameOutput->printOutput(floor->getDisplay(), player.get());
+        player->setAction("");
         input = gameInput->getInput();
     }
     return input;
@@ -107,10 +108,9 @@ void GameEngine::restartGame() {
     player->setIsDead(false);
     player->gainCurrFloorIndex(1);
     player->setHp(player->getMaxHp());
+    player->setChamberNum(-1);
     player->setGold(0);
-    floor->initFloor(player.get(), gameMap.get());
-    player->setPosn(Posn{5, 5});
-    floor->updatePlayer();
+    floor->loadFloor();
 }
 
 

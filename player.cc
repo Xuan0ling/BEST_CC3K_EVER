@@ -1,5 +1,9 @@
 #include "player.h"
 #include "floor.h"
+#include "cell.h"
+#include "item.h"
+#include "treasure.h"
+
 
 
 
@@ -28,19 +32,28 @@ char Player::getSymbol() {
 // special ability will override those functions
 //-----------------------------------------------------------------------------
 void Player::move(Posn posnChange) {
-    floor->clearCell(posn);
+    floor->getCell(posn).clearPlayer();
     Posn newPosn = posn + posnChange;
     if (floor->checkValidMove(newPosn)) {
         changePosn(posnChange);
     }
     floor->updatePlayer();
+    checkGold();
 }
 
 void Player::attack(Posn attackDir) {} 
 
 void Player::usePotion(Posn usePotionDir) {}
 
-void Player::gainGold() {}
+void Player::checkGold() {
+    auto& cell = floor->getCell(posn);
+    if (cell.hasGold()) {
+        Item* treasure = cell.getItem();
+        gainGold(treasure->getGold());
+        cell.clearItem();
+        floor->removeItem(treasure);
+    }
+}
 
 //-----------------------------------------------------------------------------
 

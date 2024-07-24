@@ -15,3 +15,9 @@ void Item::setPosn(Posn posn) {
 char Item::getSymbol() {
     return symbol;
 }
+
+int Item::getGold() {
+    return 0;
+}
+
+

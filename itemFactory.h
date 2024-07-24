@@ -5,7 +5,7 @@
 class Itemfactory {
 public:
     virtual ~Itemfactory() {}
-    virtual Item createItems(Floor* floor, Posn posn) = 0;
+    virtual Item* createItems(Floor* floor, Posn posn) = 0;
 };
 
 #endif

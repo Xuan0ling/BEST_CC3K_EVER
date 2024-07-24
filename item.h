@@ -13,6 +13,7 @@ public:
     Posn getPosn();
     void setPosn(Posn posn);
     char getSymbol();
+    virtual int getGold();
 };
 
 #endif

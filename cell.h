@@ -22,6 +22,11 @@ public:
 
 
     void clearPointers();
+    void clearPlayer();
+    void clearEnemy();
+    void clearItem();
+
+    bool hasGold() const;
     
     char getSymbol() const;
     Player* getPlayer() const;

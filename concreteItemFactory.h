@@ -1,5 +1,6 @@
 #ifndef CONCRETEITEMFACTORY_H
 #define CONCRETEITEMFACTORY_H
+
 #include "itemfactory.h"
 #include "item.h"
 #include "boostatk.h"
@@ -15,73 +16,73 @@
 #include "merchantHoardTreasure.h"
 #include "dragonHoardTreasure.h"
 
-class Woundatkfactory: public Itemfactory {
+class Woundatkfactory : public Itemfactory {
 public:
-    Item createItems(Floor *floor, Posn posn) override {
-        return Woundatk(floor, posn);
+    Item* createItems(Floor* floor, Posn posn) override {
+        return new Woundatk(floor, posn);
     }
 };
 
-class Wounddeffactory: public Itemfactory {
+class Wounddeffactory : public Itemfactory {
 public:
-    Item createItems(Floor * floor, Posn posn) override {
-        return Wounddef(floor, posn);
+    Item* createItems(Floor* floor, Posn posn) override {
+        return new Wounddef(floor, posn);
     }
 };
 
-class Boostatkfactory: public Itemfactory {
+class Boostatkfactory : public Itemfactory {
 public:
-    Item createItems(Floor *floor, Posn posn) override {
-        return Boostatk(floor, posn);
+    Item* createItems(Floor* floor, Posn posn) override {
+        return new Boostatk(floor, posn);
     }
 };
 
-class Boostdeffactory: public Itemfactory {
+class Boostdeffactory : public Itemfactory {
 public:
-    Item createItems(Floor *floor, Posn posn) override {
-        return Boostdef(floor, posn);
+    Item* createItems(Floor* floor, Posn posn) override {
+        return new Boostdef(floor, posn);
     }
 };
 
-class Restorehealthfactory: public Itemfactory {
+class Restorehealthfactory : public Itemfactory {
 public:
-    Item createItems(Floor *floor, Posn posn) override {
-        return Restorehealth(floor, posn);
+    Item* createItems(Floor* floor, Posn posn) override {
+        return new Restorehealth(floor, posn);
     }
 };
 
-class Poisonhealthfactory: public Itemfactory {
+class Poisonhealthfactory : public Itemfactory {
 public:
-    Item createItems(Floor *floor, Posn posn) override {
-        return Poisonhealth(floor, posn);
+    Item* createItems(Floor* floor, Posn posn) override {
+        return new Poisonhealth(floor, posn);
     }
 };
 
-class Smallgoldfactory: public Itemfactory {
+class Smallgoldfactory : public Itemfactory {
 public:
-    Item createItems(Floor *floor, Posn posn) override {
-        return SmallTreasure(floor, posn, 1);
+    Item* createItems(Floor* floor, Posn posn) override {
+        return new SmallTreasure(floor, posn, 1);
     }
 };
 
-class Normalgoldfactory: public Itemfactory {
+class Normalgoldfactory : public Itemfactory {
 public:
-    Item createItems(Floor *floor, Posn posn) override {
-        return NormalTreasure(floor, posn, 2);
+    Item* createItems(Floor* floor, Posn posn) override {
+        return new NormalTreasure(floor, posn, 2);
     }
 };
 
-class Merchantgoldfactory: public Itemfactory {
+class Merchantgoldfactory : public Itemfactory {
 public:
-    Item createItems(Floor *floor, Posn posn) override {
-        return MerchantHoardTreasure(floor, posn, 4);
+    Item* createItems(Floor* floor, Posn posn) override {
+        return new MerchantHoardTreasure(floor, posn, 4);
     }
 };
 
-class Dragongoldfactory: public Itemfactory {
+class Dragongoldfactory : public Itemfactory {
 public:
-    Item createItems(Floor *floor, Posn posn) override {
-        return DragonHoardTreasure(floor, posn, 6);
+    Item* createItems(Floor* floor, Posn posn) override {
+        return new DragonHoardTreasure(floor, posn, 6);
     }
 };
 

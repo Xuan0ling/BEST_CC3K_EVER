@@ -36,7 +36,7 @@ public:
     virtual void move(Posn posnChange);
     virtual void attack(Posn attackDir);
     virtual void usePotion(Posn usePotionDir);
-    virtual void gainGold();
+    virtual void checkGold();
 
     void setHp(int hp);
     void setGold(int gold);

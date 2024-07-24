@@ -220,10 +220,10 @@ void Floor::generatePotions() {
             itemFactory = std::make_unique<Wounddeffactory>();
         }
 
-        Item potion = itemFactory->createItems(this, temp);
+        std::unique_ptr<Item> potion (itemFactory->createItems(this, temp));
         removepoint(chamber, temp);
        
-        this->addItem(std::make_unique<Item>(potion));
+        this->addItem(std::move(potion));
     }
     for (auto &item : items) {
         updateItem(item.get());
@@ -231,74 +231,67 @@ void Floor::generatePotions() {
 }
 
 void Floor::generateGold() {
-     std::unique_ptr<Itemfactory> itemFactory = nullptr;
-
-    for(int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; ++i) {
         int value = prng1(0, 7);
 
         int chamber = prng1(0, 4);
         int posn = prng1(0, possiblePoints[chamber].size() - 1);
-        
+
         Posn temp = possiblePoints[chamber][posn];
 
-        if(value < 5) {
+        std::unique_ptr<Itemfactory> itemFactory = nullptr;
 
+        if (value < 5) {
             itemFactory = std::make_unique<Normalgoldfactory>();
-
         } else if (value < 6) {
-            int enemyposition;
-            Posn enemyposn;
-            while(true) {
+            Posn enemyPosn;
+            while (true) {
                 std::vector<Posn> neighbours = getNeighbours(temp);
                 std::vector<Posn> possiblePointsForDragon;
 
-                for (auto& it : neighbours) {
+                for (const auto& it : neighbours) {
                     if (checkValidMoveForEnemy(it)) {
                         possiblePointsForDragon.push_back(it);
                     }
                 }
 
-                if(possiblePointsForDragon.size() > 0) {
-                    enemyposition = prng1(0, possiblePointsForDragon.size() - 1);
-                    enemyposn = possiblePointsForDragon[enemyposition];
+                if (!possiblePointsForDragon.empty()) {
+                    int enemyPosition = prng1(0, possiblePointsForDragon.size() - 1);
+                    enemyPosn = possiblePointsForDragon[enemyPosition];
                     break;
-                }
-                else {
-                    int posn = prng1(0, possiblePoints[chamber].size() - 1);
+                } else {
+                    posn = prng1(0, possiblePoints[chamber].size() - 1);
                     temp = possiblePoints[chamber][posn];
-                    continue;
                 }
-
             }
-            
-            itemFactory = std::make_unique<Dragongoldfactory>();
-            Item treasure = itemFactory->createItems(this, temp);
-            
-            std::unique_ptr<Item> dragonHoard = std::make_unique<Item>(treasure);
 
-            std::unique_ptr<EnemyFactory> enemyFactory = std::make_unique<DragonFactory>();
-            Enemy enemy = enemyFactory->createEnemy(this, enemyposn, dragonHoard.get());
+            itemFactory = std::make_unique<Dragongoldfactory>();
+            std::unique_ptr<Item> dragonHoard(itemFactory->createItems(this, temp));
+
+            auto enemyFactory = std::make_unique<DragonFactory>();
+            Enemy enemy = enemyFactory->createEnemy(this, enemyPosn, dragonHoard.get());
 
             removepoint(chamber, temp);
-            removepoint(chamber, enemyposn);
+            removepoint(chamber, enemyPosn);
 
             this->addItem(std::move(dragonHoard));
             this->addEnemy(std::make_unique<Enemy>(enemy));
 
             continue;
-
-        } else if (value < 8) {
+        } else {
             itemFactory = std::make_unique<Smallgoldfactory>();
         }
-        Item treasure = itemFactory->createItems(this, temp);
+
+        std::unique_ptr<Item> treasure (itemFactory->createItems(this, temp));
         removepoint(chamber, temp);
-       
-        this->addItem(std::make_unique<Item>(treasure));
+        this->addItem(std::move(treasure));
     }
-    for (auto &item : items) {
+
+    for (const auto& item : items) {
         updateItem(item.get());
     }
 }
+
 
 void Floor::generatePlayer() {
     int chamber = prng1(0, NUM_CHAMBERS - 1);
@@ -349,7 +342,7 @@ Posn Floor::playerRandomPosn() {
 
 bool Floor::checkValidMove(Posn posn) {
     char symbol = getCell(posn).getDisplaySymbol();
-    if (symbol == '.' || symbol == '+' || symbol == '#') {
+    if (symbol == '.' || symbol == '+' || symbol == '#' || symbol == '\\' || symbol == 'G') {
         return true;
     }
     return false;
