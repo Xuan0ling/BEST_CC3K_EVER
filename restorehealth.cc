@@ -1,4 +1,4 @@
-#include "restorehealth.h"
+#include "restoreHealth.h"
 
 Restorehealth::Restorehealth(Floor *floor, Posn posn): Potion(floor, posn, 0, 0, 10) {}
 

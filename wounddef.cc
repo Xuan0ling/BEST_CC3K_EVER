@@ -1,4 +1,4 @@
-#include "wounddef.h"
+#include "woundDef.h"
 
 Wounddef::Wounddef(Floor* floor, Posn posn): Potion(floor, posn, 0, -5, 0) {}
 
