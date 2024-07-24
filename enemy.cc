@@ -36,7 +36,7 @@ void Enemy::beAttacked(int atk) {
 }
 
 void Enemy::move(PRNG& prng) {
-    std::vector<Posn> neighbours = floor->getCross(posn);
+    std::vector<Posn> neighbours = floor->getNeighbours(posn);
     std::vector<Posn> validNeighbours;
     for (Posn neighbour : neighbours) {
         if (floor->checkValidMoveForEnemy(neighbour)) {
@@ -53,5 +53,13 @@ void Enemy::move(PRNG& prng) {
     floor->updateEnemy(this);
 }
 
-void Enemy::attack(Player* player) {
+bool Enemy::attack(Player* player) {
+    std::vector<Posn> neighbours = floor->getNeighbours(posn);
+    for (Posn neighbour : neighbours) {
+        if (player->getPosn() == neighbour) {
+            return true;
+        }
+    }
+
+    return false;
 }
