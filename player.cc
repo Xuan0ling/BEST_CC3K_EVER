@@ -1,7 +1,7 @@
 #include "player.h"
 #include "floor.h"
-
-
+#include "item.h"
+#include "potion.h"
 
 Player::Player(Floor* floor, PlayerRace race, int hp, int atk, int def, int gold, int maxHp) 
 : floor{floor}, race{race}, hp{hp}, atk{atk}, def{def}, gold{gold}, maxHp{maxHp} {}
@@ -151,9 +151,11 @@ int Player::getExAtk() {
     return exAtk;
 }
 
+
 int Player::getExDef() {
     return exDef;
 }
+
 
 int Player::getCurrFloorIndex() {
     return currFloorIndex;
