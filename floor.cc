@@ -6,7 +6,7 @@
 #include "gameMap.h"
 #include <unistd.h>
 
-#include "concreteitemfactory.h"
+#include "concreteItemFactory.h"
 #include "concreteEnemy.h"
 
 

@@ -1,7 +1,7 @@
 #ifndef CONCRETEENEMY_H
 #define CONCRETEENEMY_H
 
-#include "EnemyFactory.h"
+#include "enemyFactory.h"
 #include "enemy.h"
 #include "human.h"
 #include "dwarf.h"

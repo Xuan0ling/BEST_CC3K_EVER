@@ -1,14 +1,14 @@
 #ifndef CONCRETEITEMFACTORY_H
 #define CONCRETEITEMFACTORY_H
 
-#include "itemfactory.h"
+#include "itemFactory.h"
 #include "item.h"
 #include "boostatk.h"
 #include "boostdef.h"
-#include "restorehealth.h"
-#include "woundatk.h"
-#include "wounddef.h"
-#include "poisonhealth.h"
+#include "restoreHealth.h"
+#include "woundAtk.h"
+#include "woundDef.h"
+#include "poisonHealth.h"
 #include "treasure.h"
 #include "posn.h"
 #include "smallTreasure.h"
