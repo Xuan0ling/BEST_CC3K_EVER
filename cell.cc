@@ -35,6 +35,11 @@ void Cell::setItem(Item* item) {
     this->item = item;
 }
 
+void Cell::setStair() {
+    clearPointers();
+    symbol = SYMBOL_STAIR;
+}
+
 char Cell::getSymbol() const {
     return symbol;
 }
