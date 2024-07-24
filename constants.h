@@ -22,6 +22,35 @@ enum class PlayerRace {
 const int MAP_WIDTH = 79;
 const int MAP_HEIGHT = 25;
 
+// ASCII color codes
+const std::string RESET = "\033[0m";
+const std::string BLUE = "\033[38;5;45m";
+const std::string RED = "\033[38;5;196m";
+const std::string YELLOW = "\033[38;5;226m";
+const std::string GREEN = "\033[38;5;46m";
+
+// Define color pairs
+#define COLOR_PAIR_PLAYER 1
+#define COLOR_PAIR_STAIRCASE 2
+#define COLOR_PAIR_ENEMY 3
+#define COLOR_PAIR_TREASURE 4
+#define COLOR_PAIR_POTION 5
+
+// character symbols
+const char SYMBOL_PLAYER = '@';
+const char SYMBOL_STAIR = '\\';
+const char SYMBOL_HUMAN = 'H';
+const char SYMBOL_DWARF = 'W';
+const char SYMBOL_ELF = 'E';
+const char SYMBOL_ORC = 'O';
+const char SYMBOL_MERCHANT = 'M';
+const char SYMBOL_DRAGON = 'D';
+const char SYMBOL_HALFLING = 'L';
+const char SYMBOL_POTION = 'P';
+const char SYMBOL_GOLD = 'G';
+
+
+
 
 // forward declaration
 class Player;
