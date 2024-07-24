@@ -30,7 +30,7 @@ void Floor::initFloor(Player* player, GameMap* gameMap) {
     }
     enemies.clear();
     items.clear();
-    player->setPosn(Posn{5, 5});
+    player->setPosn(playerRandomPosn());
     updatePlayer();
     generateFloor();
 }
@@ -203,6 +203,18 @@ void Floor::generatePlayer() {
 
 void Floor::generateFloor() {
     generateEnemies();
+}
+
+
+Posn Floor::playerRandomPosn() {
+    int chamber = prng1(0, NUM_CHAMBERS - 1);
+    player->setChamberNum(chamber);
+    int posn = prng1(0, possiblePoints[chamber].size());
+
+    Posn temp = possiblePoints[chamber][posn];
+
+    removepoint(chamber, temp);
+    return temp;
 }
 
 bool Floor::checkValidMove(Posn posn) {
