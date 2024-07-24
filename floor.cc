@@ -187,10 +187,10 @@ void Floor::generateEnemies() {
             enemyFactory = std::make_unique<MerchantFactory>();
         }
          
-        Enemy* enemy = enemyFactory->createEnemy(this, temp);
+        std::unique_ptr<Enemy> enemy (enemyFactory->createEnemy(this, temp));
         removepoint(chamber, temp);
        
-        this->addEnemy(std::make_unique<Enemy>(enemy));
+        this->addEnemy(std::move(enemy));
     }
     for (auto &enemy : enemies) {
         updateEnemy(enemy.get());
@@ -273,13 +273,13 @@ void Floor::generateGold() {
             std::unique_ptr<Item> dragonHoard(itemFactory->createItems(this, temp));
 
             auto enemyFactory = std::make_unique<DragonFactory>();
-            Enemy enemy = enemyFactory->createEnemy(this, enemyPosn, dragonHoard.get());
+            std::unique_ptr<Enemy> enemy (enemyFactory->createEnemy(this, enemyPosn, dragonHoard.get()));
 
             removepoint(chamber, temp);
             removepoint(chamber, enemyPosn);
 
             this->addItem(std::move(dragonHoard));
-            this->addEnemy(std::make_unique<Enemy>(enemy));
+            this->addEnemy(std::move(enemy));
 
             continue;
         } else {
