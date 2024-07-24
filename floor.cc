@@ -162,7 +162,7 @@ void Floor::generateEnemies() {
         
         int chamber = prng1(0, 4);
         
-        int posn = prng1(0, possiblePoints[chamber].size());
+        int posn = prng1(0, possiblePoints[chamber].size() - 1);
         
         Posn temp = possiblePoints[chamber][posn];
         
@@ -186,6 +186,7 @@ void Floor::generateEnemies() {
        
         this->addEnemy(std::make_unique<Enemy>(enemy));
     }
+    std::cout << "Enemies generated" << std::endl;
     for (auto &enemy : enemies) {
         updateEnemy(enemy.get());
     }
@@ -209,7 +210,7 @@ void Floor::generateFloor() {
 Posn Floor::playerRandomPosn() {
     int chamber = prng1(0, NUM_CHAMBERS - 1);
     player->setChamberNum(chamber);
-    int posn = prng1(0, possiblePoints[chamber].size());
+    int posn = prng1(0, possiblePoints[chamber].size() - 1);
 
     Posn temp = possiblePoints[chamber][posn];
 
