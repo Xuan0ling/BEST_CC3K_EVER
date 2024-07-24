@@ -10,9 +10,8 @@ class Elf : public Enemy {
  public:
     Elf(Floor* floor, Posn posn);
     ~Elf();
-    /* void move(PRNG& prng) override;
-    void attack(Player* player) override;
-    void beAttacked(int atk) override; */
+    bool attack(Player* player, PRNG prng1) override;
+    //void beAttacked(int atk) override;
 };
 
 #endif

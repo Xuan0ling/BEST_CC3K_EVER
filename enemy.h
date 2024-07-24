@@ -7,6 +7,7 @@
 
 
 class Enemy {
+protected:
     Floor* floor;
     char symbol;
     Posn posn;
@@ -17,7 +18,7 @@ public:
     Enemy(Floor* floor, char symbol, Posn posn, int hp, int atk, int def);
     virtual ~Enemy();
     virtual void move(PRNG& prng);
-    virtual bool attack(Player* player);
+    virtual bool attack(Player* player, PRNG prng1);
     virtual void beAttacked(int atk);
 
     char getSymbol();
