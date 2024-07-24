@@ -3,6 +3,7 @@
 #include "cell.h"
 #include "item.h"
 #include "treasure.h"
+#include "enemy.h"
 
 
 
@@ -41,9 +42,23 @@ void Player::move(Posn posnChange) {
     checkGold();
 }
 
-void Player::attack(Posn attackDir) {} 
+void Player::attack(Posn attackDir) {
+    // Posn newPosn = posn + attackDir;
+    // auto& cell = floor->getCell(newPosn);
+    // if (cell.hasEnemy()) {
+    //     cell.getEnemy()->beAttacked(this);
+    // }
+} 
 
-void Player::usePotion(Posn usePotionDir) {}
+void Player::usePotion(Posn usePotionDir) {
+    auto& cell = floor->getCell(posn + usePotionDir);
+    if (cell.hasPotion()) {
+        Item* potion = cell.getItem();
+        potion->usePotion(this);
+        cell.clearItem();
+        floor->removeItem(potion);
+    }
+}
 
 void Player::checkGold() {
     auto& cell = floor->getCell(posn);
@@ -52,6 +67,19 @@ void Player::checkGold() {
         gainGold(treasure->getGold());
         cell.clearItem();
         floor->removeItem(treasure);
+    }
+}
+
+void Player::playerEnterFloor() {
+    auto& cell = floor->getCell(posn);
+    if (cell.hasStair()) {
+        if (currFloorIndex > NUM_FLOORS) {
+            isWon = true;
+        } else {
+            gainCurrFloorIndex(1);
+            floor->loadFloor();
+            clearEffect();
+        }
     }
 }
 
@@ -77,14 +105,6 @@ int Player::getChamberNum() {
 
 void Player::gainHp(int hp) {
     this->hp += hp;
-}
-
-void Player::gainAtk(int atk) {
-    this->atk += atk;
-}
-
-void Player::gainDef(int def) {
-    this->def += def;
 }
 
 void Player::gainGold(int gold) {
@@ -138,6 +158,12 @@ std::string Player::getAction() {
 
 void Player::setAction(std::string action) {
     this->action = action;
+}
+
+void Player::clearEffect() {
+    exAtk = 0;
+    exDef = 0;
+    chamberNum = -1;
 }
 
 int Player::getHp() {

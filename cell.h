@@ -27,6 +27,9 @@ public:
     void clearItem();
 
     bool hasGold() const;
+    bool hasStair() const;
+    bool hasPotion() const;
+    bool hasEnemy() const;
     
     char getSymbol() const;
     Player* getPlayer() const;

@@ -14,6 +14,7 @@ public:
     void setPosn(Posn posn);
     char getSymbol();
     virtual int getGold();
+    virtual void usePotion(Player *player);
 };
 
 #endif

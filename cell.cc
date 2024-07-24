@@ -57,6 +57,30 @@ bool Cell::hasGold() const {
     }
 }
 
+bool Cell::hasStair() const {
+    if (symbol == SYMBOL_STAIR) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool Cell::hasPotion() const {
+    if (item && item->getSymbol() == SYMBOL_POTION) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool Cell::hasEnemy() const {
+    if (enemy) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 char Cell::getSymbol() const {
     return symbol;
 }
