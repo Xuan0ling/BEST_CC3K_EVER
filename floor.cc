@@ -152,7 +152,7 @@ void Floor::removepoint(int chambernum, Posn pair) {
 
 void Floor::enemiesAction() {
     for (auto& enemy : enemies) {
-        if (enemy->attack(player)) {
+        if (enemy->attack(player, prng1)) {
             continue;
         } else {
             enemy->move(prng1);

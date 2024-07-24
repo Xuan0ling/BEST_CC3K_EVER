@@ -53,13 +53,17 @@ void Enemy::move(PRNG& prng) {
     floor->updateEnemy(this);
 }
 
-bool Enemy::attack(Player* player) {
+bool Enemy::attack(Player *player, PRNG prng1) {
     std::vector<Posn> neighbours = floor->getNeighbours(posn);
-    for (Posn neighbour : neighbours) {
-        if (player->getPosn() == neighbour) {
-            return true;
+
+    for (Posn &neighbour : neighbours) {
+        if (neighbour == player->getPosn()) {
+            int num = prng1(0, 1);
+            if(num % 2 == 0) {
+                player->LoseHP(atk);
+            }
+            return true;     //add missed action
         }
     }
-
     return false;
 }

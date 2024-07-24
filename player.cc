@@ -3,6 +3,7 @@
 #include "cell.h"
 #include "item.h"
 #include "treasure.h"
+#include <cmath>
 
 
 
@@ -99,6 +100,11 @@ void Player::gainExDef(int exDef) {
     this->exDef += exDef;
 }
 
+void Player::LoseHP(int atkpower) {
+    int hplose = ceil((100.0/(100 + def)) * atkpower);
+    this->gainHp(-hplose);
+}
+
 void Player::gainCurrFloorIndex(int currFloorIndex) {
     this->currFloorIndex += currFloorIndex;
 }
@@ -115,7 +121,9 @@ void Player::setIsWon(bool isWon) {
     this->isWon = isWon;
 }
 
-std::string Player::getRace() {
+
+
+std::string Player::getRaceStr() {
     switch(race) {
         case PlayerRace::DROW:
             return "Drow";
@@ -130,6 +138,10 @@ std::string Player::getRace() {
         default:
             return "Invalid";  
     }
+}
+
+PlayerRace Player::getRace() {
+    return race;
 }
 
 std::string Player::getAction() {
@@ -178,6 +190,10 @@ bool Player::getIsDead() {
 
 bool Player::getIsWon() {
     return isWon;
+}
+
+bool Player::getIsMerchantVolatile() {
+    return merchantVolatile;
 }
 
 Player::~Player() {}
