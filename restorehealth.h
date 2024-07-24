@@ -5,7 +5,7 @@ class Restorehealth: public Potion {
 public:
     Restorehealth(Floor *floor, Posn posn);
     ~Restorehealth();
-    
+    void modifyPlayerStats(Player *player) override;
 };
 
 #endif
