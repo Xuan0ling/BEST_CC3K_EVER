@@ -49,10 +49,13 @@ public:
 
     void enemiesAction();
     void generateEnemies();
-    void generateItems();
+    void generatePotions();
+    void generateGold();
     void generateStair();
     void generatePlayer();
     void generateFloor();
+
+    Posn playerRandomPosn();
 
     bool checkValidMove(Posn posn);
     bool checkValidMoveForEnemy(Posn posn);

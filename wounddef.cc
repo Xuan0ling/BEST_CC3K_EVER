@@ -1,6 +1,8 @@
+
 #include "wounddef.h"
 #include "player.h"
 Wounddef::Wounddef(Floor* floor, Posn posn): Potion(floor, posn) {}
+
 
 Wounddef::~Wounddef() {}
 

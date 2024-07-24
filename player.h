@@ -12,12 +12,15 @@ class Player {
     Floor* floor;
     PlayerRace race;
 
+    int chamberNum;
+
     Posn posn;
     int hp;
     int atk;
     int def;
     int gold;
     int maxHp;
+    int chamber = -1;
     
     int exAtk = 0;
     int exDef = 0;
@@ -45,6 +48,9 @@ public:
     void setHp(int hp);
     void setGold(int gold);
 
+    void setChamberNum(int chamberNum);
+    int getChamberNum();
+
     void gainHp(int hp);
     void gainAtk(int atk);
     void gainDef(int def);
@@ -71,6 +77,7 @@ public:
     int ExtraAtk();
     int ExtraDef();
     int getCurrFloorIndex();
+    int getchamber();
     bool getIsDead();
     bool getIsWon();
     virtual ~Player();

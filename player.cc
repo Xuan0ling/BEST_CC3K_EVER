@@ -53,6 +53,14 @@ void Player::setGold(int gold) {
     this->gold = gold;
 }
 
+void Player::setChamberNum(int chamberNum) {
+    this->chamberNum = chamberNum;
+}
+
+int Player::getChamberNum() {
+    return chamberNum;
+}
+
 
 void Player::gainHp(int hp) {
     this->hp += hp;
@@ -151,6 +159,10 @@ int Player::getExDef() {
 
 int Player::getCurrFloorIndex() {
     return currFloorIndex;
+}
+
+int Player::getchamber() {
+    return chamber;
 }
 
 bool Player::getIsDead() {
