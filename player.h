@@ -16,6 +16,7 @@ class Player {
     int def;
     int gold;
     int maxHp;
+    int chamber = -1;
     
     int exAtk = 0;
     int exDef = 0;
@@ -69,6 +70,7 @@ public:
     int getExAtk();
     int getExDef();
     int getCurrFloorIndex();
+    int getchamber();
     bool getIsDead();
     bool getIsWon();
     virtual ~Player();
