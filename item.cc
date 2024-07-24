@@ -1,6 +1,6 @@
 #include "item.h"
 
-Item::Item(Posn posn) : posn{posn} {}
+Item::Item( Floor *floor, Posn posn, char symbol): floor{floor}, posn{posn}, symbol{symbol} {}
 
 Item::~Item() {}
 
@@ -12,3 +12,6 @@ void Item::setPosn(Posn posn) {
     this->posn = posn;
 }
 
+char Item::getSymbol() {
+    return symbol;
+}
