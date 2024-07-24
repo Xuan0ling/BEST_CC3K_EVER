@@ -158,7 +158,7 @@ void Floor::generateEnemies() {
     std::unique_ptr<EnemyFactory> enemyFactory = nullptr;
     
     for(int i = 0; i < 20; i++) {
-        int value = 18 % prng1(1, 18);
+        int value = prng1(0, 17);
         
         int chamber = prng1(0, 4);
         
