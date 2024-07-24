@@ -61,7 +61,7 @@ void GameOutput::printOutput(const std::vector<char>& display, Player* player) {
                 }
             }
         }
-        mvprintw(MAP_HEIGHT, 0, "Race: %s Gold: %d", player->getRace().c_str(), player->getGold());
+        mvprintw(MAP_HEIGHT, 0, "Race: %s Gold: %d", player->getRaceStr().c_str(), player->getGold());
         mvprintw(MAP_HEIGHT + 1, 0, "HP: %d", player->getHp());
         mvprintw(MAP_HEIGHT + 2, 0, "Atk: %d", player->getAtk() + player->getExAtk());
         mvprintw(MAP_HEIGHT + 3, 0, "Def: %d", player->getDef() + player->getExDef());
@@ -89,7 +89,7 @@ void GameOutput::printOutput(const std::vector<char>& display, Player* player) {
             }
             std::cout << std::endl;
         }
-        std::cout << "Race: " << player->getRace() << " Gold: " << player->getGold() << std::endl;
+        std::cout << "Race: " << player->getRaceStr() << " Gold: " << player->getGold() << std::endl;
         std::cout << "HP: " << player->getHp() << std::endl;
         std::cout << "Atk: " << player->getAtk() + player->getExAtk() << std::endl;
         std::cout << "Def: " << player->getDef() + player->getExDef() << std::endl;

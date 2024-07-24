@@ -22,6 +22,7 @@ class Player {
     int currFloorIndex = 1;
     bool isDead = false;
     bool isWon = false;
+    bool merchantVolatile = false;
 
     std::string action;
 public:
@@ -49,6 +50,7 @@ public:
     void gainGold(int gold);
     void gainExAtk(int exAtk);
     void gainExDef(int exDef);
+    void LoseHP(int atkpower);
     void gainCurrFloorIndex(int currFloorIndex);
 
 
@@ -56,9 +58,12 @@ public:
     void setIsDead(bool isDead);
     void setIsWon(bool isWon);
 
-    void clearEffect();
 
-    std::string getRace();
+    void clearEffect();
+  
+    std::string getRaceStr();
+    PlayerRace getRace();
+
     std::string getAction();
     void setAction(std::string action);
 
@@ -72,6 +77,7 @@ public:
     int getCurrFloorIndex();
     bool getIsDead();
     bool getIsWon();
+    bool getIsMerchantVolatile();
     virtual ~Player();
 };
 
