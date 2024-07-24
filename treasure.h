@@ -8,7 +8,10 @@ class Treasure: public Item {
 public:
     Treasure(Floor *floor, Posn posn, int gold);
     ~Treasure();
-    void modifyPlayerStats(Player *player) override;
+
+    int getGold();
+    void modifystats(Player* player);
+
 };
 
 

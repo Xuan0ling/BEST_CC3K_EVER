@@ -4,12 +4,13 @@
 
 #include "enemy.h"
 class Floor;
-
+class Item;
 
 class Dragon : public Enemy {
+    Item* dragonhoard;
     
  public:
-    Dragon(Floor* floor, Posn posn);
+    Dragon(Floor * floor, Posn posn, Item * hoard);
     ~Dragon();
     /* void move(PRNG& prng) override;
     void attack(Player* player) override;
