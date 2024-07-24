@@ -10,6 +10,10 @@
 #include "poisonhealth.h"
 #include "treasure.h"
 #include "posn.h"
+#include "smallTreasure.h"
+#include "normalTreasure.h"
+#include "merchantHoardTreasure.h"
+#include "dragonHoardTreasure.h"
 
 class Woundatkfactory: public Itemfactory {
 public:
@@ -56,28 +60,28 @@ public:
 class Smallgoldfactory: public Itemfactory {
 public:
     Item createItems(Floor *floor, Posn posn) override {
-        return Treasure(floor, posn, 1);
+        return SmallTreasure(floor, posn, 1);
     }
 };
 
 class Normalgoldfactory: public Itemfactory {
 public:
     Item createItems(Floor *floor, Posn posn) override {
-        return Treasure(floor, posn, 2);
+        return NormalTreasure(floor, posn, 2);
     }
 };
 
 class Merchantgoldfactory: public Itemfactory {
 public:
     Item createItems(Floor *floor, Posn posn) override {
-        return Treasure(floor, posn, 4);
+        return MerchantHoardTreasure(floor, posn, 4);
     }
 };
 
 class Dragongoldfactory: public Itemfactory {
 public:
     Item createItems(Floor *floor, Posn posn) override {
-        return Treasure(floor, posn, 6);
+        return DragonHoardTreasure(floor, posn, 6);
     }
 };
 

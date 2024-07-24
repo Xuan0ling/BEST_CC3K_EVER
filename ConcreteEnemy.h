@@ -10,6 +10,7 @@
 #include "merchant.h"
 #include "dragon.h"
 #include "halfling.h"
+#include "item.h"
 
 class HumanFactory : public EnemyFactory {
  public:
@@ -48,8 +49,9 @@ class MerchantFactory : public EnemyFactory {
 
 class DragonFactory : public EnemyFactory {
  public:
-    Enemy createEnemy(Floor* floor, Posn posn) override {
-        return Dragon(floor, posn);
+    Enemy createEnemy(Floor* floor, Posn posn, Item* item) {
+        return Dragon(floor, posn, item); 
+
     }
 };
 
