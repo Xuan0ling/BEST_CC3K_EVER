@@ -5,20 +5,25 @@
 
 
 class Player {
+    Floor* floor;
+    PlayerRace race;
+
     Posn posn;
     int hp;
     int atk;
     int def;
     int gold;
     int maxHp;
+    
     int exAtk = 0;
     int exDef = 0;
     int currFloorIndex = 1;
     bool isDead = false;
     bool isWon = false;
-    Floor* floor;
+
+    std::string action;
 public:
-    Player(Floor* floor, int hp = 100, int atk = 50, int def = 50, int gold = 0, int maxHp = 100);
+    Player(Floor* floor, PlayerRace race = PlayerRace::SHADE, int hp = 100, int atk = 50, int def = 50, int gold = 0, int maxHp = 100);
 
     void setPosn(Posn newPosn);
     void changePosn(Posn posnChange);
@@ -46,6 +51,11 @@ public:
     void setMaxHp(int maxHp);
     void setIsDead(bool isDead);
     void setIsWon(bool isWon);
+
+    std::string getRace();
+    std::string getAction();
+    void setAction(std::string action);
+
     int getHp();
     int getAtk();
     int getDef();

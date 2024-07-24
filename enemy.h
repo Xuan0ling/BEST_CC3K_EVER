@@ -7,14 +7,14 @@
 
 
 class Enemy {
+    Floor* floor;
     char symbol;
     Posn posn;
     int hp;
     int atk;
     int def;
-    Floor* floor;
 public:
-    Enemy(char symbol, Posn posn, int hp, int atk, int def, Floor* floor);
+    Enemy(Floor* floor, char symbol, Posn posn, int hp, int atk, int def);
     virtual ~Enemy();
     virtual void move(PRNG& prng);
     virtual void attack(Player* player);
@@ -26,9 +26,6 @@ public:
     int getAtk();
     int getDef();
     void setPosn(Posn posn);
-    void gainHp(int hp);
-    void gainAtk(int atk);
-    void gainDef(int def);
 };
 
 

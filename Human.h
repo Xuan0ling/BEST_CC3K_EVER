@@ -9,7 +9,7 @@ class Floor;
 class Human : public Enemy {
 
  public:
-    Human(Posn posn, Floor* floor);
+    Human(Floor* floor, Posn posn);
     ~Human();
     /* void move(PRNG& prng) override;
     void attack(Player* player) override;

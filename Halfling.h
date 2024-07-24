@@ -10,7 +10,7 @@ class Floor;
 class Halfling : public Enemy {
 
  public:
-    Halfling(Posn posn, Floor* floor);
+    Halfling(Floor* floor, Posn posn);
     ~Halfling();
     /* void move(PRNG& prng) override;
     void attack(Player* player) override;

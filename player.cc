@@ -3,8 +3,8 @@
 
 
 
-Player::Player(Floor* floor, int hp, int atk, int def, int gold, int maxHp) 
-: hp{hp}, atk{atk}, def{def}, gold{gold}, maxHp{maxHp}, floor{floor} {}
+Player::Player(Floor* floor, PlayerRace race, int hp, int atk, int def, int gold, int maxHp) 
+: floor{floor}, race{race}, hp{hp}, atk{atk}, def{def}, gold{gold}, maxHp{maxHp} {}
 
 
 void Player::setPosn(Posn newPosn) {
@@ -92,6 +92,31 @@ void Player::setIsDead(bool isDead) {
 
 void Player::setIsWon(bool isWon) {
     this->isWon = isWon;
+}
+
+std::string Player::getRace() {
+    switch(race) {
+        case PlayerRace::DROW:
+            return "Drow";
+        case PlayerRace::VAMPIRE:
+            return "Vampire";
+        case PlayerRace::TROLL:
+            return "Troll";
+        case PlayerRace::SHADE:
+            return "Shade";
+        case PlayerRace::GOBLIN:
+            return "Goblin";
+        default:
+            return "Invalid";  
+    }
+}
+
+std::string Player::getAction() {
+    return action;
+}
+
+void Player::setAction(std::string action) {
+    this->action = action;
 }
 
 int Player::getHp() {

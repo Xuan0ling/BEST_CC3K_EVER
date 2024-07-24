@@ -9,7 +9,7 @@ class Floor;
 class Merchant : public Enemy {
 
  public:
-    Merchant(Posn posn, Floor* floor);
+    Merchant(Floor* floor, Posn posn);
     ~Merchant();
     /* void move(PRNG& prng) override;
     void attack(Player* player) override;

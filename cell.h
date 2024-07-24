@@ -27,7 +27,7 @@ public:
     Enemy* getEnemy() const;
     Item* getItem() const;
 
-    bool isEnemy() const;
+    bool isEmpty() const;
 
     char getDisplaySymbol() const;
 };

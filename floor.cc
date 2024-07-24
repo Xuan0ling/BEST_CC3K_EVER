@@ -30,7 +30,9 @@ void Floor::initFloor(Player* player, GameMap* gameMap) {
     }
     enemies.clear();
     items.clear();
-    // generateFloor();
+    player->setPosn(Posn{5, 5});
+    updatePlayer();
+    generateFloor();
 }
 
 void Floor::addEnemy(EnemyPtr enemy) {
@@ -68,7 +70,46 @@ void Floor::updateItem(Item* item) {
 }
 
 bool Floor::isEmpty(Posn posn) {
-    return getCell(posn).isEnemy();
+    return getCell(posn).isEmpty();
+}
+
+std::vector<Posn> Floor::getNeighbours(Posn posn) {
+    std::vector<Posn> neighbours;
+    for (int i = -1; i <= 1; ++i) {
+        for (int j = -1; j <= 1; ++j) {
+            if (i == 0 && j == 0) {
+                continue;
+            }
+            Posn neighbour = Posn{posn.y + i, posn.x + j};
+            if (neighbour.y >= 0 && neighbour.y < MAP_HEIGHT && neighbour.x >= 0 && neighbour.x < MAP_WIDTH) {
+                neighbours.push_back(neighbour);
+            }
+        }
+    }
+    return neighbours;
+}
+
+std::vector<Posn> Floor::getCross(Posn posn) {
+    std::vector<Posn> cross;
+    for (int i = -1; i <= 1; ++i) {
+        if (i == 0) {
+            continue;
+        }
+        Posn neighbour = Posn{posn.y + i, posn.x};
+        if (neighbour.y >= 0 && neighbour.y < MAP_HEIGHT && neighbour.x >= 0 && neighbour.x < MAP_WIDTH) {
+            cross.push_back(neighbour);
+        }
+    }
+    for (int j = -1; j <= 1; ++j) {
+        if (j == 0) {
+            continue;
+        }
+        Posn neighbour = Posn{posn.y, posn.x + j};
+        if (neighbour.y >= 0 && neighbour.y < MAP_HEIGHT && neighbour.x >= 0 && neighbour.x < MAP_WIDTH) {
+            cross.push_back(neighbour);
+        }
+    }
+    return cross;
 }
 
 std::vector<char> Floor::getDisplay() {
@@ -110,7 +151,6 @@ void Floor::removepoint(int chambernum, Posn pair) {
 void Floor::enemiesAction() {
     for (auto& enemy : enemies) {
         enemy->move(prng1);
-        enemy->attack(player);
     }
 }
 
@@ -162,6 +202,7 @@ void Floor::generatePlayer() {
 }
 
 void Floor::generateFloor() {
+    generateEnemies();
 }
 
 bool Floor::checkValidMove(Posn posn) {
@@ -172,4 +213,11 @@ bool Floor::checkValidMove(Posn posn) {
     return false;
 }
 
+bool Floor::checkValidMoveForEnemy(Posn posn) {
+    char symbol = getCell(posn).getDisplaySymbol();
+    if (symbol == '.') {
+        return true;
+    }
+    return false;
+}
 

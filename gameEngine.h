@@ -24,6 +24,8 @@ public:
 
     bool gameRun();
     void handlePlayerCmd(PlayerCmd cmd);
+    void handleEnemiesAction();
+    PlayerCmd getAction();
     void restartGame();
 
     ~GameEngine();

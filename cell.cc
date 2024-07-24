@@ -51,8 +51,12 @@ Item* Cell::getItem() const {
     return item;
 }
 
-bool Cell::isEnemy() const {
-    return enemy != nullptr;
+bool Cell::isEmpty() const {
+    if (player || enemy || item) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 char Cell::getDisplaySymbol() const {

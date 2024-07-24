@@ -8,7 +8,7 @@
 GameEngine::GameEngine(std::string mapFile, PlayerRace playerRace, bool useDLC) {
     gameMap = std::make_unique<GameMap>(mapFile);
     floor = std::make_unique<Floor>();
-    player = std::make_unique<Player>(floor.get());
+    player = std::make_unique<Player>(floor.get(), playerRace);
     floor->initFloor(player.get(), gameMap.get());
     gameInput = std::make_unique<GameInput>(useDLC);
     gameOutput = std::make_unique<GameOutput>(useDLC);
@@ -16,20 +16,13 @@ GameEngine::GameEngine(std::string mapFile, PlayerRace playerRace, bool useDLC) 
 
 bool GameEngine::gameRun() {
     floor->initFloor(player.get(), gameMap.get());
-    
-    player->setPosn(Posn{5, 5});
-    floor->generateEnemies();
-    floor->updatePlayer();
-    
-    gameOutput->printOutput(floor->getDisplay());
-    PlayerCmd input = gameInput->getInput();
-    // if is invalid input, keep asking for input
-    while (input == PlayerCmd::INVALID) {
-        input = gameInput->getInput();
-    }
+    gameOutput->printOutput(floor->getDisplay(), player.get());
+
+    PlayerCmd input = getAction();
 
     while (input != PlayerCmd::QUIT) {
         handlePlayerCmd(input);
+        handleEnemiesAction();
 
         if (player->getIsDead() || player->getIsWon()) {
             break;
@@ -37,12 +30,22 @@ bool GameEngine::gameRun() {
 
 
         // floor->enemiesAction();
-        gameOutput->printOutput(floor->getDisplay());
-        input = gameInput->getInput();
+        gameOutput->printOutput(floor->getDisplay(), player.get());
+
+        input = getAction();
     }
     return player->getIsWon();
 }
 
+PlayerCmd GameEngine::getAction() {
+    PlayerCmd input = gameInput->getInput();
+    while (input == PlayerCmd::INVALID) {
+        player->setAction("Invalid Command");
+        gameOutput->printOutput(floor->getDisplay(), player.get());
+        input = gameInput->getInput();
+    }
+    return input;
+}
 
 void GameEngine::handlePlayerCmd(PlayerCmd cmd) {
     switch (cmd) {
@@ -92,6 +95,10 @@ void GameEngine::handlePlayerCmd(PlayerCmd cmd) {
         default:
             break;
     }
+}
+
+void GameEngine::handleEnemiesAction() {
+    floor->enemiesAction();
 }
 
 

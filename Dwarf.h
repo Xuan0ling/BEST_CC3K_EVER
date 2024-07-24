@@ -10,7 +10,7 @@ class Floor;
 class Dwarf : public Enemy {
 
  public:
-    Dwarf(Posn posn, Floor* floor);
+    Dwarf(Floor* floor, Posn posn);
     ~Dwarf();
     /* void move(PRNG& prng) override;
     void attack(Player* player) override;

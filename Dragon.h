@@ -9,7 +9,7 @@ class Floor;
 class Dragon : public Enemy {
 
  public:
-    Dragon(Posn posn, Floor* floor);
+    Dragon(Floor* floor, Posn posn);
     ~Dragon();
     /* void move(PRNG& prng) override;
     void attack(Player* player) override;

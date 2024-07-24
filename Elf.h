@@ -8,7 +8,7 @@
 class Elf : public Enemy {
 
  public:
-    Elf(Posn posn, Floor* floor);
+    Elf(Floor* floor, Posn posn);
     ~Elf();
     /* void move(PRNG& prng) override;
     void attack(Player* player) override;

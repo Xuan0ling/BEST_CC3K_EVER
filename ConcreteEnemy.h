@@ -14,49 +14,49 @@
 class HumanFactory : public EnemyFactory {
  public:
     Enemy createEnemy(Posn posn, Floor* floor) override {
-        return Human(posn, floor);
+        return Human(floor ,posn);
     }
 };
 
 class DwarfFactory : public EnemyFactory {
  public:
     Enemy createEnemy(Posn posn, Floor* floor) override {
-        return Dwarf(posn, floor);
+        return Dwarf(floor, posn);
     }
 };
 
 class ElfFactory : public EnemyFactory {
  public:
     Enemy createEnemy(Posn posn, Floor* floor) override {
-        return Elf(posn, floor);
+        return Elf(floor, posn);
     }
 };
 
 class OrcsFactory : public EnemyFactory {
  public:
     Enemy createEnemy(Posn posn, Floor* floor) override {
-        return Orcs(posn, floor);
+        return Orcs(floor, posn);
     }
 };
 
 class MerchantFactory : public EnemyFactory {
  public:
     Enemy createEnemy(Posn posn, Floor* floor) override {
-        return Merchant(posn, floor);
+        return Merchant(floor, posn);
     }
 };
 
 class DragonFactory : public EnemyFactory {
  public:
     Enemy createEnemy(Posn posn, Floor* floor) override {
-        return Dragon(posn, floor);
+        return Dragon(floor, posn);
     }
 };
 
 class HalflingFactory : public EnemyFactory {
  public:
     Enemy createEnemy(Posn posn, Floor* floor) override {
-        return Halfling(posn, floor);
+        return Halfling(floor, posn);
     }
 };
 

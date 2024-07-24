@@ -34,6 +34,11 @@ public:
 
     bool isEmpty(Posn posn);
 
+    // for enemies attack player
+    std::vector<Posn> getNeighbours(Posn posn);
+    // for enemies move
+    std::vector<Posn> getCross(Posn posn);
+
     std::vector<char> getDisplay();
 
 
@@ -50,6 +55,7 @@ public:
     void generateFloor();
 
     bool checkValidMove(Posn posn);
+    bool checkValidMoveForEnemy(Posn posn);
 
 
 };
