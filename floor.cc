@@ -5,7 +5,7 @@
 #include "item.h"
 #include "gameMap.h"
 #include <unistd.h>
-#include "ConcreteEnemy.h"
+#include "concreteEnemy.h"
 
 
 Floor::Floor() : player{nullptr}, gameMap{nullptr} {
@@ -181,7 +181,7 @@ void Floor::generateEnemies() {
             enemyFactory = std::make_unique<MerchantFactory>();
         }
          
-        Enemy enemy = enemyFactory->createEnemy(temp, this);
+        Enemy enemy = enemyFactory->createEnemy(this, temp);
         removepoint(chamber, temp);
        
         this->addEnemy(std::make_unique<Enemy>(enemy));
