@@ -4,9 +4,9 @@
 #include "floor.h"
 
 class Item {
-    char symbol;
-    Posn posn;
     Floor *floor;
+    Posn posn;
+    char symbol;
 public:
     Item(Floor* floor, Posn posn, char symbol);
     virtual ~Item();
