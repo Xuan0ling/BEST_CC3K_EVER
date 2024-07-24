@@ -1,4 +1,4 @@
-#include "Human.h"
+#include "human.h"
 
 
 Human::Human(Floor* floor, Posn posn) : Enemy(floor, 'H', posn, 140, 20, 20) {}

@@ -55,6 +55,8 @@ public:
     void generatePlayer();
     void generateFloor();
 
+    Posn playerRandomPosn();
+
     bool checkValidMove(Posn posn);
     bool checkValidMoveForEnemy(Posn posn);
 

@@ -1,4 +1,4 @@
-#include "Orcs.h"
+#include "orcs.h"
 
 
 Orcs::Orcs(Floor* floor, Posn posn) : Enemy(floor, 'O', posn, 180, 30, 25) {}

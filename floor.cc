@@ -5,8 +5,10 @@
 #include "item.h"
 #include "gameMap.h"
 #include <unistd.h>
-#include "ConcreteEnemy.h"
+
 #include "concreteitemfactory.h"
+#include "concreteEnemy.h"
+
 
 Floor::Floor() : player{nullptr}, gameMap{nullptr} {
     uint32_t seed = getpid();	
@@ -30,7 +32,7 @@ void Floor::initFloor(Player* player, GameMap* gameMap) {
     }
     enemies.clear();
     items.clear();
-    player->setPosn(Posn{5, 5});
+    player->setPosn(playerRandomPosn());
     updatePlayer();
     generateFloor();
 }
@@ -181,7 +183,7 @@ void Floor::generateEnemies() {
             enemyFactory = std::make_unique<MerchantFactory>();
         }
          
-        Enemy enemy = enemyFactory->createEnemy(temp, this);
+        Enemy enemy = enemyFactory->createEnemy(this, temp);
         removepoint(chamber, temp);
        
         this->addEnemy(std::make_unique<Enemy>(enemy));
@@ -253,6 +255,18 @@ void Floor::generatePlayer() {
 void Floor::generateFloor() {
     generateEnemies();
     generatePotions();
+}
+
+
+Posn Floor::playerRandomPosn() {
+    int chamber = prng1(0, NUM_CHAMBERS - 1);
+    player->setChamberNum(chamber);
+    int posn = prng1(0, possiblePoints[chamber].size());
+
+    Posn temp = possiblePoints[chamber][posn];
+
+    removepoint(chamber, temp);
+    return temp;
 }
 
 bool Floor::checkValidMove(Posn posn) {

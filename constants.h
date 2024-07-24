@@ -21,6 +21,8 @@ enum class PlayerRace {
 
 const int MAP_WIDTH = 79;
 const int MAP_HEIGHT = 25;
+const int NUM_FLOORS = 5;
+const int NUM_CHAMBERS = 5;
 
 // ASCII color codes
 const std::string RESET = "\033[0m";

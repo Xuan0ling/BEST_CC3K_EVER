@@ -7,7 +7,7 @@
 
 class EnemyFactory {
  public:
-    virtual Enemy createEnemy(Posn posn, Floor* floor) = 0;
+    virtual Enemy createEnemy(Floor* floor, Posn posn) = 0;
     virtual ~EnemyFactory() {}
 };
 

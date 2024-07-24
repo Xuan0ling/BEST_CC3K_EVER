@@ -8,6 +8,8 @@ class Player {
     Floor* floor;
     PlayerRace race;
 
+    int chamberNum;
+
     Posn posn;
     int hp;
     int atk;
@@ -39,6 +41,9 @@ public:
 
     void setHp(int hp);
     void setGold(int gold);
+
+    void setChamberNum(int chamberNum);
+    int getChamberNum();
 
     void gainHp(int hp);
     void gainAtk(int atk);
