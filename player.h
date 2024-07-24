@@ -38,6 +38,7 @@ public:
     virtual void attack(Posn attackDir);
     virtual void usePotion(Posn usePotionDir);
     virtual void checkGold();
+    void playerEnterFloor();
 
     void setHp(int hp);
     void setGold(int gold);
@@ -46,8 +47,6 @@ public:
     int getChamberNum();
 
     void gainHp(int hp);
-    void gainAtk(int atk);
-    void gainDef(int def);
     void gainGold(int gold);
     void gainExAtk(int exAtk);
     void gainExDef(int exDef);
@@ -59,8 +58,12 @@ public:
     void setIsDead(bool isDead);
     void setIsWon(bool isWon);
 
+
+    void clearEffect();
+  
     std::string getRaceStr();
     PlayerRace getRace();
+
     std::string getAction();
     void setAction(std::string action);
 

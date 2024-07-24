@@ -62,6 +62,18 @@ void GameEngine::handlePlayerCmd(PlayerCmd cmd) {
         case PlayerCmd::WE:
             player->move(Posn(0, -1));
             break;
+        case PlayerCmd::NE:
+            player->move(Posn(-1, 1));
+            break;
+        case PlayerCmd::NW:
+            player->move(Posn(-1, -1));
+            break;
+        case PlayerCmd::SE:
+            player->move(Posn(1, 1));
+            break;
+        case PlayerCmd::SW:
+            player->move(Posn(1, -1));
+            break;
         case PlayerCmd::ATTACK_NO:
             player->attack(Posn(-1, 0));
             break;
@@ -87,8 +99,7 @@ void GameEngine::handlePlayerCmd(PlayerCmd cmd) {
             player->usePotion(Posn(0, -1));
             break;
         case PlayerCmd::ENTERNEXTFLOOR:
-            player->gainCurrFloorIndex(1);
-            floor->initFloor(player.get(), gameMap.get());
+            player->playerEnterFloor();
             break;
         case PlayerCmd::RESTART:
             restartGame();

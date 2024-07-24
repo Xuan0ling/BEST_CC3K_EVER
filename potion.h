@@ -14,6 +14,7 @@ public:
     int getBuffHP();
     int getBuffATK();
     int getBuffDEF();
+    void usePotion(Player *player) override;
 };
 
 #endif

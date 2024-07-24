@@ -4,14 +4,17 @@
 #include <iostream>
 
 class GameInput {
-    char input;
-    bool useDLC;
 public:
     GameInput(bool useDLC);
-    PlayerCmd getInput();
-    PlayerCmd getPlayerPosition(char input);
-    PlayerRace getPlayerRace();
     ~GameInput();
+
+    PlayerCmd getInput();
+    PlayerCmd getPlayerPosition(const std::string& input);
+    std::string collectInput();
+    PlayerRace getPlayerRace();
+
+private:
+    bool useDLC;
 };
 
 

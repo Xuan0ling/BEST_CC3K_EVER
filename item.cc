@@ -20,4 +20,6 @@ int Item::getGold() {
     return 0;
 }
 
+void Item::usePotion(Player *player) {}
+
 
