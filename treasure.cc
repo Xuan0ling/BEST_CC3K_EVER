@@ -5,8 +5,8 @@ Treasure::Treasure(Floor *floor, Posn posn, int gold): Item(floor, posn, 'G'), G
 
 Treasure::~Treasure() {}
 
-int Treasure::getGold() {
-    return Gold;
+void Treasure::modifyPlayerStats(Player *player) {
+    player->gainGold(Gold);
 }
 
 void Treasure::modifystats(Player *player) {

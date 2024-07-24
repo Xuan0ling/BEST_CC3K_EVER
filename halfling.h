@@ -1,16 +1,17 @@
-#ifndef ORCS_H
-#define ORCS_H
+#ifndef HALFLING_H
+#define HALFLING_H
 
 
 #include "enemy.h"
 
+
 class Floor;
 
-class Orcs : public Enemy {
+class Halfling : public Enemy {
 
  public:
-    Orcs(Floor* floor, Posn posn);
-    ~Orcs();
+    Halfling(Floor* floor, Posn posn);
+    ~Halfling();
     /* void move(PRNG& prng) override;
     void attack(Player* player) override;
     void beAttacked(int atk) override; */

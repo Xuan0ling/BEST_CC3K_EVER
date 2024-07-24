@@ -2,13 +2,17 @@
 #define PLAYER_H
 
 #include "constants.h"
+#include <vector>
+#include <memory>
 
+
+class Item;
 
 class Player {
     Floor* floor;
     PlayerRace race;
 
-    int chamberNum;
+    int chamberNum = -1;
 
     Posn posn;
     int hp;
@@ -16,13 +20,14 @@ class Player {
     int def;
     int gold;
     int maxHp;
-    int chamber = -1;
     
     int exAtk = 0;
     int exDef = 0;
+
     int currFloorIndex = 1;
     bool isDead = false;
     bool isWon = false;
+
 
     std::string action;
 public:
@@ -53,7 +58,6 @@ public:
     void gainExDef(int exDef);
     void gainCurrFloorIndex(int currFloorIndex);
 
-
     void setMaxHp(int maxHp);
     void setIsDead(bool isDead);
     void setIsWon(bool isWon);
@@ -69,8 +73,9 @@ public:
     int getMaxHp();
     int getExAtk();
     int getExDef();
+    int ExtraAtk();
+    int ExtraDef();
     int getCurrFloorIndex();
-    int getchamber();
     bool getIsDead();
     bool getIsWon();
     virtual ~Player();

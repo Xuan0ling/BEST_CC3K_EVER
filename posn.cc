@@ -13,6 +13,24 @@ Posn Posn::operator+=(const Posn &other) {
     return *this;
 }
 
+Posn Posn::operator-(const Posn &other) {
+    return Posn{y - other.y, x - other.x};
+}
+
+Posn Posn::operator-=(const Posn &other) {
+    y -= other.y;
+    x -= other.x;
+    return *this;
+}
+
+bool Posn::operator==(const Posn &other) const {
+    return y == other.y && x == other.x;
+}
+
+bool Posn::operator!=(const Posn &other) const {
+    return y != other.y || x != other.x;
+}
+
 Posn::~Posn() {}
 
 

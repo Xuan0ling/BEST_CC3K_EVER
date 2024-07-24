@@ -6,7 +6,7 @@
 #include "gameMap.h"
 #include <unistd.h>
 
-#include "concreteitemfactory.h"
+#include "concreteItemFactory.h"
 #include "concreteEnemy.h"
 
 
@@ -21,6 +21,9 @@ Floor::~Floor() {}
 void Floor::initFloor(Player* player, GameMap* gameMap) {
     this->player = player;
     this->gameMap = gameMap;
+}
+
+void Floor::loadFloor() {
     this->possiblePoints = gameMap->getPossiblePoints();
     cells.clear();
     // load blank map in cells
@@ -32,8 +35,6 @@ void Floor::initFloor(Player* player, GameMap* gameMap) {
     }
     enemies.clear();
     items.clear();
-    player->setPosn(playerRandomPosn());
-    updatePlayer();
     generateFloor();
 }
 
@@ -141,14 +142,16 @@ void Floor::removeItem(Item* item) {
 }
 
 void Floor::removepoint(int chambernum, Posn pair) {
-    for (auto it = possiblePoints[chambernum].begin(); it != possiblePoints[chambernum].end();) {
-        if((*it).x == pair.y && (*it).x == pair.y) {
-            it = possiblePoints[chambernum].erase(it);
-        } else {
-            ++it;
-        }
-    }
+    // Lambda function to check if a Posn object matches the given pair
+    auto is_point = [pair](const Posn& p) { return p == pair; };
+
+    // Remove the points that match the pair from the specified chamber
+    possiblePoints[chambernum].erase(
+        std::remove_if(possiblePoints[chambernum].begin(), possiblePoints[chambernum].end(), is_point),
+        possiblePoints[chambernum].end()
+    );
 }
+
 
 void Floor::enemiesAction() {
     for (auto& enemy : enemies) {
@@ -300,21 +303,6 @@ void Floor::generateGold() {
     }
 }
 
-void Floor::generateStair() {
-    int playerchamber = player->getchamber();
-    int which = prng1(0, 4);
-    while(true) {
-        if (which != playerchamber) {
-            break;
-        } 
-        which = prng1(0, 4);
-    }
-
-    int posn = prng1(0, possiblePoints[which].size());
-
-    Posn temp = possiblePoints[which][posn];
-
-}
 
 void Floor::generatePlayer() {
 }
@@ -326,16 +314,31 @@ void Floor::generateFloor() {
 }
 
 
-Posn Floor::playerRandomPosn() {
-    int chamber = prng1(0, NUM_CHAMBERS - 1);
-    player->setChamberNum(chamber);
-    int posn = prng1(0, possiblePoints[chamber].size());
 
-    Posn temp = possiblePoints[chamber][posn];
+void Floor::generateStair() {
+    int playerchamber = player->getChamberNum();
+    int which = prng1(0, NUM_CHAMBERS - 1);
+    while (which == playerchamber) {
+        which = prng1(0, NUM_CHAMBERS - 1);
+    }
 
-    removepoint(chamber, temp);
-    return temp;
+    int posn = prng1(0, possiblePoints[which].size() - 1);
+
+    Posn temp = possiblePoints[which][posn];
+    removepoint(which, temp);
+    Cell& cell = getCell(temp);
+    cell.setStair();
 }
+
+
+void Floor::generateFloor() {
+    generatePlayer();
+    generateEnemies();
+    generatePotions();
+    generateStair();
+}
+
+
 
 bool Floor::checkValidMove(Posn posn) {
     char symbol = getCell(posn).getDisplaySymbol();
