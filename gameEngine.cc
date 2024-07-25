@@ -152,9 +152,6 @@ void GameEngine::handlePlayerCmd(PlayerCmd cmd) {
         case PlayerCmd::USEPOTION_SW:
             player->usePotion(Posn(1, -1));
             break;
-        case PlayerCmd::ENTERNEXTFLOOR:
-            player->playerEnterFloor();
-            break;
         case PlayerCmd::STOP:
             if (stop == -1) {
                 player->setAction(" Stop The World !!!");
@@ -169,6 +166,7 @@ void GameEngine::handlePlayerCmd(PlayerCmd cmd) {
         default:
             break;
     }
+    player->checkPlayerEnterFloor();
 }
 
 void GameEngine::handleEnemiesAction() {
