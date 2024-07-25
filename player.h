@@ -4,6 +4,7 @@
 #include "constants.h"
 
 
+
 class Player {
     Floor* floor;
     PlayerRace race;
@@ -52,11 +53,13 @@ public:
     void gainExDef(int exDef);
     void LoseHP(int atkpower);
     void gainCurrFloorIndex(int currFloorIndex);
+    void setMerchantVolatile();
 
 
     void setMaxHp(int maxHp);
     void setIsDead(bool isDead);
     void setIsWon(bool isWon);
+    
 
 
     void clearEffect();
@@ -66,6 +69,8 @@ public:
 
     std::string getAction();
     void setAction(std::string action);
+
+    std::string numAsString(int num);
 
     int getHp();
     int getAtk();

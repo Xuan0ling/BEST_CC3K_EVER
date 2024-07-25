@@ -3,7 +3,7 @@
 #include "item.h"
 #include "player.h"
 #include "posn.h"
-
+#include "dragonHoardTreasure.h"
 
 Dragon::Dragon (Floor* floor, Posn posn, Item* hoard) 
 : Enemy{floor, SYMBOL_DRAGON, posn, 150, 20, 20}, dragonhoard{hoard} {}
@@ -22,9 +22,12 @@ bool Dragon::attack(Player *player, PRNG prng1) {
         if (neighbour == player->getPosn()) {
             int num = prng1(0, 1);
             if(num % 2 == 0) {
+                player->setAction(player->getAction() + " D deals " );
                 player->LoseHP(atk);
+            } else {
+                player->setAction(player->getAction() + " D attacks and misses.");
             }
-            return true;     //add missed action
+            return true;    
         }
     }
 
@@ -32,14 +35,34 @@ bool Dragon::attack(Player *player, PRNG prng1) {
         if (neighbour == player->getPosn()) {
             int num = prng1(0, 1);
             if(num % 2 == 0) {
+                player->setAction(player->getAction() + " D deals " );
                 player->LoseHP(atk);
+            } else {
+                player->setAction(player->getAction() + " D attacks and misses.");
             }
-            return true;    //add missed action
+            return true;
+
+           
         }
     }
 
     return false;
 }
 
-void Dragon::beAttacked(int atk) {
+bool Dragon::beAttacked(Player* player) {
+    int hplose = loseHp(player->getAtk() + player->getAtk());
+
+    if(hp - hplose <= 0) {
+        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to D and kills D.");
+        if(player->getRace() == PlayerRace::GOBLIN) {
+            player->setAction(player->getAction() + " PC stole 5 gold before killing the D.");
+            player->gainGold(5);
+        }
+        dragonhoard->setDragonDead();
+        floor->removeEnemy(this);
+    } else {
+        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to D.");
+        hp -= hplose;
+    }
+    return true;
 }

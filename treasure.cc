@@ -9,6 +9,3 @@ int Treasure::getGold() {
     return Gold;
 }
 
-void Treasure::modifystats(Player *player) {
-    player->gainGold(Gold);
-}

@@ -19,13 +19,14 @@ public:
     virtual ~Enemy();
     virtual void move(PRNG& prng);
     virtual bool attack(Player* player, PRNG prng1);
-    virtual void beAttacked(int atk);
+    virtual bool beAttacked(Player* player);
 
     char getSymbol();
     Posn getPosn();
     int getHp();
     int getAtk();
     int getDef();
+    int loseHp(int Atk);
     void setPosn(Posn posn);
 };
 

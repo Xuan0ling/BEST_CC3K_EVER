@@ -11,9 +11,7 @@ class Human : public Enemy {
  public:
     Human(Floor* floor, Posn posn);
     ~Human();
-    /* void move(PRNG& prng) override;
-    void attack(Player* player) override;
-    void beAttacked(int atk) override; */
+    bool beAttacked(Player* player) override;
 };
 
 #endif

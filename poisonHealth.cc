@@ -1,5 +1,14 @@
 #include "poisonHealth.h"
+#include "player.h"
 
-Poisonhealth::Poisonhealth(Floor *floor, Posn posn): Potion(floor, posn, 0, 0, -10) {}
+Poisonhealth::Poisonhealth(Floor *floor, Posn posn): Potion(floor, posn, -10) {}
 
 Poisonhealth::~Poisonhealth() {}
+
+void Poisonhealth::usePotion(Player *player) {
+     if(player->getRace() == PlayerRace::DROW) {
+        value = value * 1.5;
+    }
+    player->gainHp(value);
+    player->setAction(player->getAction() + " PC uses PH.");
+}

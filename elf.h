@@ -11,7 +11,7 @@ class Elf : public Enemy {
     Elf(Floor* floor, Posn posn);
     ~Elf();
     bool attack(Player* player, PRNG prng1) override;
-    //void beAttacked(int atk) override;
+    bool beAttacked(Player* player) override;
 };
 
 #endif

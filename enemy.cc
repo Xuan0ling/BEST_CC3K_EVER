@@ -31,9 +31,14 @@ int Enemy::getDef() {
     return def;
 }
 
-
-void Enemy::beAttacked(int atk) {
+int Enemy::loseHp(int Atk) {
+    int hplose = ceil((100.0/(100 + def)) * Atk);
+    return hplose;
 }
+
+bool Enemy::beAttacked(Player* player) {
+}
+
 
 void Enemy::move(PRNG& prng) {
     std::vector<Posn> neighbours = floor->getNeighbours(posn);
@@ -60,7 +65,22 @@ bool Enemy::attack(Player *player, PRNG prng1) {
         if (neighbour == player->getPosn()) {
             int num = prng1(0, 1);
             if(num % 2 == 0) {
+                if(symbol == 'W') {
+                    player->setAction(player->getAction() + " W deals " );
+                } else if (symbol == 'H') {
+                    player->setAction(player->getAction() + " H deals " );
+                } else if (symbol == 'L') {
+                    player->setAction(player->getAction() + " L deals " );
+                }
                 player->LoseHP(atk);
+            } else {
+                if(symbol == 'W') {
+                    player->setAction(player->getAction() + " W attacks and misses." );
+                } else if (symbol == 'H') {
+                    player->setAction(player->getAction() + " H attacks and misses." );
+                } else if (symbol == 'L') {
+                    player->setAction(player->getAction() + " L attacks and misses." );
+                }
             }
             return true;     //add missed action
         }

@@ -5,7 +5,7 @@ class Poisonhealth: public Potion {
 public:
     Poisonhealth(Floor *floor, Posn posn);
     ~Poisonhealth();
-    
+    void usePotion(Player *player);
 };
 
 #endif

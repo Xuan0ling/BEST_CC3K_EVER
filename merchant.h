@@ -12,7 +12,7 @@ class Merchant : public Enemy {
     Merchant(Floor* floor, Posn posn);
     ~Merchant();
     bool attack(Player* player, PRNG prng1) override;
-   // void beAttacked(int atk) override;
+    bool beAttacked(Player* player) override;
 };
 
 #endif

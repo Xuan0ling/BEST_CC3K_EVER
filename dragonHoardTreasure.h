@@ -8,7 +8,9 @@ class DragonHoardTreasure : public Treasure {
  public:
     DragonHoardTreasure(Floor *floor, Posn posn, int gold);
     ~DragonHoardTreasure();
+    void setDragonDead() override;
     bool getdragondead();
+    bool gainGold(Player* player);
 };
 
 #endif
