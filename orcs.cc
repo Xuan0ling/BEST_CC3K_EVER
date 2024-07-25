@@ -13,11 +13,10 @@ bool Orcs::attack(Player *player, PRNG& prng1) {
             int num = prng1(0, 1);
             if(num % 2 == 0) {
                 if(player->getRace() == PlayerRace::GOBLIN) {
-                    int hpgain = ceil((100/(100 + player->getDef())) * (atk * 1.5));
-                    std::ostringstream oss;
-                    oss << hpgain;
-                    player->setAction(player->getAction() + " O has advantage over Goblins and deals " + oss.str() + ", 50% more damage than usual." );
-                    player->gainHp(hpgain);
+                    int hpgain = ceil((100.0/(100 + player->getDef() + player->getExDef())) * (atk * 1.5));
+                    
+                    player->setAction(player->getAction() + " O has advantage over Goblins and deals " + std::to_string(hpgain) + ", 50% more damage than usual." );
+                    player->gainHp(-hpgain);
                     return true;
                 }
                 player->setAction(player->getAction() + " O deals " );
