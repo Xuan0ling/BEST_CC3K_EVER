@@ -49,7 +49,7 @@ public:
 
     void removepoint(int chambernum, Posn pair);
 
-    void enemiesAction();
+    void enemiesAction(int stop);
     void generateEnemies();
     void generatePotions();
     void generateGold();

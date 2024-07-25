@@ -57,7 +57,9 @@ PlayerCmd GameInput::getInput() {
         return PlayerCmd::RESTART;
     } else if (input == "q") {
         return PlayerCmd::QUIT;
-    } else {
+    } else if (input == "f") {
+        return PlayerCmd::STOP;
+    }else {
         return PlayerCmd::INVALID;
     }
 }

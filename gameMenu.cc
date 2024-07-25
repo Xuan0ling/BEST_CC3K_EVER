@@ -55,9 +55,6 @@ PlayerRace GameMenu::stratMenu() {
 }
 
 GameMenu::~GameMenu() {
-    if (useDLC) {
-        endwin();
-    }
 }
 
 

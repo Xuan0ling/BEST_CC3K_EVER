@@ -102,8 +102,4 @@ void GameOutput::printOutput(const std::vector<char>& display, Player* player) {
 
 
 // Destructor for GameOutput
-GameOutput::~GameOutput() {
-    if (useDLC) {
-        endwin(); // End ncurses
-    }
-}
+GameOutput::~GameOutput() {}

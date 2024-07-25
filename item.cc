@@ -1,6 +1,8 @@
 #include "item.h"
 
+
 Item::Item(Posn posn, char symbol): posn{posn}, symbol{symbol} {}
+
 
 Item::~Item() {}
 

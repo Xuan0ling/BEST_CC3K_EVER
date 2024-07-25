@@ -9,10 +9,34 @@ GameEngine::GameEngine(std::string mapFile, PlayerRace playerRace, bool useDLC, 
 : playerScore(playerScore) {
     gameMap = std::make_unique<GameMap>(mapFile);
     floor = std::make_unique<Floor>();
-    player = std::make_unique<Player>(floor.get(), playerRace);
+    playerCreate(playerRace);
     floor->initFloor(player.get(), gameMap.get());
     gameInput = std::make_unique<GameInput>(useDLC);
     gameOutput = std::make_unique<GameOutput>(useDLC);
+}
+
+void GameEngine::playerCreate(PlayerRace playerRace) {
+    std::unique_ptr<Playerfactory> playerFactory;
+    switch (playerRace) {
+        case PlayerRace::SHADE:
+            playerFactory = std::make_unique<Shadefactory>();
+            break;
+        case PlayerRace::DROW:
+            playerFactory = std::make_unique<Drowfactory>();
+            break;
+        case PlayerRace::VAMPIRE:
+            playerFactory = std::make_unique<Vampirefactory>();
+            break;
+        case PlayerRace::TROLL:
+            playerFactory = std::make_unique<Trollfactory>();
+            break;
+        case PlayerRace::GOBLIN:
+            playerFactory = std::make_unique<Goblinfactory>();
+            break;
+        default:
+            break;
+    }
+    player = playerFactory->createPlayer(floor.get());
 }
 
 bool GameEngine::gameRun() {
@@ -104,6 +128,14 @@ void GameEngine::handlePlayerCmd(PlayerCmd cmd) {
         case PlayerCmd::ENTERNEXTFLOOR:
             player->playerEnterFloor();
             break;
+        case PlayerCmd::STOP:
+            if (stop == -1) {
+                player->setAction(" Stop The World !!!");
+            } else {
+                player->setAction(" Resume The World !!!");
+            }
+            stop = -stop;
+            break;
         case PlayerCmd::RESTART:
             restartGame();
             break;
@@ -113,14 +145,13 @@ void GameEngine::handlePlayerCmd(PlayerCmd cmd) {
 }
 
 void GameEngine::handleEnemiesAction() {
-    floor->enemiesAction();
+    floor->enemiesAction(stop);
 }
 
 
 void GameEngine::restartGame() {
     player->setIsWon(false);
     player->setIsDead(false);
-    player->gainCurrFloorIndex(1);
     player->setHp(player->getMaxHp());
     player->setChamberNum(-1);
     player->setGold(0);

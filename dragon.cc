@@ -50,7 +50,7 @@ bool Dragon::attack(Player *player, PRNG prng1) {
 }
 
 bool Dragon::beAttacked(Player* player) {
-    int hplose = loseHp(player->getAtk() + player->getAtk());
+    int hplose = loseHp(player->getAtk() + player->getExAtk());
 
     if(hp - hplose <= 0) {
         player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to D and kills D.");

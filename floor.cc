@@ -150,12 +150,14 @@ void Floor::removepoint(int chambernum, Posn pair) {
         possiblePoints[chambernum].end());
 }
 
-void Floor::enemiesAction() {
+void Floor::enemiesAction(int stop) {
     for (auto& enemy : enemies) {
         if (enemy->attack(player, prng1)) {
             continue;
         } else {
-            enemy->move(prng1);
+            if (stop == -1) {
+                enemy->move(prng1);
+            }
         }
     }
 }
