@@ -61,6 +61,18 @@ const int VAMPIRE_ATK = 25;
 const int VAMPIRE_DEF = 25;
 const int VAMPIRE_ADD_HP = 5;
 
+// load given floor
+// items : 0-RH,1-BA,2-BD,3-PH,4-WA,5-WD,6-normalgoldpile,7 - small hoard, 8 - merchant hoard, 9 - dragon hoard
+const char RH = '0';
+const char BA = '1';
+const char BD = '2';
+const char PH = '3';
+const char WA = '4';
+const char WD = '5';
+const char NORMALGOLDPILE = '6';
+const char SMALLHOARD = '7';
+const char MERCHANTHOARD = '8';
+const char DRAGONHOARD = '9';
 
 
 // forward declaration

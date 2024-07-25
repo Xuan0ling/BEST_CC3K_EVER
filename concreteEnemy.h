@@ -33,7 +33,7 @@ class ElfFactory : public EnemyFactory {
     }
 };
 
-class OrcsFactory : public EnemyFactory {
+class OrcFactory : public EnemyFactory {
  public:
     Enemy* createEnemy(Floor* floor, Posn posn) override {
         return new Orcs(floor, posn);
