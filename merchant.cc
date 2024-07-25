@@ -1,5 +1,4 @@
 #include "merchant.h"
-#include "Merchant.h"
 #include "player.h"
 #include "concreteItemFactory.h"
 
@@ -32,7 +31,7 @@ bool Merchant::beAttacked(Player *player) {
         player->setMerchantVolatile();
     }
 
-    int hplose = loseHp(player->getAtk() + player->getAtk());
+    int hplose = loseHp(player->getAtk() + player->getExAtk());
 
     if(hp - hplose <= 0) {
         player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to M and kills M.");

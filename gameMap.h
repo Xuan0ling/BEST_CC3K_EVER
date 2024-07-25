@@ -5,8 +5,6 @@
 #include "constants.h"
 
 class GameMap {
-    int width = MAP_WIDTH;
-    int height = MAP_HEIGHT;
     std::string mapFile;
     std::vector<std::vector<char>> cells;
     std::vector<std::vector<Posn>> PossiblePoints;

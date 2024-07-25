@@ -1,6 +1,6 @@
 #include "item.h"
 
-Item::Item( Floor *floor, Posn posn, char symbol): floor{floor}, posn{posn}, symbol{symbol} {}
+Item::Item(Floor *floor, Posn posn, char symbol): floor{floor}, posn{posn}, symbol{symbol} {}
 
 Item::~Item() {}
 

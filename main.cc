@@ -19,6 +19,9 @@ int main(int argc, char* argv[]) {
         std::string mapFile = "emptyfloor.txt";
         GameEngine gameEngine(mapFile, race, useDLC, plyerScore.get());
         bool isWon = gameEngine.gameRun();
+        if (useDLC) {
+            endwin(); // End ncurses
+        }
         GameEnd gameEnd(isWon, *(plyerScore.get()));
         gameEnd.printEnd();
     }

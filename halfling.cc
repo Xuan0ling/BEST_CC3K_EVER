@@ -14,7 +14,7 @@ bool Halfling::beAttacked(Player *player) {
     int num = prng1(0, 1);
 
     if(num % 2 == 0) {
-        int hplose = loseHp(player->getAtk() + player->getAtk());
+        int hplose = loseHp(player->getAtk() + player->getExAtk());
 
         if(hp - hplose <= 0) {
             player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to L and kills L.");

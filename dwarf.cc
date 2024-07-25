@@ -1,5 +1,4 @@
 #include "dwarf.h"
-#include "Dwarf.h"
 #include "player.h"
 
 Dwarf::Dwarf(Floor* floor, Posn posn) 

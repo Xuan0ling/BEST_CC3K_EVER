@@ -85,7 +85,7 @@ void Player::checkGold() {
 void Player::playerEnterFloor() {
     auto& cell = floor->getCell(posn);
     if (cell.hasStair()) {
-        if (currFloorIndex > NUM_FLOORS) {
+        if (currFloorIndex == NUM_FLOORS) {
             isWon = true;
         } else {
             gainCurrFloorIndex(1);
