@@ -71,13 +71,13 @@ PlayerCmd GameInput::getPlayerPosition(const std::string& input) {
         return PlayerCmd::SO;
     } else if (input == "l" || input == "ea") {
         return PlayerCmd::EA;
-    } else if (input == "H" || input == "ne") {
+    } else if (input == "J" || input == "ne") {
         return PlayerCmd::NE;
-    } else if (input == "J" || input == "nw") {
+    } else if (input == "H" || input == "nw") {
         return PlayerCmd::NW;
-    } else if (input == "K" || input == "se") {
+    } else if (input == "L" || input == "se") {
         return PlayerCmd::SE;
-    } else if (input == "L" || input == "sw") {
+    } else if (input == "K" || input == "sw") {
         return PlayerCmd::SW;
     }
     return PlayerCmd::INVALID;
@@ -101,13 +101,12 @@ PlayerRace GameInput::getPlayerRace() {
             return PlayerRace::TROLL;
         case 'g':
             return PlayerRace::GOBLIN;
+        case 'q':
+            return PlayerRace::QUIT;
         default:
             return PlayerRace::INVALID;
     }
 }
 
 GameInput::~GameInput() {
-    if (useDLC) {
-        endwin(); // End ncurses
-    }
 }

@@ -5,7 +5,8 @@
 
 
 
-GameEngine::GameEngine(std::string mapFile, PlayerRace playerRace, bool useDLC) {
+GameEngine::GameEngine(std::string mapFile, PlayerRace playerRace, bool useDLC, int* playerScore) 
+: playerScore(playerScore) {
     gameMap = std::make_unique<GameMap>(mapFile);
     floor = std::make_unique<Floor>();
     player = std::make_unique<Player>(floor.get(), playerRace);
@@ -35,6 +36,7 @@ bool GameEngine::gameRun() {
 
         input = getAction();
     }
+    *playerScore = player->getGold();
     return player->getIsWon();
 }
 

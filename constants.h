@@ -2,8 +2,10 @@
 #define CONSTANTS_H
 
 #include <memory>
+#include <vector>
 #include <string>
 #include <ncurses.h>
+#include <fstream>
 #include "posn.h"
 // define player races types
 enum class PlayerCmd {
@@ -14,7 +16,7 @@ enum class PlayerCmd {
 };
 
 enum class PlayerRace {
-    SHADE, DROW, VAMPIRE, TROLL, GOBLIN, INVALID
+    SHADE, DROW, VAMPIRE, TROLL, GOBLIN, INVALID, QUIT
 };
 
 

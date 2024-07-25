@@ -17,10 +17,11 @@ class GameEngine {
     GameMapPtr gameMap;
     GameInputPtr gameInput;
     GameOutputPtr gameOutput;
+    int* playerScore;
 
     int currFloorNum = 1;
 public:
-    GameEngine(std::string mapFile, PlayerRace playerRace, bool useDLC);
+    GameEngine(std::string mapFile, PlayerRace playerRace, bool useDLC, int* playerScore);
 
     bool gameRun();
     void handlePlayerCmd(PlayerCmd cmd);
