@@ -7,7 +7,7 @@ Human::Human(Floor* floor, Posn posn) : Enemy(floor, 'H', posn, 140, 20, 20) {}
 
 Human::~Human() {}
 
-bool Human::beAttacked(Player *player) {
+bool Human::beAttacked(Player *player, PRNG& prng1) {
     int hplose = loseHp(player->getAtk() + player->getExAtk());
 
     if(hp - hplose <= 0) {
@@ -23,8 +23,8 @@ bool Human::beAttacked(Player *player) {
         floor->loadItems();
         floor->removeEnemy(this);
     } else {
-        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to D.");
         hp -= hplose;
+        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to D." + " (" + std::to_string(hp) + "HP)");
     }
     return true;
 }

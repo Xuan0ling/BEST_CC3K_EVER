@@ -11,8 +11,8 @@ class Orcs : public Enemy {
  public:
     Orcs(Floor* floor, Posn posn);
     ~Orcs();
-    bool attack(Player* player, PRNG prng1) override;
-    bool beAttacked(Player* player) override;
+    bool attack(Player* player, PRNG& prng1) override;
+    bool beAttacked(Player* player, PRNG& prng1) override;
 };
 
 #endif

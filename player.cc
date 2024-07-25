@@ -46,7 +46,7 @@ void Player::attack(Posn attackDir) {
     Posn newPosn = posn + attackDir;
     auto& cell = floor->getCell(newPosn);
     if (cell.hasEnemy()) {
-        cell.getEnemy()->beAttacked(this);
+        cell.getEnemy()->beAttacked(this, floor->getRandomGnerator());
     }
 } 
 

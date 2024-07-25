@@ -10,8 +10,8 @@ class Elf : public Enemy {
  public:
     Elf(Floor* floor, Posn posn);
     ~Elf();
-    bool attack(Player* player, PRNG prng1) override;
-    bool beAttacked(Player* player) override;
+    bool attack(Player* player, PRNG& prng1) override;
+    bool beAttacked(Player* player, PRNG& prng1) override;
 };
 
 #endif

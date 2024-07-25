@@ -6,12 +6,9 @@ Halfling::Halfling(Floor* floor, Posn posn) : Enemy(floor, 'L', posn, 100, 15, 2
 
 Halfling::~Halfling() {}
 
-bool Halfling::beAttacked(Player *player) {
-    PRNG prng1;
-    uint32_t seed = getpid();	
-    prng1.seed(seed);
+bool Halfling::beAttacked(Player *player, PRNG& prng) {
 
-    int num = prng1(0, 1);
+    int num = (prng)(0, 1);
 
     if(num % 2 == 0) {
         int hplose = loseHp(player->getAtk() + player->getExAtk());
@@ -26,8 +23,8 @@ bool Halfling::beAttacked(Player *player) {
             player->setAction(player->getAction() + " PC gains small gold from the dead L.");
             player->gainGold(1);
         } else {
-            player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to L.");
             hp -= hplose;
+            player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to L." + " (" + std::to_string(hp) + "HP)");
         }
         return true;
     } else {

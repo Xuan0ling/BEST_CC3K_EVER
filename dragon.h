@@ -14,8 +14,8 @@ protected:
     Dragon(Floor * floor, Posn posn, Item * hoard);
     ~Dragon();
     void move(PRNG& prng) override;
-    bool attack(Player* player, PRNG prng1) override;
-    bool beAttacked(Player* player) override;
+    bool attack(Player* player, PRNG& prng1) override;
+    bool beAttacked(Player* player, PRNG& prng1) override;
 };
 
 #endif

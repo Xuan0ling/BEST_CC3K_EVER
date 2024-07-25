@@ -36,10 +36,10 @@ int Enemy::loseHp(int Atk) {
     return hplose;
 }
 
-bool Enemy::beAttacked(Player* player) {
+
+bool Enemy::beAttacked(Player* plyaer, PRNG& prng) {
     return false;
 }
-
 
 void Enemy::move(PRNG& prng) {
     std::vector<Posn> neighbours = floor->getNeighbours(posn);
@@ -59,7 +59,7 @@ void Enemy::move(PRNG& prng) {
     floor->updateEnemy(this);
 }
 
-bool Enemy::attack(Player *player, PRNG prng1) {
+bool Enemy::attack(Player *player, PRNG& prng1) {
     std::vector<Posn> neighbours = floor->getNeighbours(posn);
 
     for (Posn &neighbour : neighbours) {

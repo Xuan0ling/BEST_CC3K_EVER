@@ -14,7 +14,7 @@ Dragon::~Dragon() {}
 void Dragon::move(PRNG &prng) {
 }
 
-bool Dragon::attack(Player *player, PRNG prng1) {
+bool Dragon::attack(Player *player, PRNG& prng1) {
     std::vector<Posn> neighbours = floor->getNeighbours(posn);
     std::vector<Posn> neighboursofhoard = floor->getNeighbours(dragonhoard->getPosn());
 
@@ -49,7 +49,7 @@ bool Dragon::attack(Player *player, PRNG prng1) {
     return false;
 }
 
-bool Dragon::beAttacked(Player* player) {
+bool Dragon::beAttacked(Player* player, PRNG& prng1) {
     int hplose = loseHp(player->getAtk() + player->getExAtk());
 
     if(hp - hplose <= 0) {

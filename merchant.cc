@@ -6,7 +6,7 @@ Merchant::Merchant(Floor* floor, Posn posn) : Enemy(floor, 'M', posn, 30, 70, 5)
 
 Merchant::~Merchant() {}
 
-bool Merchant::attack(Player *player, PRNG prng1) {
+bool Merchant::attack(Player *player, PRNG& prng1) {
     if(player->getIsMerchantVolatile()) {
         std::vector<Posn> neighbours = floor->getNeighbours(posn);
         for (Posn &neighbour : neighbours) {
@@ -25,7 +25,7 @@ bool Merchant::attack(Player *player, PRNG prng1) {
     return false;
 }
 
-bool Merchant::beAttacked(Player *player) {
+bool Merchant::beAttacked(Player *player, PRNG& prng1) {
     if(player->getIsMerchantVolatile() == false) {
         player->setAction(player->getAction() + " PC attacked M. All M's are hostile now.");
         player->setMerchantVolatile();
@@ -47,8 +47,8 @@ bool Merchant::beAttacked(Player *player) {
         floor->loadItems();
         floor->removeEnemy(this);
     } else {
-        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to M.");
         hp -= hplose;
+        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to M." + " (" + std::to_string(hp) + "HP)");
     }
     return true;
 }

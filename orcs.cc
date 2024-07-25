@@ -6,7 +6,7 @@ Orcs::Orcs(Floor* floor, Posn posn) : Enemy(floor, 'O', posn, 180, 30, 25) {}
 
 Orcs::~Orcs() {}
 
-bool Orcs::attack(Player *player, PRNG prng1) {
+bool Orcs::attack(Player *player, PRNG& prng1) {
     std::vector<Posn> neighbours = floor->getNeighbours(posn);
     for (Posn &neighbour : neighbours) {
         if (neighbour == player->getPosn()) {
@@ -31,7 +31,7 @@ bool Orcs::attack(Player *player, PRNG prng1) {
     return false;
 }
 
-bool Orcs::beAttacked(Player *player) {
+bool Orcs::beAttacked(Player *player, PRNG& prng1) {
     int hplose = loseHp(player->getAtk() + player->getExAtk());
 
     if(hp - hplose <= 0) {
