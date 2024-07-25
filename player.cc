@@ -37,9 +37,11 @@ void Player::move(Posn posnChange) {
     Posn newPosn = posn + posnChange;
     if (floor->checkValidMove(newPosn)) {
         changePosn(posnChange);
+        action = " PC moves " + floor->getDirStr(posnChange) + ".";
     }
     floor->updatePlayer();
     checkGold();
+    seakPotion();
 }
 
 void Player::attack(Posn attackDir) {
@@ -73,6 +75,15 @@ void Player::checkGold() {
     }
 }
 
+void Player::seakPotion() {
+    std::vector<Posn> neighbours = floor->getNeighbours(posn);
+    for (auto& neighbour : neighbours) {
+        auto& cell = floor->getCell(neighbour);
+        if (cell.hasPotion()) {
+            action += " PC sees a unknown potion.";
+        }
+    }
+}
 
 
 void Player::checkPlayerEnterFloor() {
