@@ -15,7 +15,9 @@ void Vampire::attack(Posn attackDir) {
     Posn newPosn = posn + attackDir;
     auto& cell = floor->getCell(newPosn);
     if(cell.hasEnemy()) {
-        if(cell.getEnemy()->beAttacked(this, floor->getRandomGnerator()) && cell.getEnemy()->getSymbol() != 'W') {
+        char enemySymbol = cell.getEnemy()->getSymbol();
+        bool isSuccess = cell.getEnemy()->beAttacked(this, floor->getRandomGnerator());
+        if(enemySymbol != 'W' && isSuccess) {
             setAction(getAction() + " PC gains 5 HP due to special ability.");
             gainHp(VAMPIRE_ADD_HP);
         }
