@@ -25,9 +25,10 @@ bool Orcs::attack(Player *player, PRNG prng1) {
             } else {
                 player->setAction(player->getAction() + " O attacks and misses.");
             }
-            return true;     //add missed action
+            return true;  
         }
     }
+    return false;
 }
 
 bool Orcs::beAttacked(Player *player) {

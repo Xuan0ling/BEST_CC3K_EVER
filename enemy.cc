@@ -37,6 +37,7 @@ int Enemy::loseHp(int Atk) {
 }
 
 bool Enemy::beAttacked(Player* player) {
+    return false;
 }
 
 

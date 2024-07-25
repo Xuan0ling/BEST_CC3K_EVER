@@ -10,7 +10,7 @@ class DragonHoardTreasure : public Treasure {
     ~DragonHoardTreasure();
     void setDragonDead() override;
     bool getdragondead();
-    bool gainGold(Player* player);
+    bool gainGold(Player* player) override;
 };
 
 #endif
