@@ -4,7 +4,9 @@
 #include <vector>
 #include <iostream>
 #include "constants.h"
-#include "posn.h"
+
+class GameMenu;
+
 
 
 class GameOutput {
