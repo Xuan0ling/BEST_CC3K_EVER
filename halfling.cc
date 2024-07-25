@@ -24,7 +24,7 @@ bool Halfling::beAttacked(Player *player, PRNG& prng) {
             player->gainGold(1);
         } else {
             hp -= hplose;
-            player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to L." + " (" + std::to_string(hp) + "HP)");
+            player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to L" + " (" + std::to_string(hp) + "HP).");
         }
         return true;
     } else {

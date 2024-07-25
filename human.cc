@@ -24,7 +24,7 @@ bool Human::beAttacked(Player *player, PRNG& prng1) {
         floor->removeEnemy(this);
     } else {
         hp -= hplose;
-        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to D." + " (" + std::to_string(hp) + "HP)");
+        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to D" + " (" + std::to_string(hp) + "HP).");
     }
     return true;
 }

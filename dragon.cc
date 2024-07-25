@@ -61,7 +61,7 @@ bool Dragon::beAttacked(Player* player, PRNG& prng1) {
         dragonhoard->setDragonDead();
         floor->removeEnemy(this);
     } else {
-        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to D.");
+        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to D" + " (" + std::to_string(hp) + "HP).");
         hp -= hplose;
     }
     return true;

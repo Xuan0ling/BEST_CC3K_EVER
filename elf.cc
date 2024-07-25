@@ -59,7 +59,7 @@ bool Elf::beAttacked(Player *player, PRNG& prng1) {
         player->gainGold(2);
     } else {
         hp -= hplose;
-        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to E." + " (" + std::to_string(hp) + "HP)");
+        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to E" + " (" + std::to_string(hp) + "HP).");
     }
     return true;
 }

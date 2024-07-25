@@ -44,7 +44,7 @@ bool Orcs::beAttacked(Player *player, PRNG& prng1) {
         player->setAction(player->getAction() + " PC gains normal gold from the dead O.");
         player->gainGold(2);
     } else {
-        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to O.");
+        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to O" + " (" + std::to_string(hp) + "HP).");
         hp -= hplose;
     }
     return true;
