@@ -41,6 +41,7 @@ public:
     virtual void usePotion(Posn usePotionDir);
 
     void checkGold();
+    void seakPotion();
 
     void checkPlayerEnterFloor();
 
