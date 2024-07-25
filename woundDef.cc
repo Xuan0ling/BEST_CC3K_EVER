@@ -2,7 +2,7 @@
 #include "player.h"
 
 
-Wounddef::Wounddef(Floor* floor, Posn posn): Potion(floor, posn, -5) {}
+Wounddef::Wounddef(Posn posn): Potion(posn, -5) {}
 
 Wounddef::~Wounddef() {}
 

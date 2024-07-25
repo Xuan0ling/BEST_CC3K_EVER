@@ -1,7 +1,7 @@
 #include "smallTreasure.h"
 #include "player.h"
 
-SmallTreasure::SmallTreasure(Floor *floor, Posn posn, int gold) : Treasure(floor, posn, gold) {}
+SmallTreasure::SmallTreasure(Posn posn, int gold) : Treasure(posn, gold) {}
 
 SmallTreasure::~SmallTreasure() {}
 

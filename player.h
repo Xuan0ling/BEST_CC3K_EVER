@@ -6,6 +6,7 @@
 
 
 class Player {
+protected:
     Floor* floor;
     PlayerRace race;
 

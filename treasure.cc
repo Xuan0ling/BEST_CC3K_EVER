@@ -1,7 +1,7 @@
 #include "treasure.h"
 #include "player.h"
 
-Treasure::Treasure(Floor *floor, Posn posn, int gold): Item(floor, posn, 'G'), Gold(gold) {}
+Treasure::Treasure(Posn posn, int gold): Item(posn, 'G'), Gold(gold) {}
 
 Treasure::~Treasure() {}
 

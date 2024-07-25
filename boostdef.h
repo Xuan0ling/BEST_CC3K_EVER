@@ -4,7 +4,7 @@
 
 class Boostdef: public Potion {
 public:
-    Boostdef(Floor *floor, Posn posn);
+    Boostdef(Posn posn);
     ~Boostdef();
     void usePotion(Player *player);
 };
