@@ -40,8 +40,12 @@ void GameEngine::playerCreate(PlayerRace playerRace) {
     player = std::move(playerPtr);
 }
 
-bool GameEngine::gameRun() {
-    floor->loadFloor();
+bool GameEngine::gameRun(std::string mapFile) {
+    if (mapFile != "") {
+        floor->loadGivenFloor(mapFile);
+    } else {
+        floor->loadFloor();
+    }
     gameOutput->printOutput(floor->getDisplay(), player.get());
 
     PlayerCmd input = getAction();
@@ -148,9 +152,6 @@ void GameEngine::handlePlayerCmd(PlayerCmd cmd) {
         case PlayerCmd::USEPOTION_SW:
             player->usePotion(Posn(1, -1));
             break;
-        case PlayerCmd::ENTERNEXTFLOOR:
-            player->playerEnterFloor();
-            break;
         case PlayerCmd::STOP:
             if (stop == -1) {
                 player->setAction(" Stop The World !!!");
@@ -165,10 +166,12 @@ void GameEngine::handlePlayerCmd(PlayerCmd cmd) {
         default:
             break;
     }
+    player->checkPlayerEnterFloor();
 }
 
 void GameEngine::handleEnemiesAction() {
     floor->enemiesAction(stop);
+    player->checkGold();
 }
 
 

@@ -39,13 +39,159 @@ void Floor::loadFloor() {
     generateFloor();
 }
 
-void Floor::loadGivenFloor(std::string mapFile) {
-    std::vector<char> givenFloor;
-    std::ifstream file(mapFile);
-    char c;
-    while (file >> std::noskipws >> c) {
-        givenFloor.push_back(c);
+void Floor::processCell(char symbol, int i, int j) {
+        switch (symbol) {
+            case SYMBOL_PLAYER:
+                player->setPosn(Posn{i, j});
+                break;
+            case SYMBOL_STAIR:
+                getCell(Posn{i, j}).setStair();
+                break;
+            case RH:
+            case BA:
+            case BD:
+            case PH:
+            case WA:
+            case WD:
+            case NORMALGOLDPILE:
+            case SMALLHOARD:
+            case MERCHANTHOARD:
+            case DRAGONHOARD:
+                processItem(symbol, i, j);
+                break;
+            case SYMBOL_HUMAN:
+            case SYMBOL_DWARF:
+            case SYMBOL_ELF:
+            case SYMBOL_ORC:
+            case SYMBOL_MERCHANT:
+            case SYMBOL_HALFLING:
+                processEnemy(symbol, i, j);
+                break;
+            default:
+                break;
+        }
     }
+
+    void Floor::processItem(char symbol, int i, int j) {
+        std::unique_ptr<Itemfactory> itemFactory = nullptr;
+        switch (symbol) {
+            case RH:
+                itemFactory = std::make_unique<Restorehealthfactory>();
+                break;
+            case BA:
+                itemFactory = std::make_unique<Boostatkfactory>();
+                break;
+            case BD:
+                itemFactory = std::make_unique<Boostdeffactory>();
+                break;
+            case PH:
+                itemFactory = std::make_unique<Poisonhealthfactory>();
+                break;
+            case WA:
+                itemFactory = std::make_unique<Woundatkfactory>();
+                break;
+            case WD:
+                itemFactory = std::make_unique<Wounddeffactory>();
+                break;
+            case NORMALGOLDPILE:
+                itemFactory = std::make_unique<Normalgoldfactory>();
+                break;
+            case SMALLHOARD:
+                itemFactory = std::make_unique<Smallgoldfactory>();
+                break;
+            case MERCHANTHOARD:
+                itemFactory = std::make_unique<Merchantgoldfactory>();
+                break;
+            case DRAGONHOARD:
+                itemFactory = std::make_unique<Dragongoldfactory>();
+                break;
+        }
+        if (itemFactory) {
+            if (symbol == DRAGONHOARD) {
+                std::unique_ptr<Item> item (itemFactory->createItems(Posn{i, j}));
+            
+
+                std::vector<Posn> neighbours = getNeighbours(Posn{i, j});
+                std::vector<Posn> possiblePointsForDragon;
+                for (const auto& neighbour : neighbours) {
+                    if (checkValidMove(neighbour)) {
+                        possiblePointsForDragon.push_back(neighbour);
+                        break;
+                    }
+                }
+                if (!possiblePointsForDragon.empty()) {
+                    int index = prng1(0, possiblePointsForDragon.size() - 1);
+                    Posn dragonPosn = possiblePointsForDragon[index];
+                    auto enemyFactory = std::make_unique<DragonFactory>();
+                    std::unique_ptr<Enemy> enemy (enemyFactory->createEnemy(this, dragonPosn, item.get()));
+                    
+                    addEnemy(std::move(enemy));
+                    addItem(std::move(item));
+                }
+
+            } else {
+                std::unique_ptr<Item> item (itemFactory->createItems(Posn{i, j}));
+                addItem(std::move(item));
+            }
+        }
+    }
+
+    void Floor::processEnemy(char symbol, int i, int j) {
+        std::unique_ptr<EnemyFactory> enemyFactory = nullptr;
+        switch (symbol) {
+            case SYMBOL_HUMAN:
+                enemyFactory = std::make_unique<HumanFactory>();
+                break;
+            case SYMBOL_DWARF:
+                enemyFactory = std::make_unique<DwarfFactory>();
+                break;
+            case SYMBOL_ELF:
+                enemyFactory = std::make_unique<ElfFactory>();
+                break;
+            case SYMBOL_ORC:
+                enemyFactory = std::make_unique<OrcFactory>();
+                break;
+            case SYMBOL_MERCHANT:
+                enemyFactory = std::make_unique<MerchantFactory>();
+                break;
+            case SYMBOL_HALFLING:
+                enemyFactory = std::make_unique<HalflingFactory>();
+                break;
+        }
+        if (enemyFactory) {
+            std::unique_ptr<Enemy> enemy (enemyFactory->createEnemy(this, Posn{i, j}));
+            addEnemy(std::move(enemy));
+        }
+    }
+
+void Floor::loadGivenFloor(const std::string& mapFile) {
+    cells.resize(MAP_HEIGHT, std::vector<Cell>(MAP_WIDTH));
+    for (int i = 0; i < MAP_HEIGHT; ++i) {
+        for (int j = 0; j < MAP_WIDTH; ++j) {
+            cells[i][j] = Cell(gameMap->getTile(i, j));
+        }
+    }
+
+    std::vector<std::vector<char>> givenFloor;
+
+    std::ifstream file(mapFile);
+    std::string line;
+    while (std::getline(file, line)) {
+        std::vector<char> row;
+        for (char c : line) {
+            row.push_back(c);
+        }
+        givenFloor.push_back(row);
+    }
+    for (int i = 0; i < MAP_HEIGHT - 1; ++i) {
+        for (int j = 0; j < MAP_WIDTH - 1; ++j) {
+            char symbol = givenFloor[i][j];
+            processCell(symbol, i, j);
+        }
+    }
+    loadItems();
+    updatePlayer();
+    loadEnemies();
 }
 
 void Floor::addEnemy(EnemyPtr enemy) {
@@ -59,6 +205,12 @@ void Floor::addItem(ItemPtr item) {
 void Floor::loadItems() {
     for (const auto& item : items) {
         updateItem(item.get());
+    }
+}
+
+void Floor::loadEnemies() {
+    for (const auto& enemy : enemies) {
+        updateEnemy(enemy.get());
     }
 }
 
@@ -178,7 +330,7 @@ void Floor::generateEnemies() {
         } else if (value < 14) {
             enemyFactory = std::make_unique<ElfFactory>();
         } else if (value < 16) {
-            enemyFactory = std::make_unique<OrcsFactory>();
+            enemyFactory = std::make_unique<OrcFactory>();
         } else if (value < 18) {
             enemyFactory = std::make_unique<MerchantFactory>();
         }
