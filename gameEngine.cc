@@ -40,8 +40,12 @@ void GameEngine::playerCreate(PlayerRace playerRace) {
     player = std::move(playerPtr);
 }
 
-bool GameEngine::gameRun() {
-    floor->loadFloor();
+bool GameEngine::gameRun(std::string mapFile) {
+    if (mapFile != "") {
+        floor->loadGivenFloor(mapFile);
+    } else {
+        floor->loadFloor();
+    }
     gameOutput->printOutput(floor->getDisplay(), player.get());
 
     PlayerCmd input = getAction();
@@ -169,6 +173,7 @@ void GameEngine::handlePlayerCmd(PlayerCmd cmd) {
 
 void GameEngine::handleEnemiesAction() {
     floor->enemiesAction(stop);
+    player->checkGold();
 }
 
 

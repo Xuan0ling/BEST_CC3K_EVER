@@ -22,7 +22,7 @@ class GameEngine {
 public:
     GameEngine(std::string mapFile, PlayerRace playerRace, bool useDLC, int* playerScore);
 
-    bool gameRun();
+    bool gameRun(std::string mapFile);
     void handlePlayerCmd(PlayerCmd cmd);
     void handleEnemiesAction();
     void playerCreate(PlayerRace playerRace);
