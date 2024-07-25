@@ -42,7 +42,11 @@ PlayerCmd GameInput::getInput() {
             attackDir == PlayerCmd::WE ? PlayerCmd::ATTACK_WE : 
             attackDir == PlayerCmd::EA ? PlayerCmd::ATTACK_EA : 
             attackDir == PlayerCmd::NO ? PlayerCmd::ATTACK_NO : 
-            attackDir == PlayerCmd::SO ? PlayerCmd::ATTACK_SO : PlayerCmd::INVALID;
+            attackDir == PlayerCmd::SO ? PlayerCmd::ATTACK_SO : 
+            attackDir == PlayerCmd::NE ? PlayerCmd::ATTACK_NE : 
+            attackDir == PlayerCmd::NW ? PlayerCmd::ATTACK_NW : 
+            attackDir == PlayerCmd::SE ? PlayerCmd::ATTACK_SE : 
+            attackDir == PlayerCmd::SW ? PlayerCmd::ATTACK_SW : PlayerCmd::INVALID;
     } else if (input == "u") {
         std::string useDirInput = collectInput();
         PlayerCmd useDir = getPlayerPosition(useDirInput);
@@ -50,7 +54,11 @@ PlayerCmd GameInput::getInput() {
             useDir == PlayerCmd::WE ? PlayerCmd::USEPOTION_WE : 
             useDir == PlayerCmd::EA ? PlayerCmd::USEPOTION_EA : 
             useDir == PlayerCmd::NO ? PlayerCmd::USEPOTION_NO : 
-            useDir == PlayerCmd::SO ? PlayerCmd::USEPOTION_SO : PlayerCmd::INVALID;
+            useDir == PlayerCmd::SO ? PlayerCmd::USEPOTION_SO : 
+            useDir == PlayerCmd::NE ? PlayerCmd::USEPOTION_NE : 
+            useDir == PlayerCmd::NW ? PlayerCmd::USEPOTION_NW : 
+            useDir == PlayerCmd::SE ? PlayerCmd::USEPOTION_SE : 
+            useDir == PlayerCmd::SW ? PlayerCmd::USEPOTION_SW : PlayerCmd::INVALID;
     } else if (input == ">") {
         return PlayerCmd::ENTERNEXTFLOOR;
     } else if (input == "r") {
@@ -73,13 +81,13 @@ PlayerCmd GameInput::getPlayerPosition(const std::string& input) {
         return PlayerCmd::SO;
     } else if (input == "l" || input == "ea") {
         return PlayerCmd::EA;
-    } else if (input == "J" || input == "ne") {
+    } else if (input == "K" || input == "ne") {
         return PlayerCmd::NE;
-    } else if (input == "H" || input == "nw") {
+    } else if (input == "J" || input == "nw") {
         return PlayerCmd::NW;
     } else if (input == "L" || input == "se") {
         return PlayerCmd::SE;
-    } else if (input == "K" || input == "sw") {
+    } else if (input == "H" || input == "sw") {
         return PlayerCmd::SW;
     }
     return PlayerCmd::INVALID;

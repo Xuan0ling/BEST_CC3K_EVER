@@ -39,10 +39,13 @@ bool Merchant::beAttacked(Player *player) {
             player->setAction(player->getAction() + " PC stole 5 gold before killing the M.");
             player->gainGold(5);
         }
-        floor->removeEnemy(this);
+
         std::unique_ptr<Itemfactory> itemFactory = std::make_unique<Merchantgoldfactory>();
         std::unique_ptr<Item> merchantgold(itemFactory->createItems(posn));
+
         floor->addItem(std::move(merchantgold));
+        floor->loadItems();
+        floor->removeEnemy(this);
     } else {
         player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to M.");
         hp -= hplose;

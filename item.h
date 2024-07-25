@@ -4,7 +4,6 @@
 #include "floor.h"
 
 class Item {
-    Floor *floor;
     Posn posn;
     char symbol;
 public:

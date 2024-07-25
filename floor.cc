@@ -38,12 +38,27 @@ void Floor::loadFloor() {
     generateFloor();
 }
 
+void Floor::loadGivenFloor(std::string mapFile) {
+    std::vector<char> givenFloor;
+    std::ifstream file(mapFile);
+    char c;
+    while (file >> std::noskipws >> c) {
+        givenFloor.push_back(c);
+    }
+}
+
 void Floor::addEnemy(EnemyPtr enemy) {
     enemies.emplace_back(std::move(enemy));
 }
 
 void Floor::addItem(ItemPtr item) {
     items.emplace_back(std::move(item));
+}
+
+void Floor::loadItems() {
+    for (const auto& item : items) {
+        updateItem(item.get());
+    }
 }
 
 Cell& Floor::getCell(Posn posn) {
@@ -92,28 +107,6 @@ std::vector<Posn> Floor::getNeighbours(Posn posn) {
     return neighbours;
 }
 
-std::vector<Posn> Floor::getCross(Posn posn) {
-    std::vector<Posn> cross;
-    for (int i = -1; i <= 1; ++i) {
-        if (i == 0) {
-            continue;
-        }
-        Posn neighbour = Posn{posn.y + i, posn.x};
-        if (neighbour.y >= 0 && neighbour.y < MAP_HEIGHT && neighbour.x >= 0 && neighbour.x < MAP_WIDTH) {
-            cross.push_back(neighbour);
-        }
-    }
-    for (int j = -1; j <= 1; ++j) {
-        if (j == 0) {
-            continue;
-        }
-        Posn neighbour = Posn{posn.y, posn.x + j};
-        if (neighbour.y >= 0 && neighbour.y < MAP_HEIGHT && neighbour.x >= 0 && neighbour.x < MAP_WIDTH) {
-            cross.push_back(neighbour);
-        }
-    }
-    return cross;
-}
 
 std::vector<char> Floor::getDisplay() {
     std::vector<char> display;
@@ -128,7 +121,7 @@ std::vector<char> Floor::getDisplay() {
 void Floor::removeEnemy(Enemy* enemy) {
     Posn posn = enemy->getPosn();
     Cell& cell = getCell(posn);
-    cell.setEnemy(nullptr);
+    cell.clearEnemy();
     auto is_enemy = [enemy](const EnemyPtr& e) { return e.get() == enemy; };
     enemies.erase(std::remove_if(enemies.begin(), enemies.end(), is_enemy), enemies.end());
 }
@@ -136,7 +129,7 @@ void Floor::removeEnemy(Enemy* enemy) {
 void Floor::removeItem(Item* item) {
     Posn posn = item->getPosn();
     Cell& cell = getCell(posn);
-    cell.setItem(nullptr);
+    cell.clearItem();
     auto is_item = [item](const ItemPtr& i) { return i.get() == item; };
     items.erase(std::remove_if(items.begin(), items.end(), is_item), items.end());
 }
@@ -231,9 +224,7 @@ void Floor::generatePotions() {
        
         this->addItem(std::move(potion));
     }
-    for (auto &item : items) {
-        updateItem(item.get());
-    }
+    loadItems();
 }
 
 void Floor::generateGold() {
@@ -293,9 +284,7 @@ void Floor::generateGold() {
         this->addItem(std::move(treasure));
     }
 
-    for (const auto& item : items) {
-        updateItem(item.get());
-    }
+    loadItems();
 }
 
 

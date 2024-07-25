@@ -2,7 +2,7 @@
 #include "floor.h"
 #include "gameMap.h"
 #include "player.h"
-
+#include "concretePlayerFactory.h"
 
 
 GameEngine::GameEngine(std::string mapFile, PlayerRace playerRace, bool useDLC, int* playerScore) 
@@ -36,7 +36,8 @@ void GameEngine::playerCreate(PlayerRace playerRace) {
         default:
             break;
     }
-    player = playerFactory->createPlayer(floor.get());
+    std::unique_ptr<Player> playerPtr(playerFactory->createPlayer(floor.get()));
+    player = std::move(playerPtr);
 }
 
 bool GameEngine::gameRun() {
@@ -50,13 +51,11 @@ bool GameEngine::gameRun() {
         handlePlayerCmd(input);
         handleEnemiesAction();
 
+        gameOutput->printOutput(floor->getDisplay(), player.get());
+
         if (player->getIsDead() || player->getIsWon()) {
             break;
         }
-
-
-        // floor->enemiesAction();
-        gameOutput->printOutput(floor->getDisplay(), player.get());
 
         input = getAction();
     }
@@ -113,6 +112,18 @@ void GameEngine::handlePlayerCmd(PlayerCmd cmd) {
         case PlayerCmd::ATTACK_WE:
             player->attack(Posn(0, -1));
             break;
+        case PlayerCmd::ATTACK_NE:
+            player->attack(Posn(-1, 1));
+            break;
+        case PlayerCmd::ATTACK_NW:
+            player->attack(Posn(-1, -1));
+            break;
+        case PlayerCmd::ATTACK_SE:
+            player->attack(Posn(1, 1));
+            break;
+        case PlayerCmd::ATTACK_SW:
+            player->attack(Posn(1, -1));
+            break;
         case PlayerCmd::USEPOTION_NO:
             player->usePotion(Posn(-1, 0));
             break;
@@ -124,6 +135,18 @@ void GameEngine::handlePlayerCmd(PlayerCmd cmd) {
             break;
         case PlayerCmd::USEPOTION_WE:
             player->usePotion(Posn(0, -1));
+            break;
+        case PlayerCmd::USEPOTION_NE:
+            player->usePotion(Posn(-1, 1));
+            break;
+        case PlayerCmd::USEPOTION_NW:
+            player->usePotion(Posn(-1, -1));
+            break;
+        case PlayerCmd::USEPOTION_SE:
+            player->usePotion(Posn(1, 1));
+            break;
+        case PlayerCmd::USEPOTION_SW:
+            player->usePotion(Posn(1, -1));
             break;
         case PlayerCmd::ENTERNEXTFLOOR:
             player->playerEnterFloor();
@@ -152,7 +175,11 @@ void GameEngine::handleEnemiesAction() {
 void GameEngine::restartGame() {
     player->setIsWon(false);
     player->setIsDead(false);
-    player->setHp(player->getMaxHp());
+    if (player->getRace() == PlayerRace::VAMPIRE) {
+        player->setMaxHp(VAMPIRE_HP);
+    } else {
+        player->setMaxHp(player->getMaxHp());
+    }
     player->setChamberNum(-1);
     player->setGold(0);
     floor->loadFloor();

@@ -1,6 +1,6 @@
 #ifndef CONCRETEPLAYER_H
 #define CONCRETEPLAYER_H
-#include "playerfactory.h"
+#include "playerFactory.h"
 #include "drow.h"
 #include "goblin.h"
 #include "shade.h"

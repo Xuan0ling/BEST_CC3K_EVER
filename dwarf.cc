@@ -25,7 +25,7 @@ bool Dwarf::beAttacked(Player *player) {
     } else {
         player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to W.");
          if (player->getRace() == PlayerRace::VAMPIRE) {
-            player->setAction(player->getAction() + " But PC is allergic to D, so health decreased by 5.");
+            player->setAction(player->getAction() + " But PC is allergic to W, so health decreased by 5.");
             player->gainHp(-10);   //because a vampire should lose 5 hp, when it attacks dwarfs.
         }
         hp -= hplose;

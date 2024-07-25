@@ -21,7 +21,7 @@ protected:
     
     int exAtk = 0;
     int exDef = 0;
-    int currFloorIndex = 5;
+    int currFloorIndex = 1;
     bool isDead = false;
     bool isWon = false;
     bool merchantVolatile = false;

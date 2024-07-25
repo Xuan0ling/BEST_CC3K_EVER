@@ -22,9 +22,11 @@ public:
 
     void initFloor(Player* player, GameMap* gameMap);
     void loadFloor();
+    void loadGivenFloor(std::string mapFile);
 
     void addEnemy(EnemyPtr enemy);
     void addItem(ItemPtr item);
+    void loadItems();
 
     Cell& getCell(Posn posn);
     void clearCell(Posn posn);
@@ -37,8 +39,6 @@ public:
 
     // for enemies attack player
     std::vector<Posn> getNeighbours(Posn posn);
-    // for enemies move
-    std::vector<Posn> getCross(Posn posn);
 
     std::vector<char> getDisplay();
 

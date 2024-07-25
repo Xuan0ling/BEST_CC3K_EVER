@@ -5,7 +5,7 @@
 const int TROLL_RESTORE = 5;
 
 Troll::Troll(Floor *floor, PlayerRace race):
-    Player(floor, race, 120,25,15,120) {}
+    Player(floor, race, 120, 25, 15, 0, 120) {}
 
 Troll::~Troll() {}
 

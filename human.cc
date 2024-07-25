@@ -17,10 +17,11 @@ bool Human::beAttacked(Player *player) {
             player->gainGold(5);
         }
         player->setAction(player->getAction() + " H drops Gold.");
-        floor->removeEnemy(this);
         std::unique_ptr<Itemfactory> itemFactory = std::make_unique<twoNormalgoldfactory>();
         std::unique_ptr<Item> twonormalgold(itemFactory->createItems(posn));
         floor->addItem(std::move(twonormalgold));
+        floor->loadItems();
+        floor->removeEnemy(this);
     } else {
         player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to D.");
         hp -= hplose;
