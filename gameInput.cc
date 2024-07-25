@@ -59,8 +59,6 @@ PlayerCmd GameInput::getInput() {
             useDir == PlayerCmd::NW ? PlayerCmd::USEPOTION_NW : 
             useDir == PlayerCmd::SE ? PlayerCmd::USEPOTION_SE : 
             useDir == PlayerCmd::SW ? PlayerCmd::USEPOTION_SW : PlayerCmd::INVALID;
-    } else if (input == ">") {
-        return PlayerCmd::ENTERNEXTFLOOR;
     } else if (input == "r") {
         return PlayerCmd::RESTART;
     } else if (input == "q") {

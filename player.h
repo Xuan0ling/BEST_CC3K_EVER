@@ -39,8 +39,10 @@ public:
     virtual void move(Posn posnChange);
     virtual void attack(Posn attackDir);
     virtual void usePotion(Posn usePotionDir);
-    virtual void checkGold();
-    void playerEnterFloor();
+
+    void checkGold();
+
+    void checkPlayerEnterFloor();
 
     void setHp(int hp);
     void setGold(int gold);

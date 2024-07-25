@@ -73,7 +73,9 @@ void Player::checkGold() {
     }
 }
 
-void Player::playerEnterFloor() {
+
+
+void Player::checkPlayerEnterFloor() {
     auto& cell = floor->getCell(posn);
     if (cell.hasStair()) {
         if (currFloorIndex == NUM_FLOORS) {

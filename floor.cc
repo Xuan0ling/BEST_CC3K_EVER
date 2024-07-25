@@ -182,8 +182,6 @@ void Floor::loadGivenFloor(const std::string& mapFile) {
         }
         givenFloor.push_back(row);
     }
-    std::cout << givenFloor.size() << std::endl;
-    std::cout << givenFloor[0].size() << std::endl;
     for (int i = 0; i < MAP_HEIGHT - 1; ++i) {
         for (int j = 0; j < MAP_WIDTH - 1; ++j) {
             char symbol = givenFloor[i][j];
