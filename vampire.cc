@@ -6,7 +6,7 @@
 #include "constants.h"
 
 Vampire::Vampire(Floor *floor, PlayerRace race):
-    Player(floor, race, 100, VAMPIRE_ATK, VAMPIRE_DEF, 0, VAMPIRE_MAX_HP) {}
+    Player(floor, race, VAMPIRE_HP, VAMPIRE_ATK, VAMPIRE_DEF, 0, VAMPIRE_MAX_HP) {}
 
 Vampire::~Vampire() {}
 
