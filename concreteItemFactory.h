@@ -72,6 +72,16 @@ public:
     }
 };
 
+class twoNormalgoldfactory : public Itemfactory {
+public:
+    Item* createItems(Floor* floor, Posn posn) override {
+        return new NormalTreasure(floor, posn, 4);
+    }
+};
+
+
+
+
 class Merchantgoldfactory : public Itemfactory {
 public:
     Item* createItems(Floor* floor, Posn posn) override {

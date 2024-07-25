@@ -46,6 +46,7 @@ public:
     void removeEnemy(Enemy* enemy);
     void removeItem(Item* item);
 
+
     void removepoint(int chambernum, Posn pair);
 
     void enemiesAction();

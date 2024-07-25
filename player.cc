@@ -4,7 +4,8 @@
 #include "item.h"
 #include "treasure.h"
 #include <cmath>
-
+#include <sstream>
+#include "enemy.h"
 
 
 
@@ -44,11 +45,20 @@ void Player::move(Posn posnChange) {
 }
 
 void Player::attack(Posn attackDir) {
-    // Posn newPosn = posn + attackDir;
-    // auto& cell = floor->getCell(newPosn);
-    // if (cell.hasEnemy()) {
-    //     cell.getEnemy()->beAttacked(this);
-    // }
+    Posn newPosn = posn + attackDir;
+    auto& cell = floor->getCell(newPosn);
+    if (cell.hasEnemy()) {
+        if(race == PlayerRace::VAMPIRE) {
+            if(cell.getEnemy()->beAttacked(this)) {
+                if(cell.getEnemy()->getSymbol() != 'W') {
+                    setAction(getAction() + " PC gains 5 HP.");
+                    gainHp(5);
+                }
+                
+            } 
+        }
+        cell.getEnemy()->beAttacked(this);
+    }
 } 
 
 void Player::usePotion(Posn usePotionDir) {
@@ -65,9 +75,12 @@ void Player::checkGold() {
     auto& cell = floor->getCell(posn);
     if (cell.hasGold()) {
         Item* treasure = cell.getItem();
-        gainGold(treasure->getGold());
-        cell.clearItem();
-        floor->removeItem(treasure);
+        
+        if(treasure->gainGold(this)) {
+            cell.clearItem();
+            floor->removeItem(treasure);
+        }
+        
     }
 }
 
@@ -105,7 +118,19 @@ int Player::getChamberNum() {
 
 
 void Player::gainHp(int hp) {
-    this->hp += hp;
+    if (this->hp + hp <= 0) {
+        this->hp = 0;
+        this->setIsDead(true);
+    } else if (race == PlayerRace::VAMPIRE){
+        this->hp += hp;
+    } else {
+        if (this->hp + hp >= maxHp) {
+            this->hp = maxHp;
+        } else {
+            this->hp += hp;
+        }
+    }
+  
 }
 
 void Player::gainGold(int gold) {
@@ -113,20 +138,35 @@ void Player::gainGold(int gold) {
 }
 
 void Player::gainExAtk(int exAtk) {
-    this->exAtk += exAtk;
+    if(atk + this->exAtk + exAtk < 0) {
+        this->exAtk = -atk;
+    } else {
+        this->exAtk += exAtk;
+    }
+    
 }
 
 void Player::gainExDef(int exDef) {
-    this->exDef += exDef;
+    if(def + this->exDef + exDef < 0) {
+        this->exDef= -def;
+    } else {
+        this->exDef += exDef;
+    }
+    
 }
 
 void Player::LoseHP(int atkpower) {
-    int hplose = ceil((100.0/(100 + def)) * atkpower);
+    int hplose = ceil((100.0/(100 + def + exDef)) * atkpower);
+    setAction(getAction() + numAsString(hplose) + " damage to PC.");
     this->gainHp(-hplose);
 }
 
 void Player::gainCurrFloorIndex(int currFloorIndex) {
     this->currFloorIndex += currFloorIndex;
+}
+
+void Player::setMerchantVolatile() {
+    merchantVolatile = true;
 }
 
 void Player::setMaxHp(int maxHp) {
@@ -170,6 +210,13 @@ std::string Player::getAction() {
 
 void Player::setAction(std::string action) {
     this->action = action;
+}
+
+std::string Player::numAsString(int num) {
+    std::ostringstream oss;
+    oss << num;
+    return oss.str();
+    
 }
 
 void Player::clearEffect() {

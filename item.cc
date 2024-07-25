@@ -22,4 +22,8 @@ int Item::getGold() {
 
 void Item::usePotion(Player *player) {}
 
+bool Item::gainGold(Player *player) {
+    return false;
+}
 
+void Item::setDragonDead() {}

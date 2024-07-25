@@ -12,7 +12,7 @@ class Orcs : public Enemy {
     Orcs(Floor* floor, Posn posn);
     ~Orcs();
     bool attack(Player* player, PRNG prng1) override;
-    //void beAttacked(int atk) override;
+    bool beAttacked(Player* player) override;
 };
 
 #endif

@@ -12,7 +12,7 @@ class Halfling : public Enemy {
  public:
     Halfling(Floor* floor, Posn posn);
     ~Halfling();
-    //void beAttacked(int atk) override; 
+    bool beAttacked(Player* player) override;
 };
 
 #endif

@@ -6,6 +6,7 @@ class Wounddef: public Potion {
 public: 
     Wounddef(Floor* floor, Posn posn);
     ~Wounddef();
+    void usePotion(Player *player);
 };
 
 #endif

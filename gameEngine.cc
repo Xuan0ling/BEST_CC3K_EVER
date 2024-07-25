@@ -21,6 +21,7 @@ bool GameEngine::gameRun() {
     PlayerCmd input = getAction();
 
     while (input != PlayerCmd::QUIT) {
+        player->setAction("");
         handlePlayerCmd(input);
         handleEnemiesAction();
 

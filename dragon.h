@@ -7,6 +7,7 @@ class Floor;
 class Item;
 
 class Dragon : public Enemy {
+protected:
     Item* dragonhoard;
     
  public:
@@ -14,7 +15,7 @@ class Dragon : public Enemy {
     ~Dragon();
     void move(PRNG& prng) override;
     bool attack(Player* player, PRNG prng1) override;
-    void beAttacked(int atk) override;
+    bool beAttacked(Player* player) override;
 };
 
 #endif

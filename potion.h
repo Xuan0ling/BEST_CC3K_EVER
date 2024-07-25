@@ -3,18 +3,14 @@
 
 #include "item.h"
 #include <string>
+
 class Potion: public Item {
 protected:
-    int BuffHP;
-    int BuffATK;
-    int BuffDEF;
+    int value;
 public:
-    Potion(Floor *floor, Posn posn, int buffatk, int buffdef, int buffhp);
+    Potion(Floor *floor, Posn posn, int value);
     ~Potion();
-    int getBuffHP();
-    int getBuffATK();
-    int getBuffDEF();
-    void usePotion(Player *player) override;
+    int getValue();
 };
 
 #endif

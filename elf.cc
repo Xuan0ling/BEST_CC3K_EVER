@@ -21,9 +21,22 @@ bool Elf::attack(Player *player, PRNG prng1) {
             if (neighbour == player->getPosn()) {
                 int num = prng1(0, 1);
                 if(num % 2 == 0) {
+                    if(j == 2) {
+                        player->setAction(player->getAction() + " E attacks second time and deals " );
+                    } else {
+                        player->setAction(player->getAction() + " E deals " );
+                    }
                     player->LoseHP(atk);
+                } else {
+                    if (j == 2) {
+                        player->setAction(player->getAction() + " E attacks second time and misses.");
+                    } else {
+                        player->setAction(player->getAction() + " E attacks and misses.");
+                    }
+                    
                 }
-                return true;     //add missed action
+
+                return true; 
             }
         }
     }
@@ -32,3 +45,21 @@ bool Elf::attack(Player *player, PRNG prng1) {
     return false;
 }
 
+bool Elf::beAttacked(Player *player) {
+    int hplose = loseHp(player->getAtk() + player->getAtk());
+
+    if(hp - hplose <= 0) {
+        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to E and kills E.");
+        if(player->getRace() == PlayerRace::GOBLIN) {
+            player->setAction(player->getAction() + " PC stole 5 gold before killing the E.");
+            player->gainGold(5);
+        }
+        floor->removeEnemy(this);
+        player->setAction(player->getAction() + " PC gains normal gold from the dead E.");
+        player->gainGold(2);
+    } else {
+        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to E.");
+        hp -= hplose;
+    }
+    return true;
+}

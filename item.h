@@ -15,6 +15,8 @@ public:
     char getSymbol();
     virtual int getGold();
     virtual void usePotion(Player *player);
+    virtual bool gainGold(Player *player);
+    virtual void setDragonDead();
 };
 
 #endif
