@@ -20,7 +20,7 @@ bool Human::beAttacked(Player *player) {
         player->setAction(player->getAction() + " H drops Gold.");
         floor->removeEnemy(this);
         std::unique_ptr<Itemfactory> itemFactory = std::make_unique<twoNormalgoldfactory>();
-        std::unique_ptr<Item> twonormalgold(itemFactory->createItems(floor, posn));
+        std::unique_ptr<Item> twonormalgold(itemFactory->createItems(posn));
         floor->addItem(std::move(twonormalgold));
     } else {
         player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to D.");

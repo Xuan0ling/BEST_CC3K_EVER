@@ -8,7 +8,7 @@ class Item {
     Posn posn;
     char symbol;
 public:
-    Item(Floor* floor, Posn posn, char symbol);
+    Item(Posn posn, char symbol);
     virtual ~Item();
     Posn getPosn();
     void setPosn(Posn posn);

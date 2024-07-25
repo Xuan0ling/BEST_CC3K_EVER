@@ -5,7 +5,7 @@
 
 class NormalTreasure : public Treasure {
  public:
-    NormalTreasure(Floor *floor, Posn posn, int gold);
+    NormalTreasure(Posn posn, int gold);
     ~NormalTreasure();
     bool gainGold(Player* player) override;
 };

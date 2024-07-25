@@ -7,7 +7,7 @@ class Treasure: public Item {
  protected:
     int Gold;
 public:
-    Treasure(Floor *floor, Posn posn, int gold);
+    Treasure(Posn posn, int gold);
     ~Treasure();
     int getGold() override;
 };

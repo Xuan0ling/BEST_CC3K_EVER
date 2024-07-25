@@ -2,7 +2,7 @@
 #include "player.h"
 
 
-Woundatk::Woundatk(Floor *floor, Posn posn): Potion(floor, posn, -10) {}
+Woundatk::Woundatk(Posn posn): Potion(posn, -10) {}
 
 Woundatk::~Woundatk() {}
 

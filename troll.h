@@ -6,6 +6,8 @@ class Troll: public Player {
 public:
     Troll(Floor *floor, PlayerRace race);
     ~Troll();
+
+    void move(Posn posnChange) override;
 };
 
 #endif 

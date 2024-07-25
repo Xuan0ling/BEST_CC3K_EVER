@@ -1,7 +1,7 @@
 #include "restoreHealth.h"
 #include "player.h"
 
-Restorehealth::Restorehealth(Floor *floor, Posn posn): Potion(floor, posn, 10) {}
+Restorehealth::Restorehealth(Posn posn): Potion(posn, 10) {}
 
 Restorehealth::~Restorehealth() {}
 

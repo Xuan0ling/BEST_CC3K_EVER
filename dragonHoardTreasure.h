@@ -6,7 +6,7 @@
 class DragonHoardTreasure : public Treasure {
     bool dragondead = false;
  public:
-    DragonHoardTreasure(Floor *floor, Posn posn, int gold);
+    DragonHoardTreasure(Posn posn, int gold);
     ~DragonHoardTreasure();
     void setDragonDead() override;
     bool getdragondead();

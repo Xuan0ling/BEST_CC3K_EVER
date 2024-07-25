@@ -3,7 +3,7 @@
 #include "potion.h"
 class Restorehealth: public Potion {
 public:
-    Restorehealth(Floor *floor, Posn posn);
+    explicit Restorehealth(Posn posn);
     ~Restorehealth();
     void usePotion(Player *player);
 };

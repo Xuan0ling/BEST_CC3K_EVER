@@ -1,7 +1,7 @@
 #include "dragonHoardTreasure.h"
 #include "player.h"
 
-DragonHoardTreasure::DragonHoardTreasure(Floor *floor, Posn posn, int gold) : Treasure(floor, posn, gold)  {}
+DragonHoardTreasure::DragonHoardTreasure(Posn posn, int gold) : Treasure(posn, gold)  {}
 
 DragonHoardTreasure::~DragonHoardTreasure() {}
 

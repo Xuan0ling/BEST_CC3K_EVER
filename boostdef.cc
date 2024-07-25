@@ -1,7 +1,7 @@
 #include "boostdef.h"
 #include "player.h"
 
-Boostdef::Boostdef(Floor *floor, Posn posn): Potion{floor, posn, 5} {}
+Boostdef::Boostdef(Posn posn): Potion{posn, 5} {}
 
 Boostdef::~Boostdef() {}
 
