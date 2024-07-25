@@ -28,6 +28,8 @@ public:
     void loadFloor();
     void loadGivenFloor(const std::string& mapFile);
 
+    std::string getDirStr(Posn posn);
+
     void addEnemy(EnemyPtr enemy);
     void addItem(ItemPtr item);
     void loadItems();

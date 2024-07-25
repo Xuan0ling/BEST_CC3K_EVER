@@ -214,6 +214,27 @@ void Floor::loadEnemies() {
     }
 }
 
+std::string Floor::getDirStr(Posn posn) {
+    if (posn == Posn{0, -1}) {
+        return "West";
+    } else if (posn == Posn{0, 1}) {
+        return "East";
+    } else if (posn == Posn{-1, 0}) {
+        return "North";
+    } else if (posn == Posn{1, 0}) {
+        return "South";
+    } else if (posn == Posn{-1, -1}) {
+        return "Northwest";
+    } else if (posn == Posn{-1, 1}) {
+        return "Northeast";
+    } else if (posn == Posn{1, -1}) {
+        return "Southwest";
+    } else if (posn == Posn{1, 1}) {
+        return "Southeast";
+    }
+    return "";
+}
+
 Cell& Floor::getCell(Posn posn) {
     return cells[posn.y][posn.x];
 }

@@ -15,7 +15,9 @@ void Troll::move(Posn posnChange) {
     Posn newPosn = posn + posnChange;
     if (floor->checkValidMove(newPosn)) {
         changePosn(posnChange);
+        action = " PC moves " + floor->getDirStr(posnChange) + ".";
     }
     floor->updatePlayer();
     checkGold();
+    seakPotion();
 }
