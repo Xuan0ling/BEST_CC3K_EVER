@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <memory>
 #include "constants.h"
 #include "PRNG.h"
 class Cell;
@@ -62,7 +63,7 @@ public:
     bool checkValidMove(Posn posn);
     bool checkValidMoveForEnemy(Posn posn);
 
-
+    PRNG& getRandomGnerator();
 };
 
 

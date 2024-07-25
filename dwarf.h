@@ -12,7 +12,7 @@ class Dwarf : public Enemy {
  public:
     Dwarf(Floor* floor, Posn posn);
     ~Dwarf();
-    bool beAttacked(Player* player) override;
+    bool beAttacked(Player* player, PRNG& prng1) override;
 };
 
 #endif

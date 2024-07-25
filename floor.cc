@@ -5,6 +5,7 @@
 #include "item.h"
 #include "gameMap.h"
 #include <unistd.h>
+#include "PRNG.h"
 
 #include "concreteItemFactory.h"
 #include "concreteEnemy.h"
@@ -349,5 +350,9 @@ bool Floor::checkValidMoveForEnemy(Posn posn) {
         return true;
     }
     return false;
+}
+
+PRNG& Floor::getRandomGnerator() {
+    return prng1;
 }
 

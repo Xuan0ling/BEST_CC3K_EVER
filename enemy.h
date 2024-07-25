@@ -18,8 +18,8 @@ public:
     Enemy(Floor* floor, char symbol, Posn posn, int hp, int atk, int def);
     virtual ~Enemy();
     virtual void move(PRNG& prng);
-    virtual bool attack(Player* player, PRNG prng1);
-    virtual bool beAttacked(Player* player);
+    virtual bool attack(Player* player, PRNG& prng1);
+    virtual bool beAttacked(Player* player, PRNG& prng);
 
     char getSymbol();
     Posn getPosn();

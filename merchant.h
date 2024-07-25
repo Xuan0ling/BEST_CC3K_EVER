@@ -11,8 +11,8 @@ class Merchant : public Enemy {
  public:
     Merchant(Floor* floor, Posn posn);
     ~Merchant();
-    bool attack(Player* player, PRNG prng1) override;
-    bool beAttacked(Player* player) override;
+    bool attack(Player* player, PRNG& prng1) override;
+    bool beAttacked(Player* player, PRNG& prng1) override;
 };
 
 #endif

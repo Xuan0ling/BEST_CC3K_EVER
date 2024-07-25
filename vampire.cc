@@ -19,7 +19,7 @@ void Vampire::attack(Posn attackDir) {
             setAction(getAction() + " PC gains 5 HP.");
             gainHp(VAMPIRE_ADD_HP);
         }
-        cell.getEnemy()->beAttacked(this);
+        cell.getEnemy()->beAttacked(this, floor->getRandomGnerator());
     } 
 }
 

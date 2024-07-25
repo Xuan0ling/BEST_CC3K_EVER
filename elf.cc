@@ -9,7 +9,7 @@ Elf::~Elf() {}
 
    
 
-bool Elf::attack(Player *player, PRNG prng1) {
+bool Elf::attack(Player *player, PRNG& prng1) {
     int i = 2;
     if (player->getRace() == PlayerRace::DROW) {
         i = 1;
@@ -45,7 +45,7 @@ bool Elf::attack(Player *player, PRNG prng1) {
     return false;
 }
 
-bool Elf::beAttacked(Player *player) {
+bool Elf::beAttacked(Player *player, PRNG& prng1) {
     int hplose = loseHp(player->getAtk() + player->getExAtk());
 
     if(hp - hplose <= 0) {
@@ -58,8 +58,8 @@ bool Elf::beAttacked(Player *player) {
         player->setAction(player->getAction() + " PC gains normal gold from the dead E.");
         player->gainGold(2);
     } else {
-        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to E.");
         hp -= hplose;
+        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to E." + " (" + std::to_string(hp) + "HP)");
     }
     return true;
 }
