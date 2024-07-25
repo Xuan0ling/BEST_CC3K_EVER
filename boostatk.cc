@@ -1,7 +1,7 @@
 #include "boostatk.h"
 #include "player.h"
 
-Boostatk::Boostatk(Floor *floor, Posn posn): Potion{floor, posn, 5} {}
+Boostatk::Boostatk(Posn posn): Potion{posn, 5} {}
 
 Boostatk::~Boostatk() {}
 

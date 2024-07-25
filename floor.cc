@@ -226,7 +226,7 @@ void Floor::generatePotions() {
             itemFactory = std::make_unique<Wounddeffactory>();
         }
 
-        std::unique_ptr<Item> potion (itemFactory->createItems(this, temp));
+        std::unique_ptr<Item> potion (itemFactory->createItems(temp));
         removepoint(chamber, temp);
        
         this->addItem(std::move(potion));
@@ -272,7 +272,7 @@ void Floor::generateGold() {
             }
 
             itemFactory = std::make_unique<Dragongoldfactory>();
-            std::unique_ptr<Item> dragonHoard(itemFactory->createItems(this, temp));
+            std::unique_ptr<Item> dragonHoard(itemFactory->createItems(temp));
 
             auto enemyFactory = std::make_unique<DragonFactory>();
             std::unique_ptr<Enemy> enemy (enemyFactory->createEnemy(this, enemyPosn, dragonHoard.get()));
@@ -288,7 +288,7 @@ void Floor::generateGold() {
             itemFactory = std::make_unique<Smallgoldfactory>();
         }
 
-        std::unique_ptr<Item> treasure (itemFactory->createItems(this, temp));
+        std::unique_ptr<Item> treasure (itemFactory->createItems(temp));
         removepoint(chamber, temp);
         this->addItem(std::move(treasure));
     }

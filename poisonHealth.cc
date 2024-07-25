@@ -1,7 +1,7 @@
 #include "poisonHealth.h"
 #include "player.h"
 
-Poisonhealth::Poisonhealth(Floor *floor, Posn posn): Potion(floor, posn, -10) {}
+Poisonhealth::Poisonhealth(Posn posn): Potion(posn, -10) {}
 
 Poisonhealth::~Poisonhealth() {}
 

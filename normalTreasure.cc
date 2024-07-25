@@ -2,7 +2,7 @@
 #include "player.h"
 
 
-NormalTreasure::NormalTreasure(Floor *floor, Posn posn, int gold) : Treasure(floor, posn, gold) {}
+NormalTreasure::NormalTreasure(Posn posn, int gold) : Treasure(posn, gold) {}
 
 NormalTreasure::~NormalTreasure() {}
 

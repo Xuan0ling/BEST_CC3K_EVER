@@ -67,7 +67,7 @@ bool GameEngine::gameRun() {
 PlayerCmd GameEngine::getAction() {
     PlayerCmd input = gameInput->getInput();
     while (input == PlayerCmd::INVALID) {
-        player->setAction("Invalid Command");
+        player->setAction(" Invalid Command");
         gameOutput->printOutput(floor->getDisplay(), player.get());
         player->setAction("");
         input = gameInput->getInput();

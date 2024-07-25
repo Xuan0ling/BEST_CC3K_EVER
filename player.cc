@@ -46,15 +46,6 @@ void Player::attack(Posn attackDir) {
     Posn newPosn = posn + attackDir;
     auto& cell = floor->getCell(newPosn);
     if (cell.hasEnemy()) {
-        if(race == PlayerRace::VAMPIRE) {
-            if(cell.getEnemy()->beAttacked(this)) {
-                if(cell.getEnemy()->getSymbol() != 'W') {
-                    setAction(getAction() + " PC gains 5 HP.");
-                    gainHp(5);
-                }
-                
-            } 
-        }
         cell.getEnemy()->beAttacked(this);
     }
 } 

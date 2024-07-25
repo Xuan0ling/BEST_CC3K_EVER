@@ -41,7 +41,7 @@ bool Merchant::beAttacked(Player *player) {
         }
         floor->removeEnemy(this);
         std::unique_ptr<Itemfactory> itemFactory = std::make_unique<Merchantgoldfactory>();
-        std::unique_ptr<Item> merchantgold(itemFactory->createItems(floor, posn));
+        std::unique_ptr<Item> merchantgold(itemFactory->createItems(posn));
         floor->addItem(std::move(merchantgold));
     } else {
         player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to M.");

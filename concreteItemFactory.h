@@ -18,64 +18,64 @@
 
 class Woundatkfactory : public Itemfactory {
 public:
-    Item* createItems(Floor* floor, Posn posn) override {
-        return new Woundatk(floor, posn);
+    Item* createItems(Posn posn) override {
+        return new Woundatk(posn);
     }
 };
 
 class Wounddeffactory : public Itemfactory {
 public:
-    Item* createItems(Floor* floor, Posn posn) override {
-        return new Wounddef(floor, posn);
+    Item* createItems( Posn posn) override {
+        return new Wounddef(posn);
     }
 };
 
 class Boostatkfactory : public Itemfactory {
 public:
-    Item* createItems(Floor* floor, Posn posn) override {
-        return new Boostatk(floor, posn);
+    Item* createItems(Posn posn) override {
+        return new Boostatk(posn);
     }
 };
 
 class Boostdeffactory : public Itemfactory {
 public:
-    Item* createItems(Floor* floor, Posn posn) override {
-        return new Boostdef(floor, posn);
+    Item* createItems(Posn posn) override {
+        return new Boostdef(posn);
     }
 };
 
 class Restorehealthfactory : public Itemfactory {
 public:
-    Item* createItems(Floor* floor, Posn posn) override {
-        return new Restorehealth(floor, posn);
+    Item* createItems(Posn posn) override {
+        return new Restorehealth(posn);
     }
 };
 
 class Poisonhealthfactory : public Itemfactory {
 public:
-    Item* createItems(Floor* floor, Posn posn) override {
-        return new Poisonhealth(floor, posn);
+    Item* createItems(Posn posn) override {
+        return new Poisonhealth(posn);
     }
 };
 
 class Smallgoldfactory : public Itemfactory {
 public:
-    Item* createItems(Floor* floor, Posn posn) override {
-        return new SmallTreasure(floor, posn, 1);
+    Item* createItems(Posn posn) override {
+        return new SmallTreasure(posn, 1);
     }
 };
 
 class Normalgoldfactory : public Itemfactory {
 public:
-    Item* createItems(Floor* floor, Posn posn) override {
-        return new NormalTreasure(floor, posn, 2);
+    Item* createItems(Posn posn) override {
+        return new NormalTreasure(posn, 2);
     }
 };
 
 class twoNormalgoldfactory : public Itemfactory {
 public:
-    Item* createItems(Floor* floor, Posn posn) override {
-        return new NormalTreasure(floor, posn, 4);
+    Item* createItems(Posn posn) override {
+        return new NormalTreasure(posn, 4);
     }
 };
 
@@ -84,15 +84,15 @@ public:
 
 class Merchantgoldfactory : public Itemfactory {
 public:
-    Item* createItems(Floor* floor, Posn posn) override {
-        return new MerchantHoardTreasure(floor, posn, 4);
+    Item* createItems(Posn posn) override {
+        return new MerchantHoardTreasure(posn, 4);
     }
 };
 
 class Dragongoldfactory : public Itemfactory {
 public:
-    Item* createItems(Floor* floor, Posn posn) override {
-        return new DragonHoardTreasure(floor, posn, 6);
+    Item* createItems(Posn posn) override {
+        return new DragonHoardTreasure(posn, 6);
     }
 };
 
