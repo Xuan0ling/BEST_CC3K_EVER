@@ -23,12 +23,12 @@ bool Dwarf::beAttacked(Player *player, PRNG& prng1) {
         player->setAction(player->getAction() + " PC gains small gold from the dead W.");
         player->gainGold(1);
     } else {
+        hp -= hplose;
+        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to W" + " (" + std::to_string(hp) + "HP).");
          if (player->getRace() == PlayerRace::VAMPIRE) {
             player->setAction(player->getAction() + " But PC is allergic to W, so health decreased by 5.");
             player->gainHp(-10);   //because a vampire should lose 5 hp, when it attacks dwarfs.
         }
-        hp -= hplose;
-        player->setAction(player->getAction() + " PC does " + player->numAsString(hplose) + " damage to W" + " (" + std::to_string(hp) + "HP).");
     }
     return true;
 }
