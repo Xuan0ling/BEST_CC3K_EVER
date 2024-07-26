@@ -19,8 +19,6 @@ public:
     void setEnemy(Enemy* enemy);
     void setItem(Item* item);
     void setStair();
-
-
     void clearPointers();
     void clearPlayer();
     void clearEnemy();

@@ -162,28 +162,31 @@ void Floor::processCell(char symbol, int i, int j) {
     }
 
 void Floor::loadGivenFloor(std::vector<std::vector<char>>& givenMap) {
-
-    cells.clear();
-    // load blank map in cells
-    cells.resize(MAP_HEIGHT, std::vector<Cell>(MAP_WIDTH));
-    for (int i = 0; i < MAP_HEIGHT; ++i) {
-        for (int j = 0; j < MAP_WIDTH; ++j) {
-            cells[i][j] = Cell(gameMap->getTile(i, j));
-        }
-    }
-    enemies.clear();
-    items.clear();
-
     int startRow = (player->getCurrFloorIndex() - 1) * MAP_HEIGHT + 1;
-    for (int i = startRow; i < startRow + MAP_HEIGHT; ++i) {
-        for (int j = 0; j < MAP_WIDTH; ++j) {
-            char symbol = givenMap[i][j];
-            processCell(symbol, i % MAP_HEIGHT, j % MAP_WIDTH);
+    if (startRow >= givenMap.size() - MAP_HEIGHT) {
+        loadFloor();
+    } else {
+        cells.clear();
+        // load blank map in cells
+        cells.resize(MAP_HEIGHT, std::vector<Cell>(MAP_WIDTH));
+        for (int i = 0; i < MAP_HEIGHT; ++i) {
+            for (int j = 0; j < MAP_WIDTH; ++j) {
+                cells[i][j] = Cell(gameMap->getTile(i, j));
+            }
         }
+        enemies.clear();
+        items.clear();
+        for (int i = startRow; i < startRow + MAP_HEIGHT - 1; ++i) {
+            for (int j = 0; j < MAP_WIDTH; ++j) {
+                char symbol = givenMap[i][j];
+                processCell(symbol, i % MAP_HEIGHT, j % MAP_WIDTH);
+            }
+        }
+        
+        updatePlayer();
+        loadItems();
+        loadEnemies();
     }
-    updatePlayer();
-    loadItems();
-    loadEnemies();
 }
 
 std::vector<std::vector<char>> Floor::readMap(const std::string& mapFile) {
