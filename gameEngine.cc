@@ -77,7 +77,11 @@ bool GameEngine::gameRun() {
 
         input = getAction();
     }
-    *playerScore = player->getGold();
+    if (player->getRace() == PlayerRace::SHADE) {
+        *playerScore = player->getGold() * 1.5;
+    } else {
+        *playerScore = player->getGold();
+    }
     return player->getIsWon();
 }
 
