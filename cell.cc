@@ -81,6 +81,22 @@ bool Cell::hasEnemy() const {
     }
 }
 
+bool Cell::hasMerchant() const {
+    if (enemy && enemy->getSymbol() == SYMBOL_MERCHANT) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool Cell::hasPlayer() const {
+    if (player) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 char Cell::getSymbol() const {
     return symbol;
 }

@@ -2,6 +2,8 @@
 #include "player.h"
 #include "concreteItemFactory.h"
 
+#include "cell.h"
+
 Merchant::Merchant(Floor* floor, Posn posn) : Enemy(floor, 'M', posn, 30, 70, 5) {}
 
 Merchant::~Merchant() {}
@@ -23,6 +25,31 @@ bool Merchant::attack(Player *player, PRNG& prng1) {
         }
     }
     return false;
+}
+
+void Merchant::move(PRNG& prng) {
+    // check player is beside merchant, if so, set merchant dont move
+    std::vector<Posn> neighbours = floor->getNeighbours(posn);
+    for (Posn &neighbour : neighbours) {
+        if (floor->getCell(neighbour).hasPlayer()) {
+            return;
+        }
+    }
+    // move merchant
+    std::vector<Posn> validNeighbours;
+    for (Posn neighbour : neighbours) {
+        if (floor->checkValidMoveForEnemy(neighbour)) {
+            validNeighbours.push_back(neighbour);
+        }
+    }
+    if (validNeighbours.size() == 0) {
+        return;
+    }
+    int index = prng(0, validNeighbours.size() - 1);
+    Posn newPosn = validNeighbours[index];
+    floor->clearCell(posn);
+    posn = newPosn;
+    floor->updateEnemy(this);
 }
 
 bool Merchant::beAttacked(Player *player, PRNG& prng1) {

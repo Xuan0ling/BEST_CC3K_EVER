@@ -152,6 +152,30 @@ void GameEngine::handlePlayerCmd(PlayerCmd cmd) {
         case PlayerCmd::USEPOTION_SW:
             player->usePotion(Posn(1, -1));
             break;
+        case PlayerCmd::TRADE_NO:
+            player->trade(Posn(-1, 0));
+            break;
+        case PlayerCmd::TRADE_SO:
+            player->trade(Posn(1, 0));
+            break;
+        case PlayerCmd::TRADE_EA:
+            player->trade(Posn(0, 1));
+            break;
+        case PlayerCmd::TRADE_WE:
+            player->trade(Posn(0, -1));
+            break;
+        case PlayerCmd::TRADE_NE:
+            player->trade(Posn(-1, 1));
+            break;
+        case PlayerCmd::TRADE_NW:
+            player->trade(Posn(-1, -1));
+            break;
+        case PlayerCmd::TRADE_SE:
+            player->trade(Posn(1, 1));
+            break;
+        case PlayerCmd::TRADE_SW:
+            player->trade(Posn(1, -1));
+            break;
         case PlayerCmd::STOP:
             if (stop == -1) {
                 player->setAction(" Stop The World !!!");
@@ -179,9 +203,9 @@ void GameEngine::restartGame() {
     player->setIsWon(false);
     player->setIsDead(false);
     if (player->getRace() == PlayerRace::VAMPIRE) {
-        player->setMaxHp(VAMPIRE_HP);
+        player->setHp(VAMPIRE_HP);
     } else {
-        player->setMaxHp(player->getMaxHp());
+        player->setHp(player->getMaxHp());
     }
     player->setChamberNum(-1);
     player->setGold(0);
