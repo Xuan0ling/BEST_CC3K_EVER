@@ -9,7 +9,7 @@ protected:
     int value;
 public:
     Potion(Posn posn, int value);
-    ~Potion();
+    ~Potion() = 0;
     int getValue();
 };
 

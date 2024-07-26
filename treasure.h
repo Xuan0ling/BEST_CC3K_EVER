@@ -8,7 +8,7 @@ class Treasure: public Item {
     int Gold;
 public:
     Treasure(Posn posn, int gold);
-    ~Treasure();
+    ~Treasure() = 0;
     int getGold() override;
 };
 

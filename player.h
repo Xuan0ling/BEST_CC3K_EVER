@@ -88,7 +88,7 @@ public:
     bool getIsDead();
     bool getIsWon();
     bool getIsMerchantVolatile();
-    virtual ~Player();
+    virtual ~Player() = 0;
 };
 
 

@@ -8,7 +8,7 @@ class Item {
     char symbol;
 public:
     Item(Posn posn, char symbol);
-    virtual ~Item();
+    virtual ~Item() = 0;
     Posn getPosn();
     void setPosn(Posn posn);
     char getSymbol();

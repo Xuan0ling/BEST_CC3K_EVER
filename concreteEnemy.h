@@ -14,42 +14,42 @@
 
 class HumanFactory : public EnemyFactory {
  public:
-    Enemy* createEnemy(Floor* floor, Posn posn) override {
+    Enemy* createEnemy(Floor* floor, Posn posn, Item* item) override {
         return new Human(floor, posn);
     }
 };
 
 class DwarfFactory : public EnemyFactory {
  public:
-    Enemy* createEnemy(Floor* floor, Posn posn) override {
+    Enemy* createEnemy(Floor* floor, Posn posn, Item* item) override {
         return new Dwarf(floor, posn);
     }
 };
 
 class ElfFactory : public EnemyFactory {
  public:
-    Enemy* createEnemy( Floor* floor, Posn posn) override {
+    Enemy* createEnemy(Floor* floor, Posn posn, Item* item) override {
         return new Elf(floor, posn);
     }
 };
 
 class OrcFactory : public EnemyFactory {
  public:
-    Enemy* createEnemy(Floor* floor, Posn posn) override {
+    Enemy* createEnemy(Floor* floor, Posn posn, Item* item) override {
         return new Orcs(floor, posn);
     }
 };
 
 class MerchantFactory : public EnemyFactory {
  public:
-    Enemy* createEnemy(Floor* floor, Posn posn) override {
+    Enemy* createEnemy(Floor* floor, Posn posn, Item* item) override {
         return new Merchant(floor, posn);
     }
 };
 
 class DragonFactory : public EnemyFactory {
  public:
-    Enemy* createEnemy(Floor* floor, Posn posn, Item* item) {
+    Enemy* createEnemy(Floor* floor, Posn posn, Item* item) override {
         return new Dragon(floor, posn, item); 
 
     }
@@ -57,7 +57,7 @@ class DragonFactory : public EnemyFactory {
 
 class HalflingFactory : public EnemyFactory {
  public:
-    Enemy* createEnemy(Floor* floor, Posn posn) override {
+    Enemy* createEnemy(Floor* floor, Posn posn, Item* item) override {
         return new Halfling(floor, posn);
     }
 };

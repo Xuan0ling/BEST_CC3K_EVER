@@ -16,7 +16,7 @@ protected:
     int def;
 public:
     Enemy(Floor* floor, char symbol, Posn posn, int hp, int atk, int def);
-    virtual ~Enemy();
+    virtual ~Enemy() = 0;
     virtual void move(PRNG& prng);
     virtual bool attack(Player* player, PRNG& prng1);
     virtual bool beAttacked(Player* player, PRNG& prng);
