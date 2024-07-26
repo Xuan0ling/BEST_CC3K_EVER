@@ -44,7 +44,7 @@ public:
     void checkGold();
     void seakPotion();
 
-    void checkPlayerEnterFloor();
+    void checkPlayerEnterFloor(bool haveGivenMap, std::vector<std::vector<char>>& givenMapFile);
 
     void setHp(int hp);
     void setGold(int gold);
