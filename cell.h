@@ -30,6 +30,8 @@ public:
     bool hasStair() const;
     bool hasPotion() const;
     bool hasEnemy() const;
+    bool hasMerchant() const;
+    bool hasPlayer() const;
     
     char getSymbol() const;
     Player* getPlayer() const;

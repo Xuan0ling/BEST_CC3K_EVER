@@ -39,6 +39,7 @@ public:
     virtual void move(Posn posnChange);
     virtual void attack(Posn attackDir);
     virtual void usePotion(Posn usePotionDir);
+    void trade(Posn tradeDir);
 
     void checkGold();
     void seakPotion();

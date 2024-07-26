@@ -59,6 +59,18 @@ PlayerCmd GameInput::getInput() {
             useDir == PlayerCmd::NW ? PlayerCmd::USEPOTION_NW : 
             useDir == PlayerCmd::SE ? PlayerCmd::USEPOTION_SE : 
             useDir == PlayerCmd::SW ? PlayerCmd::USEPOTION_SW : PlayerCmd::INVALID;
+    } else if (input == "t" && useDLC) {
+        std::string tradeDirInput = collectInput();
+        PlayerCmd tradeDir = getPlayerPosition(tradeDirInput);
+        return 
+            tradeDir == PlayerCmd::WE ? PlayerCmd::TRADE_WE : 
+            tradeDir == PlayerCmd::EA ? PlayerCmd::TRADE_EA : 
+            tradeDir == PlayerCmd::NO ? PlayerCmd::TRADE_NO : 
+            tradeDir == PlayerCmd::SO ? PlayerCmd::TRADE_SO : 
+            tradeDir == PlayerCmd::NE ? PlayerCmd::TRADE_NE : 
+            tradeDir == PlayerCmd::NW ? PlayerCmd::TRADE_NW : 
+            tradeDir == PlayerCmd::SE ? PlayerCmd::TRADE_SE : 
+            tradeDir == PlayerCmd::SW ? PlayerCmd::TRADE_SW : PlayerCmd::INVALID;
     } else if (input == "r") {
         return PlayerCmd::RESTART;
     } else if (input == "q") {

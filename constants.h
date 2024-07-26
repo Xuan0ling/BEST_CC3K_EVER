@@ -14,12 +14,17 @@ enum class PlayerCmd {
     ATTACK_NE, ATTACK_NW, ATTACK_SE, ATTACK_SW,
     USEPOTION_WE, USEPOTION_NO, USEPOTION_SO, USEPOTION_EA,
     USEPOTION_NE, USEPOTION_NW, USEPOTION_SE, USEPOTION_SW,
+    TRADE_WE, TRADE_NO, TRADE_SO, TRADE_EA,
+    TRADE_NE, TRADE_NW, TRADE_SE, TRADE_SW,
     RESTART, QUIT, STOP, INVALID
 };
 
 enum class PlayerRace {
     SHADE, DROW, VAMPIRE, TROLL, GOBLIN, INVALID, QUIT
 };
+
+// available goods for player can buy
+const std::vector<std::string> GOODS = {"RH", "BA", "BD", "PH", "WA", "WD", "TP"};
 
 
 const int MAP_WIDTH = 79;

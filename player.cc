@@ -75,6 +75,51 @@ void Player::checkGold() {
     }
 }
 
+void Player::trade(Posn tradeDir) {
+    auto& cell = floor->getCell(posn + tradeDir);
+    if (cell.hasMerchant() && !merchantVolatile) {
+        int index = floor->getRandomGnerator()(0, GOODS.size() - 1);
+        int price = floor->getRandomGnerator()(5, 10);
+        float effect = 1;
+        if (race == PlayerRace::DROW) {
+            effect = 1.5;
+        }
+        if (gold >= price) {
+            gold -= price;
+            if (GOODS[index] == "RH") {
+                hp += 10 * effect;
+                if (hp > maxHp) {
+                    hp = maxHp;
+                }
+            } else if (GOODS[index] == "BA") {
+                exAtk += 5 * effect;
+            } else if (GOODS[index] == "BD") {
+                exDef += 5 * effect;
+            } else if (GOODS[index] == "PH") {
+                hp -= 10 * effect;
+                if (hp <= 0) {
+                    hp = 0;
+                    isDead = true;
+                }
+            } else if (GOODS[index] == "WA") {
+                exAtk -= 5 * effect;
+            } else if (GOODS[index] == "WD") {
+                exDef -= 5 * effect;
+            } else if (GOODS[index] == "TP") {
+                gainCurrFloorIndex(1);
+                floor->loadFloor();
+                clearEffect();
+            }
+            action += " PC trades " + GOODS[index] + " for " + numAsString(price) + " gold, and " + GOODS[index] + " is used.";
+            if (GOODS[index] == "TP") {
+                action += " PC teleport to next floor.";
+            }
+        } else {
+            action += " PC does not have enough gold to trade.";
+        }
+    }
+}
+
 void Player::seakPotion() {
     std::vector<Posn> neighbours = floor->getNeighbours(posn);
     for (auto& neighbour : neighbours) {
