@@ -6,6 +6,8 @@
 #include <string>
 #include <ncurses.h>
 #include <fstream>
+#include <cmath>
+#include <climits>
 #include "posn.h"
 // define player races types
 enum class PlayerCmd {

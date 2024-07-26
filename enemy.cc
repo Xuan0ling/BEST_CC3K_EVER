@@ -1,5 +1,7 @@
 #include "enemy.h"
 #include "player.h"
+#include <cmath>
+
 
 Enemy::Enemy(Floor* floor, char symbol, Posn posn, int hp, int atk, int def) 
 : floor{floor}, symbol{symbol}, posn{posn}, hp{hp}, atk{atk}, def{def} {}
