@@ -109,12 +109,11 @@ void Floor::processCell(char symbol, int i, int j) {
         if (itemFactory) {
             if (symbol == DRAGONHOARD) {
                 std::unique_ptr<Item> item (itemFactory->createItems(Posn{i, j}));
-            
 
                 std::vector<Posn> neighbours = getNeighbours(Posn{i, j});
                 std::vector<Posn> possiblePointsForDragon;
                 for (const auto& neighbour : neighbours) {
-                    if (checkValidMove(neighbour)) {
+                    if (checkValidMoveForEnemy(neighbour)) {
                         possiblePointsForDragon.push_back(neighbour);
                         break;
                     }
@@ -124,11 +123,9 @@ void Floor::processCell(char symbol, int i, int j) {
                     Posn dragonPosn = possiblePointsForDragon[index];
                     auto enemyFactory = std::make_unique<DragonFactory>();
                     std::unique_ptr<Enemy> enemy (enemyFactory->createEnemy(this, dragonPosn, item.get()));
-                    
                     addEnemy(std::move(enemy));
                     addItem(std::move(item));
                 }
-
             } else {
                 std::unique_ptr<Item> item (itemFactory->createItems(Posn{i, j}));
                 addItem(std::move(item));
@@ -164,30 +161,28 @@ void Floor::processCell(char symbol, int i, int j) {
         }
     }
 
-void Floor::loadGivenFloor(const std::string& mapFile) {
+void Floor::loadGivenFloor(std::vector<std::vector<char>>& givenMap) {
+
+    cells.clear();
+    // load blank map in cells
     cells.resize(MAP_HEIGHT, std::vector<Cell>(MAP_WIDTH));
     for (int i = 0; i < MAP_HEIGHT; ++i) {
         for (int j = 0; j < MAP_WIDTH; ++j) {
             cells[i][j] = Cell(gameMap->getTile(i, j));
         }
     }
+    enemies.clear();
+    items.clear();
 
-    std::vector<std::vector<char>> givenFloor;
-    // if read file failed, throw exception
-    try {
-        givenFloor = readMap(mapFile);
-    } catch (const std::runtime_error& e) {
-        throw e;
-    }
-
-    for (int i = 0; i < MAP_HEIGHT - 1; ++i) {
-        for (int j = 0; j < MAP_WIDTH - 1; ++j) {
-            char symbol = givenFloor[i][j];
-            processCell(symbol, i, j);
+    int startRow = (player->getCurrFloorIndex() - 1) * MAP_HEIGHT + 1;
+    for (int i = startRow; i < startRow + MAP_HEIGHT; ++i) {
+        for (int j = 0; j < MAP_WIDTH; ++j) {
+            char symbol = givenMap[i][j];
+            processCell(symbol, i % MAP_HEIGHT, j % MAP_WIDTH);
         }
     }
-    loadItems();
     updatePlayer();
+    loadItems();
     loadEnemies();
 }
 

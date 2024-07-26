@@ -26,7 +26,7 @@ public:
 
     void initFloor(Player* player, GameMap* gameMap);
     void loadFloor();
-    void loadGivenFloor(const std::string& mapFile);
+    void loadGivenFloor(std::vector<std::vector<char>>& givenMap);
     std::vector<std::vector<char>> readMap(const std::string& mapFile);
 
     std::string getDirStr(Posn posn);

@@ -5,14 +5,21 @@
 #include "concretePlayerFactory.h"
 
 
-GameEngine::GameEngine(std::string mapFile, PlayerRace playerRace, bool useDLC, int* playerScore) 
-: playerScore(playerScore) {
+GameEngine::GameEngine(std::string mapFile, PlayerRace playerRace, bool useDLC, int* playerScore, std::string givenMapFile) 
+: playerScore(playerScore), givenMapFile(mapFile) {
     gameMap = std::make_unique<GameMap>(mapFile);
     floor = std::make_unique<Floor>();
     playerCreate(playerRace);
     floor->initFloor(player.get(), gameMap.get());
     gameInput = std::make_unique<GameInput>(useDLC);
     gameOutput = std::make_unique<GameOutput>(useDLC);
+    if (givenMapFile != "") {
+        try {
+            givenMap = floor->readMap(givenMapFile);
+        } catch (const std::runtime_error& e) {
+            throw e;
+        }
+    }
 }
 
 void GameEngine::playerCreate(PlayerRace playerRace) {
@@ -40,9 +47,10 @@ void GameEngine::playerCreate(PlayerRace playerRace) {
     player = std::move(playerPtr);
 }
 
-bool GameEngine::gameRun(std::string mapFile) {
-    if (mapFile != "") {
-        floor->loadGivenFloor(mapFile);
+bool GameEngine::gameRun() {
+    if (givenMapFile != "") {
+        floor->loadGivenFloor(givenMap);
+        haveGivenMap = true;
     } else {
         floor->loadFloor();
     }
@@ -53,7 +61,13 @@ bool GameEngine::gameRun(std::string mapFile) {
     while (input != PlayerCmd::QUIT) {
         player->setAction("");
         handlePlayerCmd(input);
-        handleEnemiesAction();
+
+        if (hasRestart) {
+            hasRestart = false;
+        } else {
+            handleEnemiesAction();
+        }
+
 
         gameOutput->printOutput(floor->getDisplay(), player.get());
 
@@ -190,7 +204,7 @@ void GameEngine::handlePlayerCmd(PlayerCmd cmd) {
         default:
             break;
     }
-    player->checkPlayerEnterFloor();
+    player->checkPlayerEnterFloor(haveGivenMap, givenMap);
 }
 
 void GameEngine::handleEnemiesAction() {
@@ -209,7 +223,12 @@ void GameEngine::restartGame() {
     }
     player->setChamberNum(-1);
     player->setGold(0);
-    floor->loadFloor();
+    if (haveGivenMap) {
+        floor->loadGivenFloor(givenMap);
+    } else {
+        floor->loadFloor();
+    }
+    hasRestart = true;
 }
 
 

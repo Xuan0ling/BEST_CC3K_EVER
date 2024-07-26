@@ -19,10 +19,14 @@ class GameEngine {
     GameOutputPtr gameOutput;
     int* playerScore;
     int stop = -1;
+    std::string givenMapFile;
+    std::vector<std::vector<char>> givenMap;
+    bool haveGivenMap = false;
+    bool hasRestart = false;
 public:
-    GameEngine(std::string mapFile, PlayerRace playerRace, bool useDLC, int* playerScore);
+    GameEngine(std::string mapFile, PlayerRace playerRace, bool useDLC, int* playerScore, std::string givenMapFile);
 
-    bool gameRun(std::string mapFile);
+    bool gameRun();
     void handlePlayerCmd(PlayerCmd cmd);
     void handleEnemiesAction();
     void playerCreate(PlayerRace playerRace);

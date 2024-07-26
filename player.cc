@@ -121,11 +121,15 @@ void Player::seakPotion() {
 }
 
 
-void Player::checkPlayerEnterFloor() {
+void Player::checkPlayerEnterFloor(bool haveGivenMap, std::vector<std::vector<char>>& givenMap) {
     auto& cell = floor->getCell(posn);
     if (cell.hasStair()) {
         if (currFloorIndex == NUM_FLOORS) {
             isWon = true;
+        } else if (haveGivenMap) {
+            gainCurrFloorIndex(1);
+            floor->loadGivenFloor(givenMap);
+            clearEffect();
         } else {
             gainCurrFloorIndex(1);
             floor->loadFloor();

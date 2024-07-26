@@ -26,8 +26,8 @@ int main(int argc, char* argv[]) {
         if (race != PlayerRace::QUIT) {
             std::unique_ptr<int> plyerScore = std::make_unique<int>(0);
             std::string mapFile = "emptyfloor.txt";
-            GameEngine gameEngine(mapFile, race, useDLC, plyerScore.get());
-            bool isWon = gameEngine.gameRun(givenMapFile);
+            GameEngine gameEngine(mapFile, race, useDLC, plyerScore.get(), givenMapFile);
+            bool isWon = gameEngine.gameRun();
             if (useDLC) {
                 endwin(); // End ncurses
             }
