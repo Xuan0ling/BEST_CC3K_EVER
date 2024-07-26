@@ -14,6 +14,7 @@ GameEngine::GameEngine(std::string mapFile, PlayerRace playerRace, bool useDLC, 
     gameInput = std::make_unique<GameInput>(useDLC);
     gameOutput = std::make_unique<GameOutput>(useDLC);
     if (givenMapFile != "") {
+        haveGivenMap = true;
         try {
             givenMap = floor->readMap(givenMapFile);
         } catch (const std::runtime_error& e) {
@@ -48,7 +49,7 @@ void GameEngine::playerCreate(PlayerRace playerRace) {
 }
 
 bool GameEngine::gameRun() {
-    if (givenMapFile != "") {
+    if (haveGivenMap) {
         floor->loadGivenFloor(givenMap);
         haveGivenMap = true;
     } else {
