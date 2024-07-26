@@ -26,7 +26,7 @@ void GameMenu::printTitle() {
         mvprintw(y + 3, 0, "v - Vampire");
         mvprintw(y + 4, 0, "t - Troll");
         mvprintw(y + 5, 0, "g - Goblin");
-
+        mvprintw(y + 6, 0, "");
         // Refresh the screen to show the changes
         refresh();
     } else {

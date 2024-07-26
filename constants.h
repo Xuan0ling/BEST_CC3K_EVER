@@ -26,7 +26,7 @@ enum class PlayerRace {
 };
 
 // available goods for player can buy
-const std::vector<std::string> GOODS = {"RH", "BA", "BD", "PH", "WA", "WD", "TP"};
+const std::vector<std::string> GOODS = {"RH", "BA", "BD", "TP"};
 
 
 const int MAP_WIDTH = 79;

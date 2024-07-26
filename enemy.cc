@@ -85,7 +85,7 @@ bool Enemy::attack(Player *player, PRNG& prng1) {
                     player->setAction(player->getAction() + " L attacks and misses." );
                 }
             }
-            return true;     //add missed action
+            return true;
         }
     }
     return false;

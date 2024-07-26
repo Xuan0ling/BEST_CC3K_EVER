@@ -79,7 +79,7 @@ void Player::trade(Posn tradeDir) {
     auto& cell = floor->getCell(posn + tradeDir);
     if (cell.hasMerchant() && !merchantVolatile) {
         int index = floor->getRandomGnerator()(0, GOODS.size() - 1);
-        int price = floor->getRandomGnerator()(5, 10);
+        int price = floor->getRandomGnerator()(2, 4);
         float effect = 1;
         if (race == PlayerRace::DROW) {
             effect = 1.5;
@@ -95,16 +95,6 @@ void Player::trade(Posn tradeDir) {
                 exAtk += 5 * effect;
             } else if (GOODS[index] == "BD") {
                 exDef += 5 * effect;
-            } else if (GOODS[index] == "PH") {
-                hp -= 10 * effect;
-                if (hp <= 0) {
-                    hp = 0;
-                    isDead = true;
-                }
-            } else if (GOODS[index] == "WA") {
-                exAtk -= 5 * effect;
-            } else if (GOODS[index] == "WD") {
-                exDef -= 5 * effect;
             } else if (GOODS[index] == "TP") {
                 gainCurrFloorIndex(1);
                 floor->loadFloor();
