@@ -173,16 +173,13 @@ void Floor::loadGivenFloor(const std::string& mapFile) {
     }
 
     std::vector<std::vector<char>> givenFloor;
-
-    std::ifstream file(mapFile);
-    std::string line;
-    while (std::getline(file, line)) {
-        std::vector<char> row;
-        for (char c : line) {
-            row.push_back(c);
-        }
-        givenFloor.push_back(row);
+    // if read file failed, throw exception
+    try {
+        givenFloor = readMap(mapFile);
+    } catch (const std::runtime_error& e) {
+        throw e;
     }
+
     for (int i = 0; i < MAP_HEIGHT - 1; ++i) {
         for (int j = 0; j < MAP_WIDTH - 1; ++j) {
             char symbol = givenFloor[i][j];
@@ -193,6 +190,25 @@ void Floor::loadGivenFloor(const std::string& mapFile) {
     updatePlayer();
     loadEnemies();
 }
+
+std::vector<std::vector<char>> Floor::readMap(const std::string& mapFile) {
+    std::vector<std::vector<char>> givenFloor;
+    std::ifstream file(mapFile);
+    if (!file) {
+        throw std::runtime_error("Cannot open file: " + mapFile);
+    }
+    std::string line;
+    while (std::getline(file, line)) {
+        std::vector<char> row;
+        for (const auto& c : line) {
+            row.push_back(c);
+        }
+        givenFloor.push_back(row);
+    }
+    return givenFloor;
+}
+
+
 
 void Floor::addEnemy(EnemyPtr enemy) {
     enemies.emplace_back(std::move(enemy));
