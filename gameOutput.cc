@@ -3,6 +3,7 @@
 #include <ncurses.h>
 #include <iostream>
 #include <vector>
+#include <unistd.h>
 
 // Constructor for GameOutput
 GameOutput::GameOutput(bool useDLC) : useDLC{useDLC} {
@@ -67,8 +68,18 @@ void GameOutput::printOutput(const std::vector<char>& display, Player* player) {
         mvprintw(MAP_HEIGHT + 2, 0, "Atk: %d", player->getAtk() + player->getExAtk());
         mvprintw(MAP_HEIGHT + 3, 0, "Def: %d", player->getDef() + player->getExDef());
         mvprintw(MAP_HEIGHT + 4, 0, "Floor: %d", player->getCurrFloorIndex());
-        mvprintw(MAP_HEIGHT + 5, 0, "Action:%s", player->getAction().c_str());
+        mvprintw(MAP_HEIGHT + 5, 0, "Action:");
+
+        mvprintw(MAP_HEIGHT + 5, 8, "%s", player->getAction().c_str());
         refresh(); // Refresh the ncurses window to show changes
+        if(strcmp(player->getAction().c_str(), " Invalid Command") == 0) {
+            sleep(1);
+            move(MAP_HEIGHT + 5, 8); // Move the cursor to the position
+            clrtoeol();              // Clear from cursor to the end of the line
+            refresh();
+        }
+        
+
     } else {
         std::cout << "\x1B[2J\x1B[H"; // ANSI escape codes to clear the terminal
         for (int i = 0; i < MAP_HEIGHT; i++) {
