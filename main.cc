@@ -31,8 +31,10 @@ int main(int argc, char* argv[]) {
             if (useDLC) {
                 endwin(); // End ncurses
             }
-            GameEnd gameEnd(isWon, *(plyerScore.get()));
-            gameEnd.printEnd();
+            if (*(plyerScore.get()) >= 0) {
+                GameEnd gameEnd(isWon, *(plyerScore.get()));
+                gameEnd.printEnd();
+            }
         }
     } catch(const std::runtime_error& e){
         std::cerr << e.what() << std::endl;

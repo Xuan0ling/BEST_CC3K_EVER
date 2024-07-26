@@ -82,6 +82,9 @@ bool GameEngine::gameRun() {
     } else {
         *playerScore = player->getGold();
     }
+    if (input == PlayerCmd::QUIT) {
+        *playerScore = -1;
+    }
     return player->getIsWon();
 }
 
